@@ -1,0 +1,3356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LUMINARY — Complete UX/UI Design Documentation</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ivory: #FAF7F2;
+    --cream: #F3EDE3;
+    --warm-white: #FDFAF6;
+    --gold: #C9A96E;
+    --gold-light: #E8D5B0;
+    --gold-dark: #9A7840;
+    --bronze: #8B6914;
+    --charcoal: #1C1A17;
+    --warm-gray: #6B6460;
+    --light-gray: #D4CEC8;
+    --blush: #E8D5D0;
+    --sage: #C4C9BD;
+    --dusty-rose: #D4A5A0;
+    --font-display: 'Cormorant Garamond', Georgia, serif;
+    --font-heading: 'Playfair Display', Georgia, serif;
+    --font-body: 'DM Sans', sans-serif;
+    --border: 1px solid rgba(201,169,110,0.25);
+    --border-soft: 1px solid rgba(201,169,110,0.12);
+    --section-gap: 80px;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  
+  body {
+    background: var(--warm-white);
+    color: var(--charcoal);
+    font-family: var(--font-body);
+    font-size: 15px;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* ── SCROLLBAR ── */
+  ::-webkit-scrollbar { width: 4px; }
+  ::-webkit-scrollbar-track { background: var(--cream); }
+  ::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 2px; }
+
+  /* ── SIDEBAR NAV ── */
+  .sidebar {
+    position: fixed;
+    left: 0; top: 0; bottom: 0;
+    width: 260px;
+    background: var(--charcoal);
+    padding: 40px 0;
+    overflow-y: auto;
+    z-index: 100;
+    border-right: 1px solid rgba(201,169,110,0.15);
+  }
+
+  .sidebar-brand {
+    padding: 0 28px 32px;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    margin-bottom: 24px;
+  }
+
+  .brand-mark {
+    font-family: var(--font-display);
+    font-size: 22px;
+    font-weight: 300;
+    letter-spacing: 0.15em;
+    color: var(--gold-light);
+    text-transform: uppercase;
+  }
+
+  .brand-sub {
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.3);
+    margin-top: 4px;
+  }
+
+  .nav-section {
+    margin-bottom: 8px;
+    padding: 0 16px;
+  }
+
+  .nav-section-label {
+    font-size: 9px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--gold);
+    padding: 12px 12px 6px;
+    opacity: 0.7;
+  }
+
+  .nav-link {
+    display: block;
+    padding: 7px 12px;
+    font-size: 12.5px;
+    color: rgba(255,255,255,0.55);
+    text-decoration: none;
+    border-radius: 6px;
+    transition: all 0.2s;
+    letter-spacing: 0.01em;
+    cursor: pointer;
+  }
+
+  .nav-link:hover, .nav-link.active {
+    color: var(--gold-light);
+    background: rgba(201,169,110,0.1);
+  }
+
+  .nav-link.active { color: var(--gold); font-weight: 500; }
+
+  /* ── MAIN ── */
+  .main {
+    margin-left: 260px;
+    min-height: 100vh;
+  }
+
+  /* ── HERO ── */
+  .doc-hero {
+    background: var(--charcoal);
+    padding: 80px 80px 100px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .doc-hero::before {
+    content: '';
+    position: absolute;
+    top: -40%; left: -10%;
+    width: 60%; height: 200%;
+    background: radial-gradient(ellipse, rgba(201,169,110,0.08) 0%, transparent 60%);
+    pointer-events: none;
+  }
+
+  .doc-hero::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  }
+
+  .hero-eyebrow {
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .hero-eyebrow::before {
+    content: '';
+    width: 32px; height: 1px;
+    background: var(--gold);
+  }
+
+  .doc-title {
+    font-family: var(--font-display);
+    font-size: 72px;
+    font-weight: 300;
+    line-height: 1.05;
+    color: var(--ivory);
+    letter-spacing: -0.01em;
+    margin-bottom: 24px;
+    max-width: 600px;
+  }
+
+  .doc-title em {
+    font-style: italic;
+    color: var(--gold-light);
+  }
+
+  .doc-subtitle {
+    font-size: 14px;
+    color: rgba(255,255,255,0.45);
+    max-width: 500px;
+    line-height: 1.8;
+    margin-bottom: 40px;
+  }
+
+  .doc-meta {
+    display: flex;
+    gap: 32px;
+    flex-wrap: wrap;
+  }
+
+  .doc-meta-item {
+    text-align: center;
+  }
+
+  .doc-meta-num {
+    font-family: var(--font-display);
+    font-size: 32px;
+    font-weight: 300;
+    color: var(--gold);
+    display: block;
+  }
+
+  .doc-meta-label {
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.3);
+  }
+
+  /* ── CONTENT ── */
+  .content {
+    padding: 0 80px 120px;
+  }
+
+  .section {
+    padding-top: var(--section-gap);
+    border-bottom: var(--border-soft);
+    padding-bottom: var(--section-gap);
+  }
+
+  .section:last-child { border-bottom: none; }
+
+  .section-number {
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--gold);
+    opacity: 0.6;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .section-number::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: rgba(201,169,110,0.15);
+    max-width: 40px;
+  }
+
+  .section-title {
+    font-family: var(--font-display);
+    font-size: 42px;
+    font-weight: 300;
+    line-height: 1.15;
+    color: var(--charcoal);
+    margin-bottom: 32px;
+    letter-spacing: -0.01em;
+  }
+
+  .section-title em { font-style: italic; color: var(--gold-dark); }
+
+  .section-intro {
+    font-size: 15px;
+    color: var(--warm-gray);
+    max-width: 620px;
+    line-height: 1.85;
+    margin-bottom: 40px;
+  }
+
+  /* ── CARDS ── */
+  .card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+    margin: 32px 0;
+  }
+
+  .card-grid-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    margin: 32px 0;
+  }
+
+  .card-grid-3 {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 20px;
+    margin: 32px 0;
+  }
+
+  .card {
+    background: var(--warm-white);
+    border: var(--border);
+    border-radius: 16px;
+    padding: 28px;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.25s ease, border-color 0.25s ease;
+  }
+
+  .card:hover {
+    transform: translateY(-2px);
+    border-color: rgba(201,169,110,0.45);
+  }
+
+  .card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    opacity: 0;
+    transition: opacity 0.25s;
+  }
+
+  .card:hover::before { opacity: 1; }
+
+  .card-accent {
+    background: var(--charcoal);
+    border-color: rgba(201,169,110,0.2);
+    color: var(--ivory);
+  }
+
+  .card-blush {
+    background: #FDF6F3;
+    border-color: rgba(212,165,160,0.3);
+  }
+
+  .card-label {
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 10px;
+  }
+
+  .card-heading {
+    font-family: var(--font-display);
+    font-size: 20px;
+    font-weight: 400;
+    margin-bottom: 10px;
+    line-height: 1.3;
+  }
+
+  .card-accent .card-heading { color: var(--gold-light); }
+
+  .card-body {
+    font-size: 13px;
+    color: var(--warm-gray);
+    line-height: 1.7;
+  }
+
+  .card-accent .card-body { color: rgba(255,255,255,0.5); }
+
+  /* ── COLOR SWATCHES ── */
+  .color-system {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 16px;
+    margin: 32px 0;
+  }
+
+  .swatch {
+    border-radius: 12px;
+    overflow: hidden;
+    border: var(--border-soft);
+  }
+
+  .swatch-color {
+    height: 64px;
+  }
+
+  .swatch-info {
+    padding: 12px 14px;
+    background: var(--warm-white);
+  }
+
+  .swatch-name {
+    font-size: 12px;
+    font-weight: 500;
+    margin-bottom: 2px;
+  }
+
+  .swatch-hex {
+    font-size: 11px;
+    color: var(--warm-gray);
+    font-family: monospace;
+  }
+
+  .swatch-use {
+    font-size: 10px;
+    color: var(--gold-dark);
+    letter-spacing: 0.05em;
+    margin-top: 4px;
+  }
+
+  /* ── TYPOGRAPHY DEMO ── */
+  .type-demo {
+    background: var(--cream);
+    border-radius: 16px;
+    padding: 48px;
+    margin: 32px 0;
+    border: var(--border);
+  }
+
+  .type-specimen {
+    margin-bottom: 40px;
+    padding-bottom: 40px;
+    border-bottom: var(--border-soft);
+  }
+
+  .type-specimen:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+
+  .type-label {
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold-dark);
+    margin-bottom: 12px;
+  }
+
+  /* ── CODE BLOCKS ── */
+  .code-block {
+    background: var(--charcoal);
+    border-radius: 12px;
+    padding: 28px 32px;
+    margin: 20px 0;
+    overflow-x: auto;
+    position: relative;
+  }
+
+  .code-block::before {
+    content: attr(data-lang);
+    position: absolute;
+    top: 12px; right: 16px;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gold);
+    opacity: 0.6;
+  }
+
+  .code-block pre {
+    font-family: 'SF Mono', 'Fira Code', monospace;
+    font-size: 12.5px;
+    line-height: 1.7;
+    color: rgba(255,255,255,0.75);
+    white-space: pre;
+  }
+
+  .code-block .k { color: #C792EA; }
+  .code-block .s { color: #C3E88D; }
+  .code-block .c { color: var(--gold-light); }
+  .code-block .p { color: rgba(255,255,255,0.4); }
+  .code-block .v { color: #82AAFF; }
+
+  /* ── WIREFRAME MOCKUPS ── */
+  .wireframe {
+    background: var(--cream);
+    border: var(--border);
+    border-radius: 16px;
+    overflow: hidden;
+    margin: 32px 0;
+  }
+
+  .wireframe-header {
+    background: var(--charcoal);
+    padding: 12px 20px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .wireframe-dot {
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.15);
+  }
+
+  .wireframe-title {
+    font-size: 11px;
+    color: rgba(255,255,255,0.4);
+    margin-left: 8px;
+    letter-spacing: 0.1em;
+  }
+
+  .wireframe-body { padding: 32px; }
+
+  /* ── SPACING SYSTEM ── */
+  .spacing-row {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 16px;
+    padding: 16px;
+    background: var(--cream);
+    border-radius: 10px;
+    border: var(--border-soft);
+  }
+
+  .spacing-bar {
+    background: var(--gold);
+    height: 12px;
+    border-radius: 3px;
+    opacity: 0.6;
+  }
+
+  .spacing-info {
+    flex: 1;
+  }
+
+  .spacing-token {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--charcoal);
+  }
+
+  .spacing-desc {
+    font-size: 11px;
+    color: var(--warm-gray);
+    margin-top: 2px;
+  }
+
+  /* ── COMPONENT EXAMPLES ── */
+  .component-preview {
+    background: var(--warm-white);
+    border: var(--border);
+    border-radius: 16px;
+    padding: 40px;
+    margin: 24px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 120px;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+
+  /* Button styles */
+  .btn-primary {
+    background: var(--charcoal);
+    color: var(--gold-light);
+    border: 1px solid var(--charcoal);
+    padding: 14px 36px;
+    font-family: var(--font-body);
+    font-size: 12px;
+    font-weight: 400;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    border-radius: 2px;
+    cursor: pointer;
+    transition: all 0.3s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .btn-primary::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 1px;
+    background: var(--gold);
+    transform: scaleX(0);
+    transition: transform 0.3s;
+  }
+
+  .btn-primary:hover {
+    background: var(--gold-dark);
+    border-color: var(--gold-dark);
+    color: var(--ivory);
+  }
+
+  .btn-primary:hover::after { transform: scaleX(1); }
+
+  .btn-ghost {
+    background: transparent;
+    color: var(--charcoal);
+    border: 1px solid rgba(201,169,110,0.5);
+    padding: 13px 36px;
+    font-family: var(--font-body);
+    font-size: 12px;
+    font-weight: 400;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    border-radius: 2px;
+    cursor: pointer;
+    transition: all 0.3s;
+  }
+
+  .btn-ghost:hover {
+    background: var(--gold);
+    color: var(--charcoal);
+    border-color: var(--gold);
+  }
+
+  .btn-link {
+    background: none;
+    border: none;
+    color: var(--gold-dark);
+    font-family: var(--font-body);
+    font-size: 13px;
+    letter-spacing: 0.1em;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 0;
+    text-transform: uppercase;
+    text-decoration: none;
+    position: relative;
+  }
+
+  .btn-link::after {
+    content: '';
+    position: absolute;
+    bottom: -2px; left: 0; right: 0;
+    height: 1px;
+    background: var(--gold-dark);
+    transform-origin: right;
+    transform: scaleX(0);
+    transition: transform 0.3s;
+  }
+
+  .btn-link:hover::after { transform: scaleX(1); transform-origin: left; }
+
+  /* ── TAGS ── */
+  .tag {
+    display: inline-block;
+    padding: 4px 12px;
+    background: var(--cream);
+    border: var(--border);
+    border-radius: 100px;
+    font-size: 11px;
+    color: var(--warm-gray);
+    letter-spacing: 0.06em;
+    margin: 3px;
+  }
+
+  .tag-gold {
+    background: rgba(201,169,110,0.12);
+    border-color: rgba(201,169,110,0.3);
+    color: var(--bronze);
+  }
+
+  /* ── HIGHLIGHT BOXES ── */
+  .highlight-box {
+    border-left: 2px solid var(--gold);
+    padding: 20px 24px;
+    margin: 24px 0;
+    background: rgba(201,169,110,0.05);
+    border-radius: 0 10px 10px 0;
+  }
+
+  .highlight-box-title {
+    font-family: var(--font-display);
+    font-size: 17px;
+    font-weight: 500;
+    color: var(--gold-dark);
+    margin-bottom: 8px;
+  }
+
+  .highlight-box p {
+    font-size: 13.5px;
+    color: var(--warm-gray);
+    line-height: 1.75;
+  }
+
+  /* ── PAGE STRUCTURE DIAGRAMS ── */
+  .page-diagram {
+    border: var(--border);
+    border-radius: 16px;
+    overflow: hidden;
+    margin: 32px 0;
+    font-size: 12px;
+  }
+
+  .page-section-block {
+    padding: 14px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: var(--border-soft);
+    transition: background 0.2s;
+  }
+
+  .page-section-block:last-child { border-bottom: none; }
+
+  .page-section-block:hover { background: var(--cream); }
+
+  .page-section-name {
+    font-weight: 500;
+    color: var(--charcoal);
+    font-size: 13px;
+  }
+
+  .page-section-desc {
+    font-size: 11.5px;
+    color: var(--warm-gray);
+    flex: 1;
+    padding: 0 24px;
+  }
+
+  .page-section-tags { display: flex; gap: 6px; flex-wrap: wrap; }
+
+  .page-h { background: var(--charcoal); }
+  .page-h .page-section-name, .page-h .page-section-desc { color: rgba(255,255,255,0.7); }
+
+  /* ── ANIMATION SPECS ── */
+  .anim-card {
+    background: var(--charcoal);
+    border-radius: 14px;
+    padding: 28px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .anim-preview {
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 16px;
+  }
+
+  .anim-dot {
+    width: 12px; height: 12px;
+    background: var(--gold);
+    border-radius: 50%;
+    animation: float 3s ease-in-out infinite;
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0); opacity: 1; }
+    50% { transform: translateY(-16px); opacity: 0.6; }
+  }
+
+  .anim-line {
+    width: 80px; height: 1px;
+    background: var(--gold);
+    animation: expand 2s ease-in-out infinite;
+    transform-origin: left;
+  }
+
+  @keyframes expand {
+    0%, 100% { transform: scaleX(0.2); opacity: 0.3; }
+    50% { transform: scaleX(1); opacity: 1; }
+  }
+
+  .anim-fade {
+    font-family: var(--font-display);
+    font-size: 18px;
+    color: var(--gold-light);
+    animation: fadeWord 3s ease-in-out infinite;
+  }
+
+  @keyframes fadeWord {
+    0%, 100% { opacity: 0; transform: translateY(8px); }
+    20%, 80% { opacity: 1; transform: translateY(0); }
+  }
+
+  .anim-name {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--gold-light);
+    margin-bottom: 6px;
+  }
+
+  .anim-spec {
+    font-size: 11px;
+    color: rgba(255,255,255,0.35);
+    line-height: 1.6;
+    font-family: monospace;
+  }
+
+  /* ── EMOTION MAP ── */
+  .emotion-map {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2px;
+    margin: 32px 0;
+    border-radius: 16px;
+    overflow: hidden;
+  }
+
+  .emotion-cell {
+    padding: 28px 20px;
+    text-align: center;
+    position: relative;
+  }
+
+  .emotion-word {
+    font-family: var(--font-display);
+    font-size: 22px;
+    font-style: italic;
+    font-weight: 300;
+    margin-bottom: 6px;
+  }
+
+  .emotion-note {
+    font-size: 11px;
+    opacity: 0.6;
+    line-height: 1.5;
+  }
+
+  /* ── CHECKOUT FLOW ── */
+  .flow-steps {
+    display: flex;
+    align-items: flex-start;
+    gap: 0;
+    margin: 32px 0;
+    position: relative;
+  }
+
+  .flow-steps::before {
+    content: '';
+    position: absolute;
+    top: 24px; left: 24px; right: 24px;
+    height: 1px;
+    background: linear-gradient(90deg, var(--gold), var(--gold-light), var(--gold));
+    opacity: 0.3;
+  }
+
+  .flow-step {
+    flex: 1;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+    padding: 0 8px;
+  }
+
+  .flow-step-num {
+    width: 48px; height: 48px;
+    background: var(--warm-white);
+    border: 1px solid var(--gold);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-display);
+    font-size: 18px;
+    color: var(--gold-dark);
+    margin: 0 auto 12px;
+    font-weight: 300;
+  }
+
+  .flow-step-name {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--charcoal);
+    margin-bottom: 4px;
+  }
+
+  .flow-step-desc {
+    font-size: 11px;
+    color: var(--warm-gray);
+    line-height: 1.5;
+  }
+
+  /* ── GLASSMORPHISM ── */
+  .glass-demo {
+    background: linear-gradient(135deg, #1C1A17 0%, #2C2620 50%, #1A1814 100%);
+    border-radius: 16px;
+    padding: 48px;
+    margin: 32px 0;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .glass-demo::before {
+    content: '';
+    position: absolute;
+    top: -30%; left: -10%;
+    width: 300px; height: 300px;
+    background: radial-gradient(circle, rgba(201,169,110,0.12) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .glass-card {
+    background: rgba(255,255,255,0.05);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 16px;
+    padding: 28px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .glass-label {
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    opacity: 0.7;
+    margin-bottom: 8px;
+  }
+
+  .glass-heading {
+    font-family: var(--font-display);
+    font-size: 26px;
+    font-weight: 300;
+    color: var(--ivory);
+    margin-bottom: 10px;
+  }
+
+  .glass-body {
+    font-size: 13px;
+    color: rgba(255,255,255,0.4);
+    line-height: 1.7;
+  }
+
+  /* ── NAVBAR DEMO ── */
+  .nav-demo {
+    background: var(--charcoal);
+    padding: 0 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 72px;
+    border-radius: 12px;
+    margin: 20px 0;
+  }
+
+  .nav-logo {
+    font-family: var(--font-display);
+    font-size: 22px;
+    font-weight: 300;
+    letter-spacing: 0.12em;
+    color: var(--gold-light);
+    text-transform: uppercase;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 36px;
+  }
+
+  .nav-item {
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.5);
+    cursor: pointer;
+    transition: color 0.2s;
+  }
+
+  .nav-item:hover { color: var(--gold-light); }
+
+  .nav-actions {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+  }
+
+  .nav-icon {
+    width: 18px; height: 18px;
+    opacity: 0.4;
+    cursor: pointer;
+    transition: opacity 0.2s;
+  }
+
+  .nav-icon:hover { opacity: 0.8; }
+
+  /* ── FOOTER DEMO ── */
+  .footer-demo {
+    background: #141210;
+    border-radius: 12px;
+    padding: 48px;
+    margin: 20px 0;
+    border: 1px solid rgba(255,255,255,0.04);
+  }
+
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 48px;
+    margin-bottom: 48px;
+    padding-bottom: 48px;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+
+  .footer-brand-name {
+    font-family: var(--font-display);
+    font-size: 28px;
+    font-weight: 300;
+    color: var(--gold-light);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+
+  .footer-tagline {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: 14px;
+    color: rgba(255,255,255,0.25);
+    margin-bottom: 20px;
+    line-height: 1.6;
+    max-width: 240px;
+  }
+
+  .footer-col-title {
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    opacity: 0.6;
+    margin-bottom: 16px;
+  }
+
+  .footer-link {
+    display: block;
+    font-size: 12.5px;
+    color: rgba(255,255,255,0.35);
+    margin-bottom: 10px;
+    cursor: pointer;
+    transition: color 0.2s;
+    text-decoration: none;
+  }
+
+  .footer-link:hover { color: var(--gold-light); }
+
+  .footer-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .footer-copy {
+    font-size: 11px;
+    color: rgba(255,255,255,0.2);
+  }
+
+  /* ── PRODUCT CARD DEMO ── */
+  .product-card {
+    background: var(--warm-white);
+    border: var(--border);
+    border-radius: 16px;
+    overflow: hidden;
+    transition: transform 0.35s cubic-bezier(0.25,0.46,0.45,0.94),
+                border-color 0.3s ease;
+    cursor: pointer;
+  }
+
+  .product-card:hover {
+    transform: translateY(-6px);
+    border-color: rgba(201,169,110,0.4);
+  }
+
+  .product-img {
+    height: 240px;
+    background: var(--cream);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .product-img-placeholder {
+    font-family: var(--font-display);
+    font-size: 14px;
+    font-style: italic;
+    color: var(--light-gray);
+    letter-spacing: 0.1em;
+  }
+
+  .product-badge {
+    position: absolute;
+    top: 16px; left: 16px;
+    background: var(--charcoal);
+    color: var(--gold-light);
+    font-size: 9px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    padding: 5px 10px;
+    border-radius: 2px;
+  }
+
+  .product-wishlist {
+    position: absolute;
+    top: 16px; right: 16px;
+    width: 36px; height: 36px;
+    background: rgba(255,255,255,0.9);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    opacity: 0;
+    transition: opacity 0.25s;
+  }
+
+  .product-card:hover .product-wishlist { opacity: 1; }
+
+  .product-info {
+    padding: 20px 22px 24px;
+  }
+
+  .product-category {
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--gold-dark);
+    opacity: 0.7;
+    margin-bottom: 6px;
+  }
+
+  .product-name {
+    font-family: var(--font-display);
+    font-size: 19px;
+    font-weight: 400;
+    color: var(--charcoal);
+    margin-bottom: 6px;
+    line-height: 1.25;
+  }
+
+  .product-desc {
+    font-size: 12.5px;
+    color: var(--warm-gray);
+    margin-bottom: 16px;
+    line-height: 1.6;
+  }
+
+  .product-price-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .product-price {
+    font-family: var(--font-display);
+    font-size: 22px;
+    font-weight: 300;
+    color: var(--charcoal);
+  }
+
+  .product-cta {
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gold-dark);
+    cursor: pointer;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.2s;
+    padding-bottom: 2px;
+  }
+
+  .product-card:hover .product-cta { border-color: var(--gold-dark); }
+
+  /* ── HERO COPY EXAMPLES ── */
+  .copy-card {
+    padding: 40px 44px;
+    border: var(--border);
+    border-radius: 16px;
+    margin-bottom: 20px;
+    background: var(--cream);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .copy-card::before {
+    content: '"';
+    position: absolute;
+    top: -20px; left: 16px;
+    font-family: var(--font-display);
+    font-size: 120px;
+    color: rgba(201,169,110,0.12);
+    line-height: 1;
+    pointer-events: none;
+    font-weight: 300;
+  }
+
+  .copy-eyebrow {
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--gold-dark);
+    margin-bottom: 14px;
+    opacity: 0.8;
+  }
+
+  .copy-hero {
+    font-family: var(--font-display);
+    font-size: 38px;
+    font-weight: 300;
+    line-height: 1.1;
+    color: var(--charcoal);
+    margin-bottom: 16px;
+  }
+
+  .copy-hero em { font-style: italic; color: var(--gold-dark); }
+
+  .copy-sub {
+    font-size: 14px;
+    color: var(--warm-gray);
+    line-height: 1.8;
+    max-width: 480px;
+    margin-bottom: 24px;
+  }
+
+  .copy-use {
+    font-size: 11px;
+    color: var(--gold);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 6px 14px;
+    border: 1px solid rgba(201,169,110,0.3);
+    border-radius: 100px;
+    display: inline-block;
+  }
+
+  /* ── IMAGE PROMPT CARDS ── */
+  .prompt-card {
+    background: var(--charcoal);
+    border-radius: 12px;
+    padding: 20px 24px;
+    margin-bottom: 12px;
+  }
+
+  .prompt-title {
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 8px;
+    opacity: 0.8;
+  }
+
+  .prompt-text {
+    font-size: 13px;
+    color: rgba(255,255,255,0.6);
+    line-height: 1.65;
+    font-style: italic;
+  }
+
+  /* ── SECTION LABELS ── */
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+    align-items: start;
+  }
+
+  .three-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 24px;
+  }
+
+  /* ── LIST STYLES ── */
+  .spec-list {
+    list-style: none;
+    margin: 16px 0;
+  }
+
+  .spec-list li {
+    padding: 10px 0;
+    border-bottom: var(--border-soft);
+    display: flex;
+    gap: 16px;
+    font-size: 13.5px;
+    color: var(--warm-gray);
+    align-items: flex-start;
+  }
+
+  .spec-list li:last-child { border-bottom: none; }
+
+  .spec-list li::before {
+    content: '—';
+    color: var(--gold);
+    font-weight: 300;
+    flex-shrink: 0;
+  }
+
+  .spec-list strong { color: var(--charcoal); font-weight: 500; }
+
+  /* ── RESPONSIVE HINT ── */
+  @media (max-width: 1200px) {
+    .card-grid-3 { grid-template-columns: 1fr 1fr; }
+    .two-col { grid-template-columns: 1fr; }
+    .footer-grid { grid-template-columns: 1fr 1fr; }
+  }
+
+  @media (max-width: 900px) {
+    .sidebar { display: none; }
+    .main { margin-left: 0; }
+    .content, .doc-hero { padding-left: 28px; padding-right: 28px; }
+    .emotion-map { grid-template-columns: repeat(2,1fr); }
+    .card-grid-2 { grid-template-columns: 1fr; }
+  }
+
+  /* ── SCROLL REVEAL ── */
+  .reveal {
+    opacity: 0;
+    transform: translateY(18px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: none;
+  }
+
+  /* ── DASHBOARD PREVIEW ── */
+  .dashboard-preview {
+    background: #F6F4F0;
+    border-radius: 16px;
+    padding: 24px;
+    border: var(--border);
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 20px;
+    min-height: 400px;
+    margin: 32px 0;
+  }
+
+  .dash-sidebar {
+    background: var(--charcoal);
+    border-radius: 12px;
+    padding: 20px 0;
+  }
+
+  .dash-nav-item {
+    padding: 10px 18px;
+    font-size: 12px;
+    color: rgba(255,255,255,0.4);
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .dash-nav-item.active { color: var(--gold-light); background: rgba(201,169,110,0.1); }
+
+  .dash-icon { opacity: 0.6; font-size: 14px; }
+
+  .dash-main { display: flex; flex-direction: column; gap: 16px; }
+
+  .dash-stat-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+  }
+
+  .dash-stat {
+    background: var(--warm-white);
+    border: var(--border);
+    border-radius: 12px;
+    padding: 16px 18px;
+  }
+
+  .dash-stat-val {
+    font-family: var(--font-display);
+    font-size: 28px;
+    font-weight: 300;
+    color: var(--charcoal);
+  }
+
+  .dash-stat-label {
+    font-size: 11px;
+    color: var(--warm-gray);
+    margin-top: 2px;
+  }
+
+  .dash-memory-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+
+  .dash-memory-card {
+    background: var(--warm-white);
+    border: var(--border);
+    border-radius: 12px;
+    padding: 18px;
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+  }
+
+  .dash-memory-thumb {
+    width: 52px; height: 52px;
+    background: var(--cream);
+    border-radius: 8px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    border: var(--border-soft);
+  }
+
+  .dash-memory-title {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--charcoal);
+    margin-bottom: 4px;
+  }
+
+  .dash-memory-sub {
+    font-size: 11px;
+    color: var(--warm-gray);
+    line-height: 1.5;
+  }
+
+  .inset-chip {
+    display: inline-block;
+    padding: 2px 8px;
+    background: rgba(201,169,110,0.12);
+    border-radius: 100px;
+    font-size: 10px;
+    color: var(--bronze);
+    margin-top: 6px;
+  }
+
+  /* ── MOBILE FRAME ── */
+  .mobile-frame {
+    width: 220px;
+    border: 2px solid var(--charcoal);
+    border-radius: 32px;
+    overflow: hidden;
+    box-shadow: 0 24px 60px rgba(0,0,0,0.12);
+    position: relative;
+    background: var(--warm-white);
+  }
+
+  .mobile-notch {
+    background: var(--charcoal);
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .mobile-notch-pill {
+    width: 50px; height: 10px;
+    background: rgba(0,0,0,0.6);
+    border-radius: 5px;
+  }
+
+  .mobile-content { padding: 16px 14px; }
+
+  .mobile-hero-img {
+    height: 120px;
+    background: var(--cream);
+    border-radius: 10px;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-display);
+    font-size: 11px;
+    font-style: italic;
+    color: var(--light-gray);
+  }
+
+  .mobile-title {
+    font-family: var(--font-display);
+    font-size: 16px;
+    font-weight: 300;
+    line-height: 1.25;
+    color: var(--charcoal);
+    margin-bottom: 6px;
+  }
+
+  .mobile-price {
+    font-size: 13px;
+    color: var(--warm-gray);
+    margin-bottom: 12px;
+  }
+
+  .mobile-btn {
+    background: var(--charcoal);
+    color: var(--gold-light);
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    padding: 10px;
+    border-radius: 6px;
+    text-align: center;
+    margin-bottom: 8px;
+  }
+
+  .mobile-btn-ghost {
+    border: 1px solid var(--light-gray);
+    color: var(--charcoal);
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 9px;
+    border-radius: 6px;
+    text-align: center;
+  }
+
+  /* ── SECTION HIGHLIGHT CALLOUT ── */
+  .callout-banner {
+    background: var(--charcoal);
+    border-radius: 16px;
+    padding: 40px 48px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    margin: 40px 0;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .callout-banner::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  }
+
+  .callout-text {
+    font-family: var(--font-display);
+    font-size: 26px;
+    font-weight: 300;
+    font-style: italic;
+    color: var(--gold-light);
+    max-width: 500px;
+    line-height: 1.35;
+  }
+
+  /* ── ADMIN PANEL PREVIEW ── */
+  .admin-preview {
+    background: #F8F7F5;
+    border: var(--border);
+    border-radius: 16px;
+    overflow: hidden;
+    margin: 32px 0;
+  }
+
+  .admin-topbar {
+    background: var(--charcoal);
+    height: 52px;
+    display: flex;
+    align-items: center;
+    padding: 0 24px;
+    gap: 20px;
+    justify-content: space-between;
+  }
+
+  .admin-logo {
+    font-family: var(--font-display);
+    font-size: 16px;
+    color: var(--gold-light);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .admin-body {
+    display: grid;
+    grid-template-columns: 180px 1fr;
+    min-height: 340px;
+  }
+
+  .admin-sidebar {
+    background: #EFECE6;
+    padding: 16px 0;
+    border-right: var(--border-soft);
+  }
+
+  .admin-nav {
+    padding: 8px 16px;
+    font-size: 12px;
+    color: var(--warm-gray);
+    cursor: pointer;
+    border-radius: 6px;
+    margin: 2px 8px;
+    transition: all 0.2s;
+  }
+
+  .admin-nav.active {
+    background: var(--warm-white);
+    color: var(--charcoal);
+    font-weight: 500;
+    border: var(--border-soft);
+  }
+
+  .admin-content {
+    padding: 24px;
+  }
+
+  .admin-kpi {
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+
+  .admin-kpi-card {
+    background: var(--warm-white);
+    border: var(--border);
+    border-radius: 10px;
+    padding: 14px 16px;
+  }
+
+  .admin-kpi-val {
+    font-family: var(--font-display);
+    font-size: 24px;
+    font-weight: 300;
+    color: var(--charcoal);
+  }
+
+  .admin-kpi-lbl {
+    font-size: 10px;
+    color: var(--warm-gray);
+    letter-spacing: 0.08em;
+  }
+
+  .admin-kpi-trend {
+    font-size: 10px;
+    color: #5E9E6E;
+    margin-top: 3px;
+  }
+
+  /* ── REACT ARCH ── */
+  .arch-tree {
+    background: var(--charcoal);
+    border-radius: 14px;
+    padding: 32px;
+    font-family: 'SF Mono','Fira Code',monospace;
+    font-size: 12px;
+    margin: 24px 0;
+  }
+
+  .arch-node {
+    color: var(--gold-light);
+    margin: 2px 0;
+  }
+
+  .arch-child {
+    color: rgba(255,255,255,0.55);
+    margin: 2px 0;
+  }
+
+  .arch-leaf {
+    color: rgba(255,255,255,0.3);
+    margin: 2px 0;
+  }
+
+  .arch-type {
+    color: #C792EA;
+  }
+
+  .arch-prop {
+    color: #82AAFF;
+  }
+
+  /* scrollspy highlight */
+  .section { scroll-margin-top: 20px; }
+</style>
+</head>
+<body>
+
+<!-- SIDEBAR -->
+<nav class="sidebar">
+  <div class="sidebar-brand">
+    <div class="brand-mark">Luminary</div>
+    <div class="brand-sub">UX/UI Design Documentation</div>
+  </div>
+
+  <div class="nav-section">
+    <div class="nav-section-label">Brand Foundation</div>
+    <a class="nav-link active" href="#brand-identity" onclick="scrollTo(this)">Brand Identity</a>
+    <a class="nav-link" href="#design-system" onclick="scrollTo(this)">Design System</a>
+    <a class="nav-link" href="#color-palette" onclick="scrollTo(this)">Color Palette</a>
+    <a class="nav-link" href="#typography" onclick="scrollTo(this)">Typography</a>
+  </div>
+
+  <div class="nav-section">
+    <div class="nav-section-label">UX Strategy</div>
+    <a class="nav-link" href="#ux-strategy" onclick="scrollTo(this)">UX Strategy</a>
+    <a class="nav-link" href="#emotional-storytelling" onclick="scrollTo(this)">Emotional Storytelling</a>
+    <a class="nav-link" href="#conversion" onclick="scrollTo(this)">Conversion Strategy</a>
+  </div>
+
+  <div class="nav-section">
+    <div class="nav-section-label">Page Architecture</div>
+    <a class="nav-link" href="#homepage" onclick="scrollTo(this)">Homepage</a>
+    <a class="nav-link" href="#product-page" onclick="scrollTo(this)">Product Page</a>
+    <a class="nav-link" href="#category-pages" onclick="scrollTo(this)">Category Pages</a>
+    <a class="nav-link" href="#occasion-pages" onclick="scrollTo(this)">Occasion Pages</a>
+    <a class="nav-link" href="#checkout" onclick="scrollTo(this)">Checkout Flow</a>
+  </div>
+
+  <div class="nav-section">
+    <div class="nav-section-label">UI Components</div>
+    <a class="nav-link" href="#navbar-footer" onclick="scrollTo(this)">Navbar & Footer</a>
+    <a class="nav-link" href="#buttons-cards" onclick="scrollTo(this)">Buttons & Cards</a>
+    <a class="nav-link" href="#spacing-system" onclick="scrollTo(this)">Spacing System</a>
+    <a class="nav-link" href="#glassmorphism" onclick="scrollTo(this)">Glassmorphism</a>
+    <a class="nav-link" href="#animations" onclick="scrollTo(this)">Animations</a>
+  </div>
+
+  <div class="nav-section">
+    <div class="nav-section-label">Advanced Features</div>
+    <a class="nav-link" href="#customization" onclick="scrollTo(this)">Customization UX</a>
+    <a class="nav-link" href="#dashboard" onclick="scrollTo(this)">User Dashboard</a>
+    <a class="nav-link" href="#admin-panel" onclick="scrollTo(this)">Admin Panel</a>
+    <a class="nav-link" href="#ai-features" onclick="scrollTo(this)">AI Features</a>
+    <a class="nav-link" href="#mobile" onclick="scrollTo(this)">Mobile Design</a>
+  </div>
+
+  <div class="nav-section">
+    <div class="nav-section-label">Development</div>
+    <a class="nav-link" href="#react-arch" onclick="scrollTo(this)">React Architecture</a>
+    <a class="nav-link" href="#seo" onclick="scrollTo(this)">SEO Strategy</a>
+    <a class="nav-link" href="#image-prompts" onclick="scrollTo(this)">Image Prompts</a>
+    <a class="nav-link" href="#trust" onclick="scrollTo(this)">Trust & Social Proof</a>
+  </div>
+</nav>
+
+<!-- MAIN CONTENT -->
+<main class="main">
+
+  <!-- HERO -->
+  <div class="doc-hero">
+    <div class="hero-eyebrow">Complete UX/UI Design System</div>
+    <h1 class="doc-title">
+      Luminary<br><em>Memory & Gift</em><br>Design Documentation
+    </h1>
+    <p class="doc-subtitle">
+      A comprehensive, production-ready UX/UI system for a premium emotional gift and memory preservation brand. Every section is designed to evoke feeling, inspire trust, and convert with elegance.
+    </p>
+    <div class="doc-meta">
+      <div class="doc-meta-item">
+        <span class="doc-meta-num">30+</span>
+        <span class="doc-meta-label">Design Sections</span>
+      </div>
+      <div class="doc-meta-item">
+        <span class="doc-meta-num">200+</span>
+        <span class="doc-meta-label">Specifications</span>
+      </div>
+      <div class="doc-meta-item">
+        <span class="doc-meta-num">8</span>
+        <span class="doc-meta-label">Product Categories</span>
+      </div>
+      <div class="doc-meta-item">
+        <span class="doc-meta-num">2026</span>
+        <span class="doc-meta-label">Design Trends</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="content">
+
+    <!-- ══════════════════════════════════════
+         01 · BRAND IDENTITY
+    ══════════════════════════════════════ -->
+    <section class="section reveal" id="brand-identity">
+      <div class="section-number">01</div>
+      <h2 class="section-title">Brand <em>Identity</em> Direction</h2>
+      <p class="section-intro">
+        Luminary exists at the intersection of artistry and emotion — where handcrafted gifts become keepsakes that outlast lifetimes. The brand voice is poetic, unhurried, and deeply personal.
+      </p>
+
+      <div class="card-grid-3">
+        <div class="card">
+          <div class="card-label">Brand Name</div>
+          <div class="card-heading">Luminary</div>
+          <div class="card-body">From Latin <em>luminare</em> — to illuminate. The brand illuminates moments, preserves light, makes the invisible visible. Memories as light.</div>
+        </div>
+        <div class="card card-accent">
+          <div class="card-label">Core Promise</div>
+          <div class="card-heading">"We make the moment permanent."</div>
+          <div class="card-body">Every product is a pause button on time. An act of love made tangible. Something that exists because a moment mattered.</div>
+        </div>
+        <div class="card card-blush">
+          <div class="card-label">Brand Personality</div>
+          <div class="card-heading">Romantic Artisan</div>
+          <div class="card-body">Thoughtful. Warm. Quietly luxurious. Never loud. Like a master craftsperson who speaks through their work rather than about it.</div>
+        </div>
+      </div>
+
+      <div class="highlight-box">
+        <div class="highlight-box-title">Tagline Options</div>
+        <p><strong>"Cast in love. Kept forever."</strong> — For casting products (hand/footprint)<br>
+        <strong>"Some moments deserve to last."</strong> — Universal brand tagline<br>
+        <strong>"For the ones who matter most."</strong> — Emotional gifting angle<br>
+        <strong>"Every touch tells a story."</strong> — Sensory, intimate brand voice</p>
+      </div>
+
+      <div class="card-grid-2">
+        <div>
+          <h3 style="font-family:var(--font-display);font-size:22px;font-weight:400;margin-bottom:16px;color:var(--charcoal)">Brand Pillars</h3>
+          <ul class="spec-list">
+            <li><strong>Emotional Permanence</strong> — Products that freeze meaningful moments in time</li>
+            <li><strong>Handcrafted Integrity</strong> — Every item made by hand, no two identical</li>
+            <li><strong>Romantic Minimalism</strong> — Beauty through restraint, elegance through simplicity</li>
+            <li><strong>Meaningful Gifting</strong> — Not what you give, but what it means to give it</li>
+            <li><strong>Premium Sensibility</strong> — Quality that communicates care without shouting price</li>
+          </ul>
+        </div>
+        <div>
+          <h3 style="font-family:var(--font-display);font-size:22px;font-weight:400;margin-bottom:16px;color:var(--charcoal)">Competitive Positioning</h3>
+          <ul class="spec-list">
+            <li><strong>vs. Etsy shops</strong> — More editorial, curated, and premium experience</li>
+            <li><strong>vs. Hallmark</strong> — Artisanal, personalised, not mass-produced</li>
+            <li><strong>vs. Luxury brands</strong> — Emotional, accessible, personal — not status-driven</li>
+            <li><strong>vs. Amazon</strong> — Story-first, experience-driven, feels like a gift itself</li>
+            <li><strong>Unique Position</strong> — The Aesop of emotional gifting</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════
+         02 · VISUAL DESIGN SYSTEM
+    ══════════════════════════════════════ -->
+    <section class="section reveal" id="design-system">
+      <div class="section-number">02</div>
+      <h2 class="section-title">Visual <em>Design</em> System</h2>
+      <p class="section-intro">
+        A design language built on warmth, restraint, and organic texture. Inspired by Japanese wabi-sabi aesthetics, Scandinavian minimalism, and the warm tones of aged parchment and burnished gold.
+      </p>
+
+      <div class="card-grid">
+        <div class="card">
+          <div class="card-label">Design Language</div>
+          <div class="card-heading">Warm Minimalism</div>
+          <div class="card-body">Ivory backgrounds, generous white space, thin golden dividers. Every pixel breathes.</div>
+        </div>
+        <div class="card">
+          <div class="card-label">Texture Direction</div>
+          <div class="card-heading">Organic + Editorial</div>
+          <div class="card-body">Subtle grain overlays, cream tones that suggest handmade paper, linen, plaster.</div>
+        </div>
+        <div class="card">
+          <div class="card-label">Layout Philosophy</div>
+          <div class="card-heading">Cinematic Pacing</div>
+          <div class="card-body">Long vertical scrolls, full-bleed imagery, slow reveals. Like turning pages of a beautiful book.</div>
+        </div>
+        <div class="card">
+          <div class="card-label">Motion Principle</div>
+          <div class="card-heading">Unhurried Elegance</div>
+          <div class="card-body">600–900ms transitions, ease-out curves, never sudden. Time has weight here.</div>
+        </div>
+      </div>
+
+      <div class="callout-banner">
+        <div class="callout-text">"Design is not decoration. It is the architecture of emotion."</div>
+        <div>
+          <div style="font-size:11px;letter-spacing:0.15em;text-transform:uppercase;color:var(--gold);opacity:0.7;margin-bottom:8px">Design Mantra</div>
+          <div style="font-size:13px;color:rgba(255,255,255,0.45);max-width:240px;line-height:1.6">Every layout decision should make the visitor feel something before they read anything.</div>
+        </div>
+      </div>
+
+      <h3 style="font-family:var(--font-display);font-size:22px;font-weight:400;margin-bottom:20px;color:var(--charcoal)">Design Principles</h3>
+      <div class="card-grid-3">
+        <div class="card">
+          <div class="card-label">Principle 1</div>
+          <div class="card-heading">Negative Space as Luxury</div>
+          <div class="card-body">Crowding is cheap. Empty space communicates that each element matters. Minimum 80px section padding, 48px between components.</div>
+        </div>
+        <div class="card">
+          <div class="card-label">Principle 2</div>
+          <div class="card-heading">Typography Does the Heavy Lifting</div>
+          <div class="card-body">Headlines should move the reader before an image even loads. Cormorant Garamond at large sizes is the emotional anchor.</div>
+        </div>
+        <div class="card">
+          <div class="card-label">Principle 3</div>
+          <div class="card-heading">Gold is Sacred</div>
+          <div class="card-body">Gold (#C9A96E) is used sparingly — for lines, accents, and key CTAs only. Never as a background. Its rarity makes it precious.</div>
+        </div>
+        <div class="card">
+          <div class="card-label">Principle 4</div>
+          <div class="card-heading">Photography Leads</div>
+          <div class="card-body">Products are shown in context — in hands, on surfaces, in light. Never against white studio backgrounds alone.</div>
+        </div>
+        <div class="card">
+          <div class="card-label">Principle 5</div>
+          <div class="card-heading">Emotion Before Function</div>
+          <div class="card-body">The 'Add to Cart' button is never the loudest element. The story, the image, the copy — these convert. The button just seals the deal.</div>
+        </div>
+        <div class="card">
+          <div class="card-label">Principle 6</div>
+          <div class="card-heading">Mobile First, Always</div>
+          <div class="card-body">60%+ of emotional buyers discover and purchase on mobile. Every breakpoint is designed mobile-first with touch-native interactions.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════
+         03 · COLOR PALETTE
+    ══════════════════════════════════════ -->
+    <section class="section reveal" id="color-palette">
+      <div class="section-number">03</div>
+      <h2 class="section-title">Color <em>Palette</em></h2>
+      <p class="section-intro">
+        A warm, restrained palette inspired by aged ivory, candlelight, burnished gold, and the natural patina of handcrafted objects. No primary colors. No vibrancy for its own sake.
+      </p>
+
+      <div class="color-system">
+        <div class="swatch">
+          <div class="swatch-color" style="background:#FAF7F2"></div>
+          <div class="swatch-info">
+            <div class="swatch-name">Warm Ivory</div>
+            <div class="swatch-hex">#FAF7F2</div>
+            <div class="swatch-use">Primary Background</div>
+          </div>
+        </div>
+        <div class="swatch">
+          <div class="swatch-color" style="background:#F3EDE3"></div>
+          <div class="swatch-info">
+            <div class="swatch-name">Parchment Cream</div>
+            <div class="swatch-hex">#F3EDE3</div>
+            <div class="swatch-use">Section Backgrounds</div>
+          </div>
+        </div>
+        <div class="swatch">
+          <div class="swatch-color" style="background:#C9A96E"></div>
+          <div class="swatch-info">
+            <div class="swatch-name">Antique Gold</div>
+            <div class="swatch-hex">#C9A96E</div>
+            <div class="swatch-use">Primary Accent</div>
+          </div>
+        </div>
+        <div class="swatch">
+          <div class="swatch-color" style="background:#9A7840"></div>
+          <div class="swatch-info">
+            <div class="swatch-name">Deep Bronze</div>
+            <div class="swatch-hex">#9A7840</div>
+            <div class="swatch-use">Hover States, CTAs</div>
+          </div>
+        </div>
+        <div class="swatch">
+          <div class="swatch-color" style="background:#1C1A17"></div>
+          <div class="swatch-info">
+            <div class="swatch-name">Warm Charcoal</div>
+            <div class="swatch-hex">#1C1A17</div>
+            <div class="swatch-use">Primary Text, Nav BG</div>
+          </div>
+        </div>
+        <div class="swatch">
+          <div class="swatch-color" style="background:#6B6460"></div>
+          <div class="swatch-info">
+            <div class="swatch-name">Stone Gray</div>
+            <div class="swatch-hex">#6B6460</div>
+            <div class="swatch-use">Body Text, Subtext</div>
+          </div>
+        </div>
+        <div class="swatch">
+          <div class="swatch-color" style="background:#E8D5D0"></div>
+          <div class="swatch-info">
+            <div class="swatch-name">Dusty Blush</div>
+            <div class="swatch-hex">#E8D5D0</div>
+            <div class="swatch-use">Romantic Accents</div>
+          </div>
+        </div>
+        <div class="swatch">
+          <div class="swatch-color" style="background:#C4C9BD"></div>
+          <div class="swatch-info">
+            <div class="swatch-name">Sage Mist</div>
+            <div class="swatch-hex">#C4C9BD</div>
+            <div class="swatch-use">Nature, Organic Sections</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="highlight-box">
+        <div class="highlight-box-title">Color Usage Rules</div>
+        <p>
+          <strong>Ivory (#FAF7F2)</strong> — Used on 80% of the site. Never pure white.<br>
+          <strong>Gold (#C9A96E)</strong> — Maximum 15% of any design surface. Lines, icons, key labels.<br>
+          <strong>Charcoal (#1C1A17)</strong> — Headers, navbars, hero sections, important CTAs.<br>
+          <strong>Blush (#E8D5D0)</strong> — Baby/newborn category pages only. Soft, maternal.<br>
+          <strong>Never use</strong> — pure black, bright red, bright blue, or purple. They break the warmth.
+        </p>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════
+         04 · TYPOGRAPHY
+    ══════════════════════════════════════ -->
+    <section class="section reveal" id="typography">
+      <div class="section-number">04</div>
+      <h2 class="section-title">Typography <em>System</em></h2>
+      <p class="section-intro">
+        Two complementary typefaces that together create a feeling of editorial luxury and emotional intimacy. The serif carries the heart; the sans-serif carries the message.
+      </p>
+
+      <div class="type-demo">
+        <div class="type-specimen">
+          <div class="type-label">Display / Emotional Copy — Cormorant Garamond</div>
+          <p style="font-family:'Cormorant Garamond',serif;font-size:54px;font-weight:300;color:var(--charcoal);line-height:1.05;letter-spacing:-0.02em">The first touch<br><em style="color:var(--gold-dark)">lasts forever.</em></p>
+          <p style="font-size:11px;color:var(--warm-gray);margin-top:12px;letter-spacing:0.1em;text-transform:uppercase">Weight 300 · Size 54px · Letter-spacing -0.02em · Use: Hero headlines, emotional moments</p>
+        </div>
+        <div class="type-specimen">
+          <div class="type-label">Section Headers — Playfair Display</div>
+          <p style="font-family:'Playfair Display',serif;font-size:36px;font-weight:400;color:var(--charcoal);line-height:1.2">For the moment<br>you want to keep</p>
+          <p style="font-size:11px;color:var(--warm-gray);margin-top:12px;letter-spacing:0.1em;text-transform:uppercase">Weight 400 · Size 32–40px · Use: Section titles, product names</p>
+        </div>
+        <div class="type-specimen">
+          <div class="type-label">Body Copy — DM Sans</div>
+          <p style="font-family:'DM Sans',sans-serif;font-size:15px;font-weight:400;color:var(--warm-gray);line-height:1.85;max-width:520px">Each casting is made by hand in our studio, using a gentle non-toxic formula safe for newborns. No two pieces are identical — like the moment that inspired them.</p>
+          <p style="font-size:11px;color:var(--warm-gray);margin-top:12px;letter-spacing:0.1em;text-transform:uppercase">Weight 300–400 · Size 14–16px · Line-height 1.8 · Use: Descriptions, body text</p>
+        </div>
+        <div class="type-specimen">
+          <div class="type-label">UI Labels / Navigation — DM Sans Uppercase</div>
+          <p style="font-family:'DM Sans',sans-serif;font-size:11px;font-weight:400;letter-spacing:0.2em;text-transform:uppercase;color:var(--warm-gray)">Shop Collections &nbsp;·&nbsp; Our Story &nbsp;·&nbsp; Gifting Guide &nbsp;·&nbsp; Add to Cart &nbsp;·&nbsp; New Arrival</p>
+          <p style="font-size:11px;color:var(--warm-gray);margin-top:12px;letter-spacing:0.1em;text-transform:uppercase">Weight 400 · Size 10–12px · Letter-spacing 0.15–0.25em · Use: Nav, buttons, labels, chips</p>
+        </div>
+      </div>
+
+      <div class="card-grid-3">
+        <div class="card">
+          <div class="card-label">Scale — Desktop</div>
+          <ul class="spec-list" style="font-size:12px">
+            <li><strong>Hero</strong> 60–80px Cormorant 300</li>
+            <li><strong>H1</strong> 48px Cormorant 300</li>
+            <li><strong>H2</strong> 36px Playfair 400</li>
+            <li><strong>H3</strong> 24px Playfair 400</li>
+            <li><strong>Body</strong> 15px DM Sans 300</li>
+            <li><strong>Caption</strong> 12px DM Sans 400</li>
+          </ul>
+        </div>
+        <div class="card">
+          <div class="card-label">Scale — Mobile</div>
+          <ul class="spec-list" style="font-size:12px">
+            <li><strong>Hero</strong> 36–44px Cormorant 300</li>
+            <li><strong>H1</strong> 32px Cormorant 300</li>
+            <li><strong>H2</strong> 26px Playfair 400</li>
+            <li><strong>H3</strong> 20px Playfair 400</li>
+            <li><strong>Body</strong> 14px DM Sans 300</li>
+            <li><strong>Caption</strong> 11px DM Sans 400</li>
+          </ul>
+        </div>
+        <div class="card">
+          <div class="card-label">Line Heights</div>
+          <ul class="spec-list" style="font-size:12px">
+            <li><strong>Display</strong> 1.0–1.1 (tight)</li>
+            <li><strong>Headings</strong> 1.15–1.25</li>
+            <li><strong>Subheadings</strong> 1.3–1.4</li>
+            <li><strong>Body</strong> 1.75–1.85 (airy)</li>
+            <li><strong>Captions</strong> 1.5–1.6</li>
+            <li><strong>UI Labels</strong> 1.0</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════
+         05 · HOMEPAGE STRUCTURE
+    ══════════════════════════════════════ -->
+    <section class="section reveal" id="homepage">
+      <div class="section-number">05</div>
+      <h2 class="section-title">Homepage <em>Structure</em></h2>
+      <p class="section-intro">
+        The homepage is not a storefront. It is an emotional journey. Each section builds desire, establishes trust, and gently guides the visitor toward the product that is meant for them.
+      </p>
+
+      <div class="page-diagram">
+        <div class="page-section-block page-h">
+          <div class="page-section-name" style="color:var(--gold-light)">NAVBAR</div>
+          <div class="page-section-desc" style="color:rgba(255,255,255,0.45)">Fixed on scroll · transparent-to-opaque · Logo center on mobile</div>
+          <div class="page-section-tags"><span class="tag" style="background:rgba(201,169,110,0.15);color:var(--gold);border-color:rgba(201,169,110,0.2)">Sticky</span></div>
+        </div>
+        <div class="page-section-block">
+          <div class="page-section-name">01 · Cinematic Hero</div>
+          <div class="page-section-desc">Full-viewport, slow-motion video or parallax photograph. Large editorial headline fades in. Minimal single CTA.</div>
+          <div class="page-section-tags">
+            <span class="tag tag-gold">100vh</span>
+            <span class="tag">Video / Parallax</span>
+          </div>
+        </div>
+        <div class="page-section-block" style="background:var(--cream)">
+          <div class="page-section-name">02 · Emotional Manifesto</div>
+          <div class="page-section-desc">3-line brand statement in large Cormorant, centered, no images. Pure typographic emotion.</div>
+          <div class="page-section-tags">
+            <span class="tag">Typography only</span>
+            <span class="tag">Scroll-reveal</span>
+          </div>
+        </div>
+        <div class="page-section-block">
+          <div class="page-section-name">03 · Occasion Collections</div>
+          <div class="page-section-desc">4 cards: New Baby, Anniversary, Birthday, Romantic. Full-bleed images with hover overlays and poetic copy.</div>
+          <div class="page-section-tags">
+            <span class="tag tag-gold">4 Cards</span>
+            <span class="tag">Hover Reveal</span>
+          </div>
+        </div>
+        <div class="page-section-block" style="background:var(--cream)">
+          <div class="page-section-name">04 · Featured Products</div>
+          <div class="page-section-desc">Horizontal scroll (mobile) / 3-column grid (desktop). Editorial-style product cards with large photography.</div>
+          <div class="page-section-tags">
+            <span class="tag">3 cols</span>
+            <span class="tag">Horizontal scroll mobile</span>
+          </div>
+        </div>
+        <div class="page-section-block">
+          <div class="page-section-name">05 · Brand Story Video / Craft Feature</div>
+          <div class="page-section-desc">Split-screen: left = artisan at work, right = poetic text about the process. Parallax scroll effect.</div>
+          <div class="page-section-tags">
+            <span class="tag">Split 50/50</span>
+            <span class="tag">Parallax</span>
+          </div>
+        </div>
+        <div class="page-section-block" style="background:var(--cream)">
+          <div class="page-section-name">06 · Personalisation Preview</div>
+          <div class="page-section-desc">Interactive: let visitor preview their name/date on a sample product. Hooks them emotionally before they've bought.</div>
+          <div class="page-section-tags">
+            <span class="tag tag-gold">Interactive</span>
+            <span class="tag">High Converting</span>
+          </div>
+        </div>
+        <div class="page-section-block">
+          <div class="page-section-name">07 · Process & Trust Section</div>
+          <div class="page-section-desc">4 steps with illustrations: Order → Customise → Handcraft → Deliver. Builds trust, explains the premium price.</div>
+          <div class="page-section-tags">
+            <span class="tag">4-step flow</span>
+            <span class="tag">Trust builder</span>
+          </div>
+        </div>
+        <div class="page-section-block" style="background:var(--cream)">
+          <div class="page-section-name">08 · Customer Memories (Social Proof)</div>
+          <div class="page-section-desc">Full-width mosaic of real customer photos. Not star ratings — personal stories and quotes.</div>
+          <div class="page-section-tags">
+            <span class="tag">Masonry grid</span>
+            <span class="tag">UGC</span>
+          </div>
+        </div>
+        <div class="page-section-block">
+          <div class="page-section-name">09 · Gift Finder CTA</div>
+          <div class="page-section-desc">Dark background section with a single headline and a quiz-start CTA. "Find the perfect gift in 60 seconds."</div>
+          <div class="page-section-tags">
+            <span class="tag tag-gold">High CTA</span>
+          </div>
+        </div>
+        <div class="page-section-block" style="background:var(--cream)">
+          <div class="page-section-name">10 · Newsletter — Memory Vault</div>
+          <div class="page-section-desc">Positioned as "Join the Memory Vault" — not "subscribe to newsletter." Email + an emotional reason to sign up.</div>
+          <div class="page-section-tags">
+            <span class="tag">Email capture</span>
+          </div>
+        </div>
+        <div class="page-section-block page-h">
+          <div class="page-section-name" style="color:var(--gold-light)">FOOTER</div>
+          <div class="page-section-desc" style="color:rgba(255,255,255,0.45)">Dark, minimal, 4-column. Brand story left, 3 link columns right. Gold separator lines.</div>
+          <div class="page-section-tags"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════
+         06 · EMOTIONAL STORYTELLING
+    ══════════════════════════════════════ -->
+    <section class="section reveal" id="emotional-storytelling">
+      <div class="section-number">06</div>
+      <h2 class="section-title">Emotional Storytelling <em>Strategy</em></h2>
+      <p class="section-intro">
+        The most powerful purchase motivator is not logic — it is identity. "What does it say about me if I give this?" Design every touchpoint to answer: "I am someone who truly sees the people I love."
+      </p>
+
+      <div class="emotion-map">
+        <div class="emotion-cell" style="background:#FAF7F2;border:var(--border-soft)">
+          <div class="emotion-word" style="color:var(--charcoal)">Nostalgia</div>
+          <div class="emotion-note" style="color:var(--warm-gray)">Trigger: childhood scents, sepia tones, handwritten fonts</div>
+        </div>
+        <div class="emotion-cell" style="background:#F3EDE3;border:var(--border-soft)">
+          <div class="emotion-word" style="color:var(--charcoal)">Wonder</div>
+          <div class="emotion-note" style="color:var(--warm-gray)">Trigger: cinematic scale, macro photography of textures</div>
+        </div>
+        <div class="emotion-cell" style="background:var(--blush);border:var(--border-soft)">
+          <div class="emotion-word" style="color:#6B3A3A">Tenderness</div>
+          <div class="emotion-note" style="color:#8B5A5A">Trigger: baby hands, couples touching, soft light</div>
+        </div>
+        <div class="emotion-cell" style="background:var(--charcoal)">
+          <div class="emotion-word" style="color:var(--gold-light)">Longing</div>
+          <div class="emotion-note" style="color:rgba(255,255,255,0.4)">Trigger: "before they grow up", "while you still can"</div>
+        </div>
+        <div class="emotion-cell" style="background:#EEF0EC;border:var(--border-soft)">
+          <div class="emotion-word" style="color:#3A4A38">Gratitude</div>
+          <div class="emotion-note" style="color:#5A6A58">Trigger: "because you matter" gifting framing</div>
+        </div>
+        <div class="emotion-cell" style="background:#FDF6F3;border:var(--border-soft)">
+          <div class="emotion-word" style="color:#6B3A2A">Romance</div>
+          <div class="emotion-note" style="color:#8B5A4A">Trigger: couple photography, anniversary context</div>
+        </div>
+        <div class="emotion-cell" style="background:#F8F5F0;border:var(--border-soft)">
+          <div class="emotion-word" style="color:var(--charcoal)">Pride</div>
+          <div class="emotion-note" style="color:var(--warm-gray)">Trigger: "made by our studio", "took 8 hours to craft"</div>
+        </div>
+        <div class="emotion-cell" style="background:rgba(201,169,110,0.1);border:1px solid rgba(201,169,110,0.2)">
+          <div class="emotion-word" style="color:var(--bronze)">Urgency</div>
+          <div class="emotion-note" style="color:var(--gold-dark)">Trigger: "babies grow so fast" — non-pushy FOMO</div>
+        </div>
+      </div>
+
+      <h3 style="font-family:var(--font-display);font-size:22px;font-weight:400;margin:40px 0 20px;color:var(--charcoal)">Hero Copy Concepts</h3>
+
+      <div class="copy-card">
+        <div class="copy-eyebrow">Hero — Newborn / Baby Category</div>
+        <div class="copy-hero">Their hands were this small<br><em>for only a moment.</em></div>
+        <div class="copy-sub">Cast your newborn's hand and footprint in our organic plaster formula — a permanent memory of a fleeting miracle. Every detail preserved, forever.</div>
+        <button class="btn-primary">Preserve This Moment</button>
+      </div>
+
+      <div class="copy-card">
+        <div class="copy-eyebrow">Hero — Anniversary / Couples Category</div>
+        <div class="copy-hero">The same hands<br><em>every time.</em></div>
+        <div class="copy-sub">A couple hand casting sculpture, made together in a single afternoon. Two people, one moment, one piece of art that lasts the rest of your lives.</div>
+        <button class="btn-primary">Start Our Story</button>
+      </div>
+
+      <div class="copy-card">
+        <div class="copy-eyebrow">Hero — Gift Finder / General</div>
+        <div class="copy-hero">Some gifts say<br><em>"I love you" forever.</em></div>
+        <div class="copy-sub">Handcrafted memory keepsakes for the people who matter most. Because the best gifts aren't bought — they're made, with intention.</div>
+        <button class="btn-primary">Find the Perfect Gift</button>
+      </div>
+
+      <div class="highlight-box">
+        <div class="highlight-box-title">Emotional Copy Rules</div>
+        <p>
+          <strong>1. Write to one person.</strong> Not "for parents" — "for you, on the night you brought them home."<br>
+          <strong>2. Lead with feeling, not product.</strong> Not "buy a hand casting" — "hold onto this moment forever."<br>
+          <strong>3. Use time as a weapon.</strong> "Babies grow. Photos fade. This doesn't."<br>
+          <strong>4. Never use urgency that feels manipulative.</strong> Natural urgency: "before they grow up." False urgency: "only 3 left!"<br>
+          <strong>5. Earn the CTA.</strong> The button should feel like a natural next step, not an interrupt.
+        </p>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════
+         07 · PRODUCT PAGE
+    ══════════════════════════════════════ -->
+    <section class="section reveal" id="product-page">
+      <div class="section-number">07</div>
+      <h2 class="section-title">Product Page <em>Architecture</em></h2>
+      <p class="section-intro">
+        The product page is where emotion converts to action. It must do three things: make the visitor feel it's for them, make the product feel worth its price, and make the path to purchase effortless.
+      </p>
+
+      <div class="card-grid-2">
+        <div>
+          <div class="page-diagram">
+            <div class="page-section-block page-h">
+              <div class="page-section-name" style="color:var(--gold-light)">Product Image Gallery</div>
+              <div class="page-section-desc" style="color:rgba(255,255,255,0.45)">Left: sticky vertical thumbnail rail · Right: large image · Zoom on hover</div>
+            </div>
+            <div class="page-section-block">
+              <div class="page-section-name">Product Identity</div>
+              <div class="page-section-desc">Category badge · Product name (Cormorant 36px) · Short poetic tagline</div>
+            </div>
+            <div class="page-section-block" style="background:var(--cream)">
+              <div class="page-section-name">Pricing + Variants</div>
+              <div class="page-section-desc">Price in Cormorant · Size/material selector · Custom fields</div>
+            </div>
+            <div class="page-section-block">
+              <div class="page-section-name">Personalisation Builder</div>
+              <div class="page-section-desc">Live preview canvas · Name/date/message inputs · Font selector</div>
+            </div>
+            <div class="page-section-block" style="background:var(--cream)">
+              <div class="page-section-name">Add to Cart / Wishlist</div>
+              <div class="page-section-desc">Prominent CTA · Gift wrap option · Delivery estimate</div>
+            </div>
+            <div class="page-section-block">
+              <div class="page-section-name">Trust Signals</div>
+              <div class="page-section-desc">Handmade badge · 30-day guarantee · Secure checkout · Free returns</div>
+            </div>
+            <div class="page-section-block" style="background:var(--cream)">
+              <div class="page-section-name">Story of This Product</div>
+              <div class="page-section-desc">Long-form emotional copy · Making process · Materials used</div>
+            </div>
+            <div class="page-section-block">
+              <div class="page-section-name">Customer Stories</div>
+              <div class="page-section-desc">3–5 reviews with photos · Emotional, story-first format</div>
+            </div>
+            <div class="page-section-block" style="background:var(--cream)">
+              <div class="page-section-name">You May Also Love</div>
+              <div class="page-section-desc">4 related products · Editorial card format</div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="mobile-frame" style="margin:0 auto">
+            <div class="mobile-notch"><div class="mobile-notch-pill"></div></div>
+            <div style="background:var(--cream);height:180px;display:flex;align-items:center;justify-content:center;position:relative">
+              <div style="font-family:'Cormorant Garamond',serif;font-size:12px;font-style:italic;color:var(--light-gray)">Product Photo</div>
+              <div style="position:absolute;bottom:10px;left:0;right:0;display:flex;justify-content:center;gap:5px">
+                <div style="width:6px;height:6px;background:var(--gold);border-radius:50%"></div>
+                <div style="width:6px;height:6px;background:var(--light-gray);border-radius:50%"></div>
+                <div style="width:6px;height:6px;background:var(--light-gray);border-radius:50%"></div>
+                <div style="width:6px;height:6px;background:var(--light-gray);border-radius:50%"></div>
+              </div>
+            </div>
+            <div class="mobile-content">
+              <div style="font-size:9px;letter-spacing:0.15em;text-transform:uppercase;color:var(--gold-dark);opacity:0.7;margin-bottom:4px">Baby Keepsakes</div>
+              <div class="mobile-title">Newborn Hand<br>& Footprint Frame</div>
+              <div style="font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:300;color:var(--charcoal);margin-bottom:4px">৳ 2,800</div>
+              <div style="font-size:10px;color:var(--warm-gray);margin-bottom:12px">Free personalisation included</div>
+              <div style="background:var(--cream);border-radius:8px;padding:10px;margin-bottom:12px;border:var(--border-soft)">
+                <div style="font-size:9px;color:var(--gold-dark);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:6px">Personalise</div>
+                <div style="background:white;border:var(--border-soft);border-radius:4px;padding:8px;font-size:11px;color:var(--warm-gray)">Baby's name &amp; birth date...</div>
+              </div>
+              <div class="mobile-btn">Add to Keepsake Box</div>
+              <div class="mobile-btn-ghost">Save to Wishlist ♡</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <h3 style="font-family:var(--font-display);font-size:22px;font-weight:400;margin:40px 0 20px;color:var(--charcoal)">Product Cards — Style</h3>
+      <div class="card-grid-3">
+        <div class="product-card">
+          <div class="product-img">
+            <div class="product-img-placeholder">Hand Casting</div>
+            <div class="product-badge">New</div>
+            <div class="product-wishlist">♡</div>
+          </div>
+          <div class="product-info">
+            <div class="product-category">Baby Keepsakes</div>
+            <div class="product-name">Newborn Hand & Footprint Frame</div>
+            <div class="product-desc">A permanent impression of the tiniest fingers and toes, set in a hand-gilded frame.</div>
+            <div class="product-price-row">
+              <div class="product-price">৳2,800</div>
+              <div class="product-cta">Explore →</div>
+            </div>
+          </div>
+        </div>
+        <div class="product-card">
+          <div class="product-img" style="background:#EEE8E0">
+            <div class="product-img-placeholder">Couple Casting</div>
+            <div class="product-wishlist">♡</div>
+          </div>
+          <div class="product-info">
+            <div class="product-category">Anniversary</div>
+            <div class="product-name">Couple Hand Casting Sculpture</div>
+            <div class="product-desc">Two hands, one moment, cast in plaster and finished in matte white or warm bronze.</div>
+            <div class="product-price-row">
+              <div class="product-price">৳4,500</div>
+              <div class="product-cta">Explore →</div>
+            </div>
+          </div>
+        </div>
+        <div class="product-card">
+          <div class="product-img" style="background:#EDE8F0">
+            <div class="product-img-placeholder">Memory Frame</div>
+            <div class="product-badge">Bestseller</div>
+            <div class="product-wishlist">♡</div>
+          </div>
+          <div class="product-info">
+            <div class="product-category">Birthday</div>
+            <div class="product-name">Birthday Memory Frame</div>
+            <div class="product-desc">A personalised frame with birth details, a photo, and a handwritten message engraved.</div>
+            <div class="product-price-row">
+              <div class="product-price">৳1,900</div>
+              <div class="product-cta">Explore →</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════
+         08 · CHECKOUT FLOW
+    ══════════════════════════════════════ -->
+    <section class="section reveal" id="checkout">
+      <div class="section-number">08</div>
+      <h2 class="section-title">Checkout <em>Flow</em></h2>
+      <p class="section-intro">
+        The checkout must feel like an extension of the gift experience, not an interruption. Progress should feel gentle, trust should be constant, and the confirmation should feel like a celebration.
+      </p>
+
+      <div class="flow-steps">
+        <div class="flow-step">
+          <div class="flow-step-num">1</div>
+          <div class="flow-step-name">Bag Review</div>
+          <div class="flow-step-desc">Gift options, customisation summary, personalisation review</div>
+        </div>
+        <div class="flow-step">
+          <div class="flow-step-num">2</div>
+          <div class="flow-step-name">Your Details</div>
+          <div class="flow-step-desc">Name, email. Guest or save account for Memory Vault</div>
+        </div>
+        <div class="flow-step">
+          <div class="flow-step-num">3</div>
+          <div class="flow-step-name">Delivery</div>
+          <div class="flow-step-desc">Address, delivery speed, gift message, gift wrap (optional)</div>
+        </div>
+        <div class="flow-step">
+          <div class="flow-step-num">4</div>
+          <div class="flow-step-name">Payment</div>
+          <div class="flow-step-desc">Card, bKash, Nagad, COD. All on-page, no redirects.</div>
+        </div>
+        <div class="flow-step">
+          <div class="flow-step-num">5</div>
+          <div class="flow-step-name">Confirmation</div>
+          <div class="flow-step-desc">Cinematic "Thank you" page with order story and timeline</div>
+        </div>
+      </div>
+
+      <div class="card-grid-2">
+        <div class="card">
+          <div class="card-label">Checkout UX Rules</div>
+          <ul class="spec-list" style="font-size:13px">
+            <li><strong>No account required</strong> — guest checkout default, account optional</li>
+            <li><strong>Order summary visible always</strong> — sticky right column desktop</li>
+            <li><strong>Personalisation preview</strong> — show custom text on product in sidebar</li>
+            <li><strong>Progress indicator</strong> — gold dots, not numbered steps</li>
+            <li><strong>Gift message step</strong> — never skipped, always offered gracefully</li>
+            <li><strong>One page where possible</strong> — minimise back-button anxiety</li>
+          </ul>
+        </div>
+        <div class="card card-accent">
+          <div class="card-label">Order Confirmation Page</div>
+          <ul class="spec-list">
+            <li><strong>Headline:</strong> "Your memory is being made." Large Cormorant italic</li>
+            <li><strong>Order timeline:</strong> Animated steps — Order received → Crafting → Dispatched → Delivered</li>
+            <li><strong>Handcrafting note:</strong> "Our artisan will begin your piece within 24 hours"</li>
+            <li><strong>Share prompt:</strong> "Share your gift moment" for UGC generation</li>
+            <li><strong>Upsell (subtle):</strong> "Complete the memory" — matching product suggestion</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════
+         09 · NAVBAR & FOOTER
+    ══════════════════════════════════════ -->
+    <section class="section reveal" id="navbar-footer">
+      <div class="section-number">09</div>
+      <h2 class="section-title">Navbar & <em>Footer</em></h2>
+
+      <p style="font-size:13px;color:var(--warm-gray);margin-bottom:16px;letter-spacing:0.08em;text-transform:uppercase">Navbar — Desktop</p>
+      <div class="nav-demo">
+        <div class="nav-logo">Luminary</div>
+        <div class="nav-links">
+          <div class="nav-item">Collections</div>
+          <div class="nav-item">Occasions</div>
+          <div class="nav-item">Our Story</div>
+          <div class="nav-item">Gift Guide</div>
+          <div class="nav-item">Custom Orders</div>
+        </div>
+        <div class="nav-actions">
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+          <button class="btn-primary" style="padding:9px 20px;font-size:11px">Create Yours</button>
+        </div>
+      </div>
+
+      <p style="font-size:13px;color:var(--warm-gray);margin:32px 0 16px;letter-spacing:0.08em;text-transform:uppercase">Footer — Dark Premium</p>
+      <div class="footer-demo">
+        <div class="footer-grid">
+          <div>
+            <div class="footer-brand-name">Luminary</div>
+            <div class="footer-tagline">"Cast in love.<br>Kept forever."</div>
+            <div style="display:flex;gap:12px;margin-top:8px">
+              <div style="width:32px;height:32px;background:rgba(255,255,255,0.05);border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:14px;color:rgba(255,255,255,0.3)">f</div>
+              <div style="width:32px;height:32px;background:rgba(255,255,255,0.05);border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:14px;color:rgba(255,255,255,0.3)">in</div>
+              <div style="width:32px;height:32px;background:rgba(255,255,255,0.05);border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:14px;color:rgba(255,255,255,0.3)">▶</div>
+            </div>
+          </div>
+          <div>
+            <div class="footer-col-title">Collections</div>
+            <a class="footer-link">Baby Keepsakes</a>
+            <a class="footer-link">Couple Castings</a>
+            <a class="footer-link">Memory Frames</a>
+            <a class="footer-link">Anniversary Gifts</a>
+            <a class="footer-link">Birthday Gifts</a>
+          </div>
+          <div>
+            <div class="footer-col-title">Occasions</div>
+            <a class="footer-link">New Baby</a>
+            <a class="footer-link">Wedding</a>
+            <a class="footer-link">Anniversary</a>
+            <a class="footer-link">Birthday</a>
+            <a class="footer-link">Valentine's Day</a>
+          </div>
+          <div>
+            <div class="footer-col-title">Help & Info</div>
+            <a class="footer-link">How It Works</a>
+            <a class="footer-link">Custom Orders</a>
+            <a class="footer-link">Shipping Info</a>
+            <a class="footer-link">Returns Policy</a>
+            <a class="footer-link">Care Guide</a>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <div class="footer-copy">© 2026 Luminary Memory & Gift. Handcrafted with love in Dhaka.</div>
+          <div style="display:flex;gap:20px">
+            <a class="footer-link" style="margin:0">Privacy</a>
+            <a class="footer-link" style="margin:0">Terms</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════
+         10 · BUTTONS & CARDS
+    ══════════════════════════════════════ -->
+    <section class="section reveal" id="buttons-cards">
+      <div class="section-number">10</div>
+      <h2 class="section-title">Buttons & <em>UI Components</em></h2>
+
+      <div class="component-preview" style="flex-direction:column;align-items:flex-start;gap:24px">
+        <div>
+          <div style="font-size:11px;letter-spacing:0.15em;text-transform:uppercase;color:var(--warm-gray);margin-bottom:14px">Primary Buttons</div>
+          <div style="display:flex;gap:16px;flex-wrap:wrap">
+            <button class="btn-primary">Add to Keepsake Box</button>
+            <button class="btn-primary">Create Your Memory</button>
+            <button class="btn-primary">Preserve This Moment</button>
+          </div>
+        </div>
+        <div>
+          <div style="font-size:11px;letter-spacing:0.15em;text-transform:uppercase;color:var(--warm-gray);margin-bottom:14px">Ghost Buttons</div>
+          <div style="display:flex;gap:16px;flex-wrap:wrap">
+            <button class="btn-ghost">View Collection</button>
+            <button class="btn-ghost">Save to Wishlist</button>
+            <button class="btn-ghost">Learn Our Story</button>
+          </div>
+        </div>
+        <div>
+          <div style="font-size:11px;letter-spacing:0.15em;text-transform:uppercase;color:var(--warm-gray);margin-bottom:14px">Text Link Buttons</div>
+          <div style="display:flex;gap:24px;flex-wrap:wrap;align-items:center">
+            <button class="btn-link">Explore All →</button>
+            <button class="btn-link">Shop New Arrivals →</button>
+            <button class="btn-link">Read the Story →</button>
+          </div>
+        </div>
+        <div>
+          <div style="font-size:11px;letter-spacing:0.15em;text-transform:uppercase;color:var(--warm-gray);margin-bottom:14px">Tags & Chips</div>
+          <div>
+            <span class="tag">Baby</span>
+            <span class="tag">Anniversary</span>
+            <span class="tag">Birthday</span>
+            <span class="tag tag-gold">Bestseller</span>
+            <span class="tag tag-gold">Handcrafted</span>
+            <span class="tag tag-gold">Personalised</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════
+         11 · SPACING SYSTEM
+    ══════════════════════════════════════ -->
+    <section class="section reveal" id="spacing-system">
+      <div class="section-number">11</div>
+      <h2 class="section-title">Luxury Spacing <em>System</em></h2>
+      <p class="section-intro">
+        In luxury design, space communicates worth. Every spacing decision is an investment in perceived value.
+      </p>
+
+      <div>
+        <div class="spacing-row"><div class="spacing-bar" style="width:4px"></div><div class="spacing-info"><div class="spacing-token">4px — space-1</div><div class="spacing-desc">Micro gaps: between icon and text, chip padding</div></div></div>
+        <div class="spacing-row"><div class="spacing-bar" style="width:8px"></div><div class="spacing-info"><div class="spacing-token">8px — space-2</div><div class="spacing-desc">Compact internal component spacing</div></div></div>
+        <div class="spacing-row"><div class="spacing-bar" style="width:16px"></div><div class="spacing-info"><div class="spacing-token">16px — space-4</div><div class="spacing-desc">Standard component padding, form field gaps</div></div></div>
+        <div class="spacing-row"><div class="spacing-bar" style="width:24px"></div><div class="spacing-info"><div class="spacing-token">24px — space-6</div><div class="spacing-desc">Card padding, internal section gaps</div></div></div>
+        <div class="spacing-row"><div class="spacing-bar" style="width:40px"></div><div class="spacing-info"><div class="spacing-token">40px — space-10</div><div class="spacing-desc">Between card components, minor section breaks</div></div></div>
+        <div class="spacing-row"><div class="spacing-bar" style="width:64px"></div><div class="spacing-info"><div class="spacing-token">64px — space-16</div><div class="spacing-desc">Section internal padding (top/bottom)</div></div></div>
+        <div class="spacing-row"><div class="spacing-bar" style="width:96px"></div><div class="spacing-info"><div class="spacing-token">96px — space-24</div><div class="spacing-desc">Major section separators, between homepage sections</div></div></div>
+        <div class="spacing-row"><div class="spacing-bar" style="width:128px"></div><div class="spacing-info"><div class="spacing-token">128px — space-32</div><div class="spacing-desc">Hero padding, cinematic sections, full-bleed areas</div></div></div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════
+         12 · GLASSMORPHISM
+    ══════════════════════════════════════ -->
+    <section class="section reveal" id="glassmorphism">
+      <div class="section-number">12</div>
+      <h2 class="section-title">Glassmorphism <em>Usage</em></h2>
+      <p class="section-intro">
+        Used sparingly and purposefully — never as decoration, always to layer information on rich visual backgrounds. Glass says "premium" when used correctly.
+      </p>
+
+      <div class="glass-demo">
+        <div class="card-grid-2">
+          <div class="glass-card">
+            <div class="glass-label">Product Quick View</div>
+            <div class="glass-heading">Newborn Memory Frame</div>
+            <div class="glass-body">Used as overlays on product image hovers, quick-add panels, and notification toasts on dark hero sections.</div>
+          </div>
+          <div class="glass-card" style="background:rgba(201,169,110,0.06);border-color:rgba(201,169,110,0.15)">
+            <div class="glass-label" style="color:var(--gold)">Golden Glass Variant</div>
+            <div class="glass-heading">Anniversary Collection</div>
+            <div class="glass-body">Used for featured product callouts over warm-toned photography. The gold border catches light like a real frame.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card-grid-3" style="margin-top:24px">
+        <div class="card">
+          <div class="card-label">Use Glass For</div>
+          <ul class="spec-list" style="font-size:12px">
+            <li>Product hover overlays on image galleries</li>
+            <li>Notification toasts on dark backgrounds</li>
+            <li>Cart drawer header</li>
+            <li>Quick-view modal backdrop</li>
+            <li>Hero section overlay cards</li>
+          </ul>
+        </div>
+        <div class="card">
+          <div class="card-label">Glass Spec</div>
+          <div class="code-block" data-lang="CSS" style="font-size:11px">
+            <pre><span class="p">.glass {</span>
+  <span class="v">background:</span> <span class="s">rgba(255,255,255,0.05)</span><span class="p">;</span>
+  <span class="v">backdrop-filter:</span> <span class="s">blur(24px)</span><span class="p">;</span>
+  <span class="v">border:</span> <span class="s">1px solid rgba(255,255,255,0.08)</span><span class="p">;</span>
+  <span class="v">border-radius:</span> <span class="s">16px</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="p">.glass-gold {</span>
+  <span class="v">background:</span> <span class="s">rgba(201,169,110,0.06)</span><span class="p">;</span>
+  <span class="v">border-color:</span> <span class="s">rgba(201,169,110,0.2)</span><span class="p">;</span>
+<span class="p">}</span></pre>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-label">Never Use Glass For</div>
+          <ul class="spec-list" style="font-size:12px">
+            <li>On white/cream backgrounds (invisible)</li>
+            <li>As primary navigation background</li>
+            <li>Full-page layouts</li>
+            <li>More than 2 layers deep (nesting breaks blur)</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════
+         13 · ANIMATIONS
+    ══════════════════════════════════════ -->
+    <section class="section reveal" id="animations">
+      <div class="section-number">13</div>
+      <h2 class="section-title">Animation & <em>Micro-interaction</em> System</h2>
+      <p class="section-intro">
+        Every animation should feel like a breath — natural, unhurried, purposeful. Animations build the emotional experience; they are never decorative.
+      </p>
+
+      <div class="card-grid-3">
+        <div class="anim-card">
+          <div class="anim-preview"><div class="anim-dot"></div></div>
+          <div class="anim-name">Scroll Reveal</div>
+          <div class="anim-spec">opacity: 0→1<br>translateY: 24px→0<br>duration: 700ms<br>easing: cubic-bezier(.25,.46,.45,.94)<br>trigger: IntersectionObserver</div>
+        </div>
+        <div class="anim-card">
+          <div class="anim-preview"><div class="anim-line"></div></div>
+          <div class="anim-name">Gold Line Draw</div>
+          <div class="anim-spec">scaleX: 0→1<br>transform-origin: left<br>duration: 900ms<br>easing: ease-out<br>use: section dividers, CTAs</div>
+        </div>
+        <div class="anim-card">
+          <div class="anim-preview"><div class="anim-fade">forever.</div></div>
+          <div class="anim-name">Word Fade Sequence</div>
+          <div class="anim-spec">staggered opacity fade<br>delay: 200ms per word<br>duration: 600ms each<br>use: hero copy reveal<br>translateY: 10px→0</div>
+        </div>
+      </div>
+
+      <div class="card-grid-2" style="margin-top:24px">
+        <div class="card">
+          <div class="card-label">Hover Interactions</div>
+          <ul class="spec-list" style="font-size:12px">
+            <li><strong>Product card:</strong> translateY(-6px) + border-color fade, 300ms ease</li>
+            <li><strong>Image gallery:</strong> Scale 1.03 with overflow hidden, 500ms ease</li>
+            <li><strong>Buttons:</strong> Background color transition + underline draw, 280ms</li>
+            <li><strong>Navigation links:</strong> Opacity 0.5→1, gold dot appears below, 200ms</li>
+            <li><strong>Occasion cards:</strong> Dark overlay fades in, title rises, 400ms</li>
+            <li><strong>CTA link:</strong> Arrow slides right 4px on hover, 250ms</li>
+          </ul>
+        </div>
+        <div class="card">
+          <div class="card-label">Page Transitions</div>
+          <ul class="spec-list" style="font-size:12px">
+            <li><strong>Route transition:</strong> Curtain wipe in gold/cream, 600ms</li>
+            <li><strong>Product gallery:</strong> Crossfade between images, 400ms</li>
+            <li><strong>Cart open:</strong> Slide in from right, backdrop fade, 350ms</li>
+            <li><strong>Checkout steps:</strong> Slide + fade, 450ms ease-in-out</li>
+            <li><strong>Loading state:</strong> Pulsing gold orb — not a spinner</li>
+            <li><strong>Add to cart:</strong> Product thumbnail flies to cart icon, 600ms arc</li>
+          </ul>
+        </div>
+        <div class="card">
+          <div class="card-label">Scroll Animations</div>
+          <ul class="spec-list" style="font-size:12px">
+            <li><strong>Parallax hero:</strong> Background moves at 0.4× scroll speed</li>
+            <li><strong>Section reveals:</strong> Staggered children, 100ms delay each</li>
+            <li><strong>Product images:</strong> Lazy-load with fade-in, not pop-in</li>
+            <li><strong>Floating quote:</strong> Slow upward drift as you scroll past</li>
+            <li><strong>Gold line animation:</strong> Draws itself when entering viewport</li>
+          </ul>
+        </div>
+        <div class="card card-accent">
+          <div class="card-label">Animation Philosophy</div>
+          <ul class="spec-list">
+            <li><strong>Ease-out only</strong> for entrances. Ease-in for exits.</li>
+            <li><strong>Never bounce or spring</strong> — this is luxury, not a game app</li>
+            <li><strong>Respect prefers-reduced-motion</strong> — all animations disable at system level</li>
+            <li><strong>60fps always</strong> — only transform and opacity, never width/height</li>
+            <li><strong>Max 900ms</strong> for any single animation</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════
+         14 · CUSTOMIZATION EXPERIENCE
+    ══════════════════════════════════════ -->
+    <section class="section reveal" id="customization">
+      <div class="section-number">14</div>
+      <h2 class="section-title">Product Customisation <em>Experience</em></h2>
+      <p class="section-intro">
+        Personalisation is not a form field — it is part of the gift experience. The customisation flow should feel as meaningful as the product itself.
+      </p>
+
+      <div class="card-grid-2">
+        <div>
+          <h3 style="font-family:var(--font-display);font-size:22px;font-weight:400;margin-bottom:16px">Live Preview System</h3>
+          <ul class="spec-list">
+            <li><strong>Real-time rendering</strong> — As the customer types a name, it appears on the product instantly</li>
+            <li><strong>Font selector</strong> — 4–6 handwritten/serif fonts, shown on product (not in a dropdown)</li>
+            <li><strong>Zoom preview</strong> — Tap to see engraving/text up close before ordering</li>
+            <li><strong>3D/360° view</strong> — For casting products, rotate the sculpture preview</li>
+            <li><strong>Before/after toggle</strong> — "Without personalisation" vs "with your details"</li>
+            <li><strong>Share preview</strong> — "Show what you're ordering" to partner or family</li>
+          </ul>
+        </div>
+        <div>
+          <h3 style="font-family:var(--font-display);font-size:22px;font-weight:400;margin-bottom:16px">Upload Flow (Photo Products)</h3>
+          <ul class="spec-list">
+            <li><strong>Drag & drop zone</strong> — Large, welcoming, with gentle border animation on hover</li>
+            <li><strong>Photo crop tool</strong> — Built-in, no third-party redirect</li>
+            <li><strong>Filter/tone selector</strong> — 5 preset moods: Natural, Warm, Matte, B&W, Sepia</li>
+            <li><strong>Resolution checker</strong> — Gentle warning if photo quality is too low</li>
+            <li><strong>Layout selector</strong> — Portrait, landscape, centered, bleeding</li>
+            <li><strong>Auto-enhance toggle</strong> — Brightness/contrast improvement with one click</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="highlight-box">
+        <div class="highlight-box-title">Customisation Copy Tone</div>
+        <p>
+          Never say "Enter text here." Say <strong>"Their name, exactly as you say it."</strong><br>
+          Never say "Upload image." Say <strong>"Add the photo that matters most."</strong><br>
+          Never say "Select font." Say <strong>"Choose the style that feels like them."</strong><br>
+          Form fields are emotional choices — language must match.
+        </p>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════
+         15 · USER DASHBOARD
+    ══════════════════════════════════════ -->
+    <section class="section reveal" id="dashboard">
+      <div class="section-number">15</div>
+      <h2 class="section-title">User Dashboard — <em>Memory Vault</em></h2>
+      <p class="section-intro">
+        The user account is not "My Account" — it is the "Memory Vault." A personal archive of moments, orders, and reminders. It should feel like a private journal, not a utility screen.
+      </p>
+
+      <div class="dashboard-preview">
+        <div class="dash-sidebar">
+          <div style="padding:16px 18px 20px;border-bottom:1px solid rgba(255,255,255,0.05);margin-bottom:8px">
+            <div style="width:40px;height:40px;background:rgba(201,169,110,0.15);border-radius:50%;margin-bottom:8px;display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:18px;color:var(--gold)">S</div>
+            <div style="font-size:12px;color:rgba(255,255,255,0.6)">Sadia Rahman</div>
+            <div style="font-size:10px;color:rgba(255,255,255,0.25);margin-top:2px">3 memories saved</div>
+          </div>
+          <div class="dash-nav-item active"><span class="dash-icon">🏠</span> Memory Vault</div>
+          <div class="dash-nav-item"><span class="dash-icon">📦</span> My Orders</div>
+          <div class="dash-nav-item"><span class="dash-icon">♡</span> Wishlist</div>
+          <div class="dash-nav-item"><span class="dash-icon">🔔</span> Reminders</div>
+          <div class="dash-nav-item"><span class="dash-icon">⚙</span> Settings</div>
+        </div>
+        <div class="dash-main">
+          <div class="dash-stat-row">
+            <div class="dash-stat"><div class="dash-stat-val">3</div><div class="dash-stat-label">Memories created</div></div>
+            <div class="dash-stat"><div class="dash-stat-val">2</div><div class="dash-stat-label">Gifts pending</div></div>
+            <div class="dash-stat" style="background:rgba(201,169,110,0.08);border-color:rgba(201,169,110,0.2)"><div class="dash-stat-val" style="color:var(--bronze)">৳400</div><div class="dash-stat-label" style="color:var(--warm-gray)">Saved in wishlist</div></div>
+          </div>
+          <div class="dash-memory-row">
+            <div class="dash-memory-card">
+              <div class="dash-memory-thumb">🤲</div>
+              <div><div class="dash-memory-title">Arif & Sadia — Couple Casting</div><div class="dash-memory-sub">Ordered Oct 12, 2025<br>Delivered Oct 18</div><div class="inset-chip">Order Complete</div></div>
+            </div>
+            <div class="dash-memory-card">
+              <div class="dash-memory-thumb">👶</div>
+              <div><div class="dash-memory-title">Baby Zara — Newborn Frame</div><div class="dash-memory-sub">Ordered Nov 3, 2025<br>In production</div><div class="inset-chip" style="background:rgba(201,169,110,0.12)">Crafting Now</div></div>
+            </div>
+            <div class="dash-memory-card">
+              <div class="dash-memory-thumb">🔔</div>
+              <div><div class="dash-memory-title">Anniversary Reminder</div><div class="dash-memory-sub">Jan 14, 2026 (in 58 days)<br>7th Wedding Anniversary</div><div class="inset-chip" style="background:rgba(94,158,110,0.12);color:#3A7A50">Reminder Set</div></div>
+            </div>
+            <div class="dash-memory-card">
+              <div class="dash-memory-thumb">♡</div>
+              <div><div class="dash-memory-title">Birthday Memory Frame</div><div class="dash-memory-sub">Saved to wishlist<br>For Ammi's birthday</div><div class="inset-chip">In Wishlist</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="highlight-box" style="margin-top:32px">
+        <div class="highlight-box-title">Memory Reminder System</div>
+        <p>
+          Users can add important dates (anniversaries, birthdays, due dates) and get email reminders at 30, 14, and 7 days ahead. The reminder email looks like a personal note — not a marketing email. Subject: <strong>"Arif, your anniversary is in 14 days."</strong> Body: a warm, personal nudge with one relevant gift suggestion.
+        </p>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════
+         16 · ADMIN PANEL
+    ══════════════════════════════════════ -->
+    <section class="section reveal" id="admin-panel">
+      <div class="section-number">16</div>
+      <h2 class="section-title">Admin Panel <em>Design</em></h2>
+      <p class="section-intro">
+        The admin panel serves the artisan team, not just the business owner. It must handle custom order management, personalisation review, and production workflow as a priority.
+      </p>
+
+      <div class="admin-preview">
+        <div class="admin-topbar">
+          <div class="admin-logo">Luminary Admin</div>
+          <div style="display:flex;gap:16px;align-items:center">
+            <div style="font-size:11px;color:rgba(255,255,255,0.35);letter-spacing:0.1em">3 orders awaiting approval</div>
+            <div style="width:32px;height:32px;background:rgba(201,169,110,0.15);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;color:var(--gold);font-size:16px">A</div>
+          </div>
+        </div>
+        <div class="admin-body">
+          <div class="admin-sidebar">
+            <div class="admin-nav active">📊 Dashboard</div>
+            <div class="admin-nav">📦 Orders</div>
+            <div class="admin-nav">✏️ Custom Orders</div>
+            <div class="admin-nav">🛍 Products</div>
+            <div class="admin-nav">👤 Customers</div>
+            <div class="admin-nav">📝 Content</div>
+            <div class="admin-nav">📈 Analytics</div>
+            <div class="admin-nav">⚙ Settings</div>
+          </div>
+          <div class="admin-content">
+            <div class="admin-kpi">
+              <div class="admin-kpi-card"><div class="admin-kpi-val">৳84,200</div><div class="admin-kpi-lbl">Revenue This Month</div><div class="admin-kpi-trend">↑ 18% vs last month</div></div>
+              <div class="admin-kpi-card"><div class="admin-kpi-val">47</div><div class="admin-kpi-lbl">Orders This Month</div><div class="admin-kpi-trend">↑ 12 new today</div></div>
+              <div class="admin-kpi-card"><div class="admin-kpi-val">92%</div><div class="admin-kpi-lbl">5-Star Reviews</div><div class="admin-kpi-trend">↑ Excellent</div></div>
+              <div class="admin-kpi-card"><div class="admin-kpi-val">4.3d</div><div class="admin-kpi-lbl">Avg Production Time</div><div class="admin-kpi-trend">Target: 5d ✓</div></div>
+            </div>
+            <div style="background:white;border:var(--border);border-radius:10px;overflow:hidden">
+              <div style="padding:14px 16px;border-bottom:var(--border-soft);display:flex;justify-content:space-between;align-items:center">
+                <div style="font-size:13px;font-weight:500;color:var(--charcoal)">Recent Custom Orders</div>
+                <span class="tag tag-gold">3 pending review</span>
+              </div>
+              <div style="padding:12px 16px;border-bottom:var(--border-soft);display:flex;gap:16px;align-items:center;font-size:12px">
+                <div style="width:32px;height:32px;background:var(--cream);border-radius:6px;display:flex;align-items:center;justify-content:center">🤲</div>
+                <div style="flex:1"><div style="font-weight:500;color:var(--charcoal)">#LM-2847 — Couple Hand Casting</div><div style="color:var(--warm-gray)">Uploaded files: 2 · Personalisation: "Arif & Sadia, 2019"</div></div>
+                <button class="btn-primary" style="padding:6px 14px;font-size:10px">Review</button>
+              </div>
+              <div style="padding:12px 16px;display:flex;gap:16px;align-items:center;font-size:12px">
+                <div style="width:32px;height:32px;background:var(--cream);border-radius:6px;display:flex;align-items:center;justify-content:center">👶</div>
+                <div style="flex:1"><div style="font-weight:500;color:var(--charcoal)">#LM-2848 — Newborn Footprint Frame</div><div style="color:var(--warm-gray)">Name: Zara · Born: Nov 2, 2025 · Weight: 3.1kg</div></div>
+                <button class="btn-ghost" style="padding:6px 14px;font-size:10px">In Production</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════
+         17 · AI-POWERED FEATURES
+    ══════════════════════════════════════ -->
+    <section class="section reveal" id="ai-features">
+      <div class="section-number">17</div>
+      <h2 class="section-title">AI-Powered <em>Personalisation</em></h2>
+      <p class="section-intro">
+        AI is invisible here. It works behind the scenes to make every visitor feel like the site was built for them. The customer should feel understood, not tracked.
+      </p>
+
+      <div class="card-grid-3">
+        <div class="card">
+          <div class="card-label">Gift Finder AI</div>
+          <div class="card-heading">60-Second Gift Finder</div>
+          <div class="card-body">A conversational quiz: "Who is this for?" "What occasion?" "What's your budget?" → personalised 3-product recommendation with emotional copy matching the relationship.</div>
+        </div>
+        <div class="card card-accent">
+          <div class="card-label">Smart Engraving AI</div>
+          <div class="card-heading">Caption Generator</div>
+          <div class="card-body">Customer enters a date or name → AI suggests 5 beautiful poetic captions. "Help me write something" replaces a blank text box with a wonderful moment of care.</div>
+        </div>
+        <div class="card">
+          <div class="card-label">Memory Prompts</div>
+          <div class="card-heading">Memory Capture Helper</div>
+          <div class="card-body">After purchase, prompt the customer: "Tell us the story of this moment." Their story becomes a private memory in their vault, and (with permission) a social testimonial.</div>
+        </div>
+        <div class="card">
+          <div class="card-label">Predictive Reminders</div>
+          <div class="card-heading">Occasion Intelligence</div>
+          <div class="card-body">Based on purchase history and saved dates, AI suggests: "Riya's first birthday is in 3 weeks — shall we create something?" Feels personal, not automated.</div>
+        </div>
+        <div class="card">
+          <div class="card-label">Personalisation AI</div>
+          <div class="card-heading">Smart Photo Enhancement</div>
+          <div class="card-body">Auto-detects faces in uploaded photos, suggests optimal crops for frames, enhances tone for print quality. One click, professional result.</div>
+        </div>
+        <div class="card">
+          <div class="card-label">Browsing Intelligence</div>
+          <div class="card-heading">Context-Aware Homepage</div>
+          <div class="card-body">Returning visitor with baby purchase history? Hero changes to "Watch them grow." Couple buyer? "Add to your love story." Powered by browser-local signals.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════
+         18 · MOBILE DESIGN
+    ══════════════════════════════════════ -->
+    <section class="section reveal" id="mobile">
+      <div class="section-number">18</div>
+      <h2 class="section-title">Mobile-First <em>Experience</em></h2>
+      <p class="section-intro">
+        Mobile is not a shrunk-down desktop. It is the primary canvas. Emotional buyers discover on Instagram, land on a product page, and purchase — all on a phone. Design for that journey.
+      </p>
+
+      <div style="display:flex;gap:32px;flex-wrap:wrap;justify-content:center;margin:40px 0">
+        <div>
+          <p style="text-align:center;font-size:11px;color:var(--warm-gray);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:16px">Product Page</p>
+          <div class="mobile-frame">
+            <div class="mobile-notch"><div class="mobile-notch-pill"></div></div>
+            <div style="background:var(--charcoal);height:40px;display:flex;align-items:center;justify-content:space-between;padding:0 16px">
+              <div style="color:rgba(255,255,255,0.4);font-size:18px">←</div>
+              <div style="font-family:'Cormorant Garamond',serif;font-size:14px;color:var(--gold-light);letter-spacing:0.1em">LUMINARY</div>
+              <div style="color:rgba(255,255,255,0.4);font-size:16px">🛍</div>
+            </div>
+            <div class="mobile-hero-img">Product Image</div>
+            <div class="mobile-content" style="padding-top:0">
+              <div class="mobile-title">Couple Hand<br>Casting Sculpture</div>
+              <div style="font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:300;color:var(--charcoal);">৳ 4,500</div>
+              <div style="font-size:10px;color:var(--warm-gray);margin-bottom:14px">Free engraving · Ships in 5–7 days</div>
+              <div class="mobile-btn">Add to Keepsake Box</div>
+              <div class="mobile-btn-ghost">♡ Save for Later</div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <p style="text-align:center;font-size:11px;color:var(--warm-gray);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:16px">Memory Vault</p>
+          <div class="mobile-frame">
+            <div class="mobile-notch"><div class="mobile-notch-pill"></div></div>
+            <div style="background:var(--charcoal);height:40px;display:flex;align-items:center;justify-content:center;padding:0 16px">
+              <div style="font-family:'Cormorant Garamond',serif;font-size:14px;color:var(--gold-light);letter-spacing:0.1em">My Memory Vault</div>
+            </div>
+            <div style="padding:16px 14px">
+              <div style="background:var(--cream);border-radius:10px;padding:14px;margin-bottom:10px;border:var(--border-soft)">
+                <div style="font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:var(--gold-dark);opacity:0.7;margin-bottom:4px">Next Occasion</div>
+                <div style="font-size:15px;font-family:'Cormorant Garamond',serif;color:var(--charcoal)">7th Anniversary</div>
+                <div style="font-size:11px;color:var(--warm-gray)">January 14 · in 58 days</div>
+                <button class="btn-link" style="font-size:10px;margin-top:8px">Find the perfect gift →</button>
+              </div>
+              <div style="background:white;border-radius:10px;padding:14px;border:var(--border-soft);margin-bottom:8px;display:flex;gap:10px;align-items:center">
+                <div style="width:40px;height:40px;background:var(--cream);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:18px">🤲</div>
+                <div><div style="font-size:12px;font-weight:500;color:var(--charcoal)">Couple Casting</div><div style="font-size:10px;color:var(--warm-gray)">Delivered Oct 18</div></div>
+              </div>
+              <div style="background:white;border-radius:10px;padding:14px;border:var(--border-soft);display:flex;gap:10px;align-items:center">
+                <div style="width:40px;height:40px;background:var(--cream);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:18px">👶</div>
+                <div><div style="font-size:12px;font-weight:500;color:var(--charcoal)">Baby Zara Frame</div><div style="font-size:10px;color:var(--gold-dark)">In production ✦</div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card-grid-3">
+        <div class="card">
+          <div class="card-label">Mobile Navigation</div>
+          <ul class="spec-list" style="font-size:12px">
+            <li><strong>Bottom tab bar</strong> — Home, Shop, Wishlist, Vault, Bag</li>
+            <li><strong>Logo center</strong> — Transparent on scroll, opaque when scrolled</li>
+            <li><strong>Hamburger menu</strong> — Full-screen slide-in, dark bg, large serif links</li>
+            <li><strong>Search</strong> — Tap to expand, voice input supported</li>
+          </ul>
+        </div>
+        <div class="card">
+          <div class="card-label">Touch Interactions</div>
+          <ul class="spec-list" style="font-size:12px">
+            <li><strong>Swipe gallery</strong> — Native-feel product image swiping</li>
+            <li><strong>Long press wishlist</strong> — Hold product card to save without opening</li>
+            <li><strong>Pull to refresh</strong> — Custom animation: gold particles settle</li>
+            <li><strong>Pinch to zoom</strong> — Product images, engraving preview</li>
+          </ul>
+        </div>
+        <div class="card">
+          <div class="card-label">Mobile Breakpoints</div>
+          <ul class="spec-list" style="font-size:12px">
+            <li><strong>xs:</strong> 320px — minimal padding, single column</li>
+            <li><strong>sm:</strong> 375px — standard iPhone viewport</li>
+            <li><strong>md:</strong> 768px — tablet, 2-column starts</li>
+            <li><strong>lg:</strong> 1024px — desktop starts</li>
+            <li><strong>xl:</strong> 1440px — maximum content width</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════
+         19 · REACT ARCHITECTURE
+    ══════════════════════════════════════ -->
+    <section class="section reveal" id="react-arch">
+      <div class="section-number">19</div>
+      <h2 class="section-title">React + Tailwind <em>Architecture</em></h2>
+      <p class="section-intro">
+        A component hierarchy designed for emotional experiences. State is managed close to where it matters. The architecture is lean, purposeful, and extensible.
+      </p>
+
+      <div class="arch-tree">
+        <div class="arch-node">&lt;<span class="arch-type">App</span>&gt;</div>
+        <div class="arch-node" style="margin-left:20px">├── &lt;<span class="arch-type">ThemeProvider</span>&gt; <span class="arch-prop">// warm-ivory · charcoal · gold tokens</span></div>
+        <div class="arch-node" style="margin-left:20px">├── &lt;<span class="arch-type">AuthProvider</span>&gt; <span class="arch-prop">// Memory Vault session</span></div>
+        <div class="arch-node" style="margin-left:20px">├── &lt;<span class="arch-type">CartProvider</span>&gt; <span class="arch-prop">// persistent, personalisation-aware</span></div>
+        <div class="arch-node" style="margin-left:20px">├── &lt;<span class="arch-type">Layout</span>&gt;</div>
+        <div class="arch-child" style="margin-left:40px">│   ├── &lt;<span class="arch-type">Navbar</span> transparent scrollAware /&gt;</div>
+        <div class="arch-child" style="margin-left:40px">│   ├── &lt;<span class="arch-type">PageTransition</span> variant="curtain" /&gt;</div>
+        <div class="arch-child" style="margin-left:40px">│   ├── &lt;<span class="arch-type">Router</span>&gt;</div>
+        <div class="arch-leaf" style="margin-left:60px">│   │   ├── / → &lt;HomePage /&gt;</div>
+        <div class="arch-leaf" style="margin-left:60px">│   │   ├── /collections/:category → &lt;CategoryPage /&gt;</div>
+        <div class="arch-leaf" style="margin-left:60px">│   │   ├── /product/:slug → &lt;ProductPage /&gt;</div>
+        <div class="arch-leaf" style="margin-left:60px">│   │   ├── /occasions/:occasion → &lt;OccasionPage /&gt;</div>
+        <div class="arch-leaf" style="margin-left:60px">│   │   ├── /gift-finder → &lt;GiftFinderQuiz /&gt;</div>
+        <div class="arch-leaf" style="margin-left:60px">│   │   ├── /checkout → &lt;CheckoutFlow /&gt;</div>
+        <div class="arch-leaf" style="margin-left:60px">│   │   └── /vault → &lt;MemoryVault /&gt;</div>
+        <div class="arch-child" style="margin-left:40px">│   └── &lt;<span class="arch-type">Footer</span> /&gt;</div>
+        <div class="arch-node" style="margin-left:20px">│</div>
+        <div class="arch-node" style="margin-left:20px">└── <span class="arch-prop">// Key Shared Components</span></div>
+        <div class="arch-child" style="margin-left:40px">    ├── &lt;<span class="arch-type">ProductCard</span> editorial wishlist /&gt;</div>
+        <div class="arch-child" style="margin-left:40px">    ├── &lt;<span class="arch-type">PersonalisationBuilder</span> livePreview /&gt;</div>
+        <div class="arch-child" style="margin-left:40px">    ├── &lt;<span class="arch-type">ImageGallery</span> parallax zoom /&gt;</div>
+        <div class="arch-child" style="margin-left:40px">    ├── &lt;<span class="arch-type">CartDrawer</span> slideIn glass /&gt;</div>
+        <div class="arch-child" style="margin-left:40px">    ├── &lt;<span class="arch-type">ScrollReveal</span> stagger /&gt;</div>
+        <div class="arch-child" style="margin-left:40px">    ├── &lt;<span class="arch-type">GoldDivider</span> animated /&gt;</div>
+        <div class="arch-child" style="margin-left:40px">    └── &lt;<span class="arch-type">MemoryTimeline</span> reminders /&gt;</div>
+      </div>
+
+      <div class="card-grid-2">
+        <div>
+          <div class="code-block" data-lang="Tailwind Config">
+            <pre><span class="c">// tailwind.config.js — Luminary tokens</span>
+<span class="k">module.exports</span> = {
+  theme: {
+    extend: {
+      colors: {
+        ivory:   <span class="s">'#FAF7F2'</span>,
+        cream:   <span class="s">'#F3EDE3'</span>,
+        gold: {
+          DEFAULT: <span class="s">'#C9A96E'</span>,
+          light:   <span class="s">'#E8D5B0'</span>,
+          dark:    <span class="s">'#9A7840'</span>,
+        },
+        charcoal: <span class="s">'#1C1A17'</span>,
+        stone:    <span class="s">'#6B6460'</span>,
+        blush:    <span class="s">'#E8D5D0'</span>,
+      },
+      fontFamily: {
+        display: [<span class="s">'Cormorant Garamond'</span>, <span class="s">'Georgia'</span>],
+        heading: [<span class="s">'Playfair Display'</span>, <span class="s">'Georgia'</span>],
+        body:    [<span class="s">'DM Sans'</span>, <span class="s">'sans-serif'</span>],
+      },
+      spacing: {
+        <span class="s">'section'</span>: <span class="s">'96px'</span>,
+        <span class="s">'hero'</span>:    <span class="s">'128px'</span>,
+      }
+    }
+  }
+}</pre>
+          </div>
+        </div>
+        <div>
+          <div class="code-block" data-lang="React Component">
+            <pre><span class="c">// ScrollReveal component</span>
+<span class="k">const</span> <span class="v">ScrollReveal</span> = ({ children, delay=0 }) => {
+  <span class="k">const</span> ref = useRef(null);
+  <span class="k">const</span> [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    <span class="k">const</span> obs = <span class="k">new</span> IntersectionObserver(
+      ([entry]) => entry.isIntersecting 
+        && setVisible(true),
+      { threshold: 0.15 }
+    );
+    obs.observe(ref.current);
+    <span class="k">return</span> () => obs.disconnect();
+  }, []);
+
+  <span class="k">return</span> (
+    &lt;div ref={ref} style={{
+      opacity: visible ? 1 : 0,
+      transform: visible 
+        ? 'none' 
+        : 'translateY(24px)',
+      transition: `all 700ms 
+        cubic-bezier(.25,.46,.45,.94) 
+        ${delay}ms`
+    }}&gt;
+      {children}
+    &lt;/div&gt;
+  );
+};</pre>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════
+         20 · CATEGORY & OCCASION PAGES
+    ══════════════════════════════════════ -->
+    <section class="section reveal" id="category-pages">
+      <div class="section-number">20</div>
+      <h2 class="section-title">Category & Occasion <em>Pages</em></h2>
+
+      <div class="card-grid-2">
+        <div>
+          <h3 style="font-family:var(--font-display);font-size:22px;font-weight:400;margin-bottom:16px">Category Page Structure</h3>
+          <div class="page-diagram">
+            <div class="page-section-block page-h"><div class="page-section-name" style="color:var(--gold-light)">Category Hero</div><div class="page-section-desc" style="color:rgba(255,255,255,0.45)">Full-width image · Category name · Short emotional intro</div></div>
+            <div class="page-section-block"><div class="page-section-name">Filter Bar</div><div class="page-section-desc">Minimal horizontal pill filters. Not dropdowns. Never cluttered.</div></div>
+            <div class="page-section-block" style="background:var(--cream)"><div class="page-section-name">Featured Product</div><div class="page-section-desc">First product full-width editorial style</div></div>
+            <div class="page-section-block"><div class="page-section-name">Product Grid</div><div class="page-section-desc">3-column. No pagination — infinite gentle load</div></div>
+            <div class="page-section-block" style="background:var(--cream)"><div class="page-section-name">Category Story</div><div class="page-section-desc">Poetic copy about this category's meaning</div></div>
+          </div>
+        </div>
+        <div>
+          <h3 style="font-family:var(--font-display);font-size:22px;font-weight:400;margin-bottom:16px">Occasion Landing Pages</h3>
+          <div class="card-grid" style="margin-top:0">
+            <div class="card" style="padding:20px">
+              <div style="font-size:28px;margin-bottom:8px">🤱</div>
+              <div class="card-label">New Baby</div>
+              <div style="font-size:12px;color:var(--warm-gray)">Pastel blush palette. "They were this small." Cast + frame combos.</div>
+            </div>
+            <div class="card" style="padding:20px;background:#F0EDE8">
+              <div style="font-size:28px;margin-bottom:8px">💍</div>
+              <div class="card-label">Anniversary</div>
+              <div style="font-size:12px;color:var(--warm-gray)">Dark, romantic. Couple castings. "Still the same hands."</div>
+            </div>
+            <div class="card" style="padding:20px">
+              <div style="font-size:28px;margin-bottom:8px">🎂</div>
+              <div class="card-label">Birthday</div>
+              <div style="font-size:12px;color:var(--warm-gray)">Warm gold. Memory frames. "Another year, another story."</div>
+            </div>
+            <div class="card" style="padding:20px;background:#F8F2EE">
+              <div style="font-size:28px;margin-bottom:8px">❤️</div>
+              <div class="card-label">Valentine's Day</div>
+              <div style="font-size:12px;color:var(--warm-gray)">Blush and gold. "Show don't say." Romantic sculptures.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════
+         21 · SEO STRATEGY
+    ══════════════════════════════════════ -->
+    <section class="section reveal" id="seo">
+      <div class="section-number">21</div>
+      <h2 class="section-title">SEO <em>Landing Pages</em></h2>
+
+      <div class="card-grid-3">
+        <div class="card">
+          <div class="card-label">Evergreen SEO Pages</div>
+          <ul class="spec-list" style="font-size:12px">
+            <li>/newborn-hand-footprint-casting-dhaka</li>
+            <li>/couple-hand-casting-sculpture-bangladesh</li>
+            <li>/anniversary-gift-ideas-bangladesh</li>
+            <li>/baby-memory-frame-personalised</li>
+            <li>/handmade-gifts-dhaka-delivery</li>
+          </ul>
+        </div>
+        <div class="card">
+          <div class="card-label">Blog / Content Pillars</div>
+          <ul class="spec-list" style="font-size:12px">
+            <li>"How to preserve newborn memories"</li>
+            <li>"Unique anniversary gift ideas 2026"</li>
+            <li>"Best personalized gifts for parents"</li>
+            <li>"Hand casting at home vs professional"</li>
+            <li>"Why handmade gifts mean more"</li>
+          </ul>
+        </div>
+        <div class="card">
+          <div class="card-label">Schema Markup</div>
+          <ul class="spec-list" style="font-size:12px">
+            <li>Product schema with reviews/ratings</li>
+            <li>LocalBusiness for Bangladesh/Dhaka</li>
+            <li>FAQPage for common casting questions</li>
+            <li>Article schema on all blog posts</li>
+            <li>BreadcrumbList on all category/product pages</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════
+         22 · TRUST & SOCIAL PROOF
+    ══════════════════════════════════════ -->
+    <section class="section reveal" id="trust">
+      <div class="section-number">22</div>
+      <h2 class="section-title">Trust & <em>Social Proof</em></h2>
+
+      <div class="card-grid-2">
+        <div>
+          <h3 style="font-family:var(--font-display);font-size:22px;font-weight:400;margin-bottom:16px">Trust Signals</h3>
+          <ul class="spec-list">
+            <li><strong>Handmade badge</strong> — "Made by hand in our Dhaka studio, one at a time"</li>
+            <li><strong>Guarantee seal</strong> — "30-day memory guarantee — if it's not perfect, we remake it"</li>
+            <li><strong>Safe materials</strong> — "Non-toxic, safe for newborns. Tested and certified."</li>
+            <li><strong>Process transparency</strong> — Show the studio, the artisans, the making</li>
+            <li><strong>Secure payment</strong> — Show logos of bKash, Nagad, card networks discreetly</li>
+            <li><strong>Order tracking</strong> — Real-time "Your memory is being crafted" updates</li>
+          </ul>
+        </div>
+        <div>
+          <h3 style="font-family:var(--font-display);font-size:22px;font-weight:400;margin-bottom:16px">Social Proof System</h3>
+          <ul class="spec-list">
+            <li><strong>Story-first reviews</strong> — Not "5/5 good product." Real parent/couple stories.</li>
+            <li><strong>Photo reviews</strong> — Customer photos of the product in their home</li>
+            <li><strong>Memory wall</strong> — UGC mosaic: real customers' preserved moments</li>
+            <li><strong>Before/after gallery</strong> — "From casting to final product"</li>
+            <li><strong>Press mentions</strong> — Any media coverage, shown elegantly</li>
+            <li><strong>Counter</strong> — "2,400+ memories preserved" — milestone framing</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════
+         23 · IMAGE PROMPTS
+    ══════════════════════════════════════ -->
+    <section class="section reveal" id="image-prompts">
+      <div class="section-number">23</div>
+      <h2 class="section-title">Image & Visual <em>Direction</em></h2>
+      <p class="section-intro">
+        Every photograph must carry the emotional weight of the brand. These prompts guide product photography, lifestyle shots, and AI-generated supporting visuals.
+      </p>
+
+      <div class="card-grid-2">
+        <div>
+          <div class="prompt-card">
+            <div class="prompt-title">Hero Photography Direction</div>
+            <div class="prompt-text">Warm cinematic light, golden hour, soft shallow depth of field. A mother's hand cradling a tiny newborn foot. Linen texture in background. Cream and ivory tones. Film grain texture, slightly desaturated. Award-winning documentary photography style.</div>
+          </div>
+          <div class="prompt-card">
+            <div class="prompt-title">Product on Surface</div>
+            <div class="prompt-text">Handcrafted plaster casting on aged oak table, natural window light from left, thin gold frame in background. Dried flowers nearby. Editorial still life, Kinfolk magazine aesthetic, minimal styling, breathing space around subject.</div>
+          </div>
+          <div class="prompt-card">
+            <div class="prompt-title">Couple Photography</div>
+            <div class="prompt-text">Two pairs of hands interlocked, casting mold between them. Bokeh background, warm amber tones. Intimate, not posed. Captured in moment of quiet joy. Real couples, not models. Bengali cultural context where appropriate.</div>
+          </div>
+        </div>
+        <div>
+          <div class="prompt-card">
+            <div class="prompt-title">Studio / Making Process</div>
+            <div class="prompt-text">Artisan's hands working plaster, close macro shot, workshop with warm light. Tools arranged beautifully. Not industrial — small, personal, intimate. Texture of the craft visible. Story of human making.</div>
+          </div>
+          <div class="prompt-card">
+            <div class="prompt-title">Memory Frame Display</div>
+            <div class="prompt-text">Personalised wooden frame on a bedroom shelf, surrounded by soft focus family photographs. Morning light. Real home, not staged. The frame as part of a life being lived, not a product being sold.</div>
+          </div>
+          <div class="prompt-card">
+            <div class="prompt-title">AI Generation Prompt (Midjourney)</div>
+            <div class="prompt-text">Newborn hand and footprint casting frame, white plaster, warm studio light, shallow DOF, ivory linen background, film grain, editorial product photography, 50mm lens, golden hour warmth, Kinfolk magazine style --ar 4:5 --style raw --v 6</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════
+         24 · CONVERSION STRATEGY
+    ══════════════════════════════════════ -->
+    <section class="section reveal" id="conversion">
+      <div class="section-number">24</div>
+      <h2 class="section-title">Conversion <em>Optimisation</em></h2>
+      <p class="section-intro">
+        Emotional products convert when the visitor feels seen. The strategy is not persuasion — it is resonance. Make them feel understood, and the purchase follows naturally.
+      </p>
+
+      <div class="card-grid-3">
+        <div class="card card-accent">
+          <div class="card-label">Emotional Triggers</div>
+          <ul class="spec-list">
+            <li><strong>Scarcity (genuine):</strong> "Each piece is made to order — allow 5–7 days"</li>
+            <li><strong>Time sensitivity:</strong> "Babies grow fast. This moment won't wait."</li>
+            <li><strong>Social validation:</strong> "2,400 families have preserved moments this way"</li>
+            <li><strong>Gift framing:</strong> "This isn't a gift. It's a statement."</li>
+          </ul>
+        </div>
+        <div class="card">
+          <div class="card-label">Page Performance</div>
+          <ul class="spec-list" style="font-size:12px">
+            <li><strong>First paint &lt;1.2s</strong> — LCP target</li>
+            <li><strong>Lazy load images</strong> with LQIP (blurred placeholder)</li>
+            <li><strong>No layout shift</strong> — reserve space for all images</li>
+            <li><strong>WebP all images</strong> — 70% smaller than JPEG</li>
+            <li><strong>Above fold:</strong> no blocking scripts</li>
+          </ul>
+        </div>
+        <div class="card">
+          <div class="card-label">Wishlist & Save Psychology</div>
+          <ul class="spec-list" style="font-size:12px">
+            <li>Wishlist creates investment before purchase decision</li>
+            <li>"Save for later" reduces immediate bounce</li>
+            <li>Email recovery: "Your saved memory is waiting"</li>
+            <li>Wishlists shareable with partner/family</li>
+            <li>7-day wishlist email: price-stable, reminder tone</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="callout-banner">
+        <div class="callout-text">"The goal is not to sell a product. It is to give someone the words for what they already felt."</div>
+        <div style="text-align:right">
+          <div style="font-size:11px;color:var(--gold);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:8px">Core Conversion Principle</div>
+          <div style="font-size:13px;color:rgba(255,255,255,0.4);max-width:200px;line-height:1.6">When copy reflects a feeling the visitor already has, they buy not because you persuaded them but because you understood them.</div>
+        </div>
+      </div>
+    </section>
+
+  </div><!-- /content -->
+</main>
+
+<script>
+// Scroll reveal observer
+const reveals = document.querySelectorAll('.reveal');
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.08 });
+
+reveals.forEach(el => observer.observe(el));
+
+// Sidebar nav active state
+const sections = document.querySelectorAll('section[id]');
+const navLinks = document.querySelectorAll('.nav-link');
+
+const scrollObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const id = entry.target.id;
+      navLinks.forEach(link => {
+        link.classList.toggle('active', link.getAttribute('href') === '#' + id);
+      });
+    }
+  });
+}, { rootMargin: '-40% 0px -55% 0px' });
+
+sections.forEach(s => scrollObserver.observe(s));
+
+// Nav link click
+navLinks.forEach(link => {
+  link.addEventListener('click', (e) => {
+    e.preventDefault();
+    const targetId = link.getAttribute('href').slice(1);
+    const target = document.getElementById(targetId);
+    if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+});
+</script>
+</body>
+</html>
