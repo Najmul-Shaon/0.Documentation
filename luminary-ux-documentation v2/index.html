@@ -1,0 +1,3143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Luminary — All Screen Designs</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500&display=swap" rel="stylesheet">
+<style>
+/* ╔═══════════════════════════════════════╗
+   ║         GLOBAL DESIGN TOKENS          ║
+   ╚═══════════════════════════════════════╝ */
+:root {
+  /* Core Palette */
+  --ivory:        #FAF7F2;
+  --cream:        #F3EDE3;
+  --parchment:    #EDE4D8;
+  --warm-white:   #FDFAF6;
+  --gold:         #C9A96E;
+  --gold-light:   #E8D5B0;
+  --gold-dark:    #9A7840;
+  --bronze:       #8B6914;
+  --charcoal:     #1C1A17;
+  --charcoal-2:   #252220;
+  --warm-gray:    #6B6460;
+  --light-gray:   #D4CEC8;
+  --blush:        #F0E0DC;
+
+  /* ROMANTIC RED — vibrant, passionate, alive */
+  --crimson:      #C8102E;
+  --crimson-deep: #8B0A1E;
+  --crimson-bright:#E8193A;
+  --crimson-glow: rgba(200,16,46,0.15);
+  --crimson-mist: rgba(200,16,46,0.06);
+  --rose-dark:    #7A0A1A;
+
+  /* Typography */
+  --font-display: 'Cormorant Garamond', Georgia, serif;
+  --font-heading: 'Playfair Display', Georgia, serif;
+  --font-body:    'DM Sans', system-ui, sans-serif;
+
+  /* Borders */
+  --border:       1px solid rgba(201,169,110,0.22);
+  --border-soft:  1px solid rgba(201,169,110,0.1);
+  --border-red:   1px solid rgba(200,16,46,0.3);
+}
+
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  background:var(--warm-white);
+  color:var(--charcoal);
+  font-family:var(--font-body);
+  font-size:15px;
+  line-height:1.7;
+  overflow-x:hidden;
+}
+::-webkit-scrollbar{width:4px;}
+::-webkit-scrollbar-track{background:var(--cream);}
+::-webkit-scrollbar-thumb{background:var(--gold);border-radius:2px;}
+
+/* ╔═══════════════════════════════════════╗
+   ║           SCREEN NAV BAR              ║
+   ╚═══════════════════════════════════════╝ */
+.screen-nav{
+  position:sticky;
+  top:0;
+  z-index:999;
+  background:var(--charcoal);
+  border-bottom:1px solid rgba(201,169,110,0.2);
+  padding:0 24px;
+  display:flex;
+  align-items:center;
+  height:56px;
+  gap:0;
+  overflow-x:auto;
+}
+.screen-nav::-webkit-scrollbar{height:2px;}
+.screen-nav-brand{
+  font-family:var(--font-display);
+  font-size:18px;
+  font-weight:300;
+  letter-spacing:0.18em;
+  color:var(--gold-light);
+  text-transform:uppercase;
+  white-space:nowrap;
+  margin-right:32px;
+  flex-shrink:0;
+}
+.screen-btn{
+  padding:0 16px;
+  height:56px;
+  display:flex;
+  align-items:center;
+  font-size:11px;
+  letter-spacing:0.12em;
+  text-transform:uppercase;
+  color:rgba(255,255,255,0.45);
+  cursor:pointer;
+  white-space:nowrap;
+  border-bottom:2px solid transparent;
+  transition:all 0.2s;
+  flex-shrink:0;
+  text-decoration:none;
+}
+.screen-btn:hover{color:var(--gold-light);border-bottom-color:var(--gold);}
+.screen-btn.active{color:var(--gold);border-bottom-color:var(--gold);}
+.screen-btn.red-tab{color:rgba(255,120,130,0.6);}
+.screen-btn.red-tab:hover,.screen-btn.red-tab.active{color:#ff6b7a;border-bottom-color:var(--crimson);}
+
+/* ╔═══════════════════════════════════════╗
+   ║          SHARED COMPONENTS            ║
+   ╚═══════════════════════════════════════╝ */
+.site-header{
+  background:var(--charcoal);
+  height:72px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 60px;
+  position:relative;
+}
+.site-header::after{
+  content:'';
+  position:absolute;
+  bottom:0;left:0;right:0;height:1px;
+  background:linear-gradient(90deg,transparent,var(--gold),transparent);
+  opacity:0.3;
+}
+.logo{
+  font-family:var(--font-display);
+  font-size:26px;
+  font-weight:300;
+  letter-spacing:0.2em;
+  color:var(--gold-light);
+  text-transform:uppercase;
+}
+.header-nav{display:flex;gap:32px;align-items:center;}
+.header-link{
+  font-size:11px;
+  letter-spacing:0.15em;
+  text-transform:uppercase;
+  color:rgba(255,255,255,0.5);
+  cursor:pointer;
+  transition:color 0.2s;
+  text-decoration:none;
+}
+.header-link:hover{color:var(--gold-light);}
+.header-link.love-link{color:rgba(200,100,110,0.6);}
+.header-link.love-link:hover{color:#ff8899;}
+.header-icons{display:flex;gap:20px;align-items:center;}
+.h-icon{
+  width:20px;height:20px;
+  opacity:0.45;cursor:pointer;
+  transition:opacity 0.2s;
+  color:white;
+}
+.h-icon:hover{opacity:1;}
+.cart-pill{
+  background:var(--crimson);
+  color:white;
+  font-size:10px;
+  letter-spacing:0.1em;
+  padding:8px 18px;
+  border-radius:2px;
+  text-transform:uppercase;
+  cursor:pointer;
+  transition:background 0.2s;
+  display:flex;align-items:center;gap:6px;
+}
+.cart-pill:hover{background:var(--crimson-bright);}
+.cart-count{
+  background:var(--gold);
+  color:var(--charcoal);
+  font-size:9px;
+  font-weight:500;
+  width:16px;height:16px;
+  border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+}
+
+/* Shared footer */
+.site-footer{
+  background:#111009;
+  padding:64px 60px 40px;
+  border-top:1px solid rgba(201,169,110,0.1);
+}
+.footer-top{
+  display:grid;
+  grid-template-columns:2fr 1fr 1fr 1fr;
+  gap:48px;
+  padding-bottom:48px;
+  border-bottom:1px solid rgba(255,255,255,0.05);
+  margin-bottom:32px;
+}
+.footer-brand{
+  font-family:var(--font-display);
+  font-size:30px;
+  font-weight:300;
+  color:var(--gold-light);
+  letter-spacing:0.15em;
+  text-transform:uppercase;
+  margin-bottom:12px;
+}
+.footer-tagline{
+  font-family:var(--font-display);
+  font-style:italic;
+  font-size:15px;
+  color:rgba(255,255,255,0.2);
+  margin-bottom:20px;
+  max-width:220px;
+  line-height:1.6;
+}
+.footer-col-head{
+  font-size:10px;letter-spacing:0.22em;text-transform:uppercase;
+  color:var(--gold);opacity:0.55;margin-bottom:16px;
+}
+.footer-link{
+  display:block;font-size:13px;
+  color:rgba(255,255,255,0.3);
+  margin-bottom:10px;cursor:pointer;
+  transition:color 0.2s;text-decoration:none;
+}
+.footer-link:hover{color:var(--gold-light);}
+.footer-bottom{
+  display:flex;justify-content:space-between;align-items:center;
+  font-size:11px;color:rgba(255,255,255,0.18);
+}
+.footer-social{display:flex;gap:10px;}
+.social-dot{
+  width:32px;height:32px;background:rgba(255,255,255,0.04);
+  border-radius:50%;border:1px solid rgba(255,255,255,0.07);
+  display:flex;align-items:center;justify-content:center;
+  font-size:12px;color:rgba(255,255,255,0.25);cursor:pointer;
+  transition:all 0.2s;
+}
+.social-dot:hover{background:var(--crimson);border-color:var(--crimson);color:white;}
+
+/* Universal button styles */
+.btn{
+  display:inline-flex;align-items:center;gap:8px;
+  font-family:var(--font-body);
+  font-size:11px;letter-spacing:0.18em;text-transform:uppercase;
+  cursor:pointer;border:none;border-radius:2px;
+  transition:all 0.28s ease;text-decoration:none;
+}
+.btn-dark{
+  background:var(--charcoal);color:var(--gold-light);
+  padding:14px 36px;border:1px solid var(--charcoal);
+}
+.btn-dark:hover{background:#2c2926;border-color:#2c2926;}
+.btn-red{
+  background:var(--crimson);color:white;
+  padding:14px 36px;border:1px solid var(--crimson);
+}
+.btn-red:hover{background:var(--crimson-bright);border-color:var(--crimson-bright);}
+.btn-ghost-gold{
+  background:transparent;color:var(--charcoal);
+  padding:13px 36px;border:1px solid rgba(201,169,110,0.5);
+}
+.btn-ghost-gold:hover{background:var(--gold);border-color:var(--gold);color:var(--charcoal);}
+.btn-ghost-red{
+  background:transparent;color:var(--crimson);
+  padding:13px 36px;border:1px solid rgba(200,16,46,0.4);
+}
+.btn-ghost-red:hover{background:var(--crimson);border-color:var(--crimson);color:white;}
+.btn-ghost-white{
+  background:transparent;color:white;
+  padding:13px 36px;border:1px solid rgba(255,255,255,0.35);
+}
+.btn-ghost-white:hover{background:rgba(255,255,255,0.1);}
+
+/* Tags */
+.tag{
+  display:inline-block;padding:4px 12px;
+  background:var(--cream);border:var(--border);
+  border-radius:100px;font-size:11px;
+  color:var(--warm-gray);letter-spacing:0.05em;margin:3px;
+}
+.tag-gold{background:rgba(201,169,110,0.1);border-color:rgba(201,169,110,0.3);color:var(--bronze);}
+.tag-red{background:rgba(200,16,46,0.08);border-color:rgba(200,16,46,0.25);color:var(--crimson-deep);}
+
+/* Section utility */
+.sec-eyebrow{
+  font-size:10px;letter-spacing:0.28em;text-transform:uppercase;
+  color:var(--gold);display:flex;align-items:center;gap:10px;
+  margin-bottom:14px;
+}
+.sec-eyebrow::before{content:'';width:28px;height:1px;background:var(--gold);}
+.sec-eyebrow-red{color:var(--crimson);}
+.sec-eyebrow-red::before{background:var(--crimson);}
+
+.sec-title{
+  font-family:var(--font-display);
+  font-size:48px;font-weight:300;
+  line-height:1.08;letter-spacing:-0.01em;
+  color:var(--charcoal);margin-bottom:20px;
+}
+.sec-title em{font-style:italic;color:var(--gold-dark);}
+.sec-title em.red{color:var(--crimson);}
+
+.sec-body{
+  font-size:15px;color:var(--warm-gray);
+  max-width:560px;line-height:1.85;
+}
+
+/* Gold line */
+.gold-line{
+  width:48px;height:1px;
+  background:linear-gradient(90deg,var(--gold),transparent);
+  margin:20px 0;
+}
+.red-line{
+  width:48px;height:1px;
+  background:linear-gradient(90deg,var(--crimson),transparent);
+  margin:20px 0;
+}
+
+/* Screen wrapper */
+.screen{
+  display:none;
+  animation:fadeIn 0.4s ease;
+}
+.screen.active{display:block;}
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:none;}}
+
+/* ╔═══════════════════════════════════════╗
+   ║         01 · HOMEPAGE                 ║
+   ╚═══════════════════════════════════════╝ */
+.hero{
+  min-height:100vh;
+  background:var(--charcoal);
+  position:relative;
+  display:flex;
+  flex-direction:column;
+  justify-content:flex-end;
+  padding:0 60px 80px;
+  overflow:hidden;
+}
+.hero-bg{
+  position:absolute;inset:0;
+  background:
+    radial-gradient(ellipse 60% 80% at 70% 40%, rgba(201,169,110,0.07) 0%, transparent 60%),
+    radial-gradient(ellipse 40% 60% at 20% 70%, rgba(200,16,46,0.04) 0%, transparent 50%);
+}
+.hero-visual{
+  position:absolute;right:60px;top:50%;transform:translateY(-50%);
+  width:520px;height:620px;
+  background:linear-gradient(145deg,#2a2420 0%,#1a1815 100%);
+  border-radius:4px;
+  border:var(--border-soft);
+  display:flex;align-items:center;justify-content:center;
+  overflow:hidden;
+}
+.hero-visual-inner{
+  width:100%;height:100%;
+  background:
+    linear-gradient(180deg,rgba(200,16,46,0.05) 0%,transparent 40%),
+    repeating-linear-gradient(
+      45deg,
+      transparent,transparent 40px,
+      rgba(201,169,110,0.02) 40px,rgba(201,169,110,0.02) 41px
+    );
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:20px;
+}
+.hero-visual-label{
+  font-family:var(--font-display);
+  font-style:italic;font-size:15px;
+  color:rgba(255,255,255,0.18);letter-spacing:0.08em;
+}
+.hero-visual-frame{
+  width:260px;height:320px;
+  border:1px solid rgba(201,169,110,0.2);
+  border-radius:3px;
+  display:flex;align-items:center;justify-content:center;
+  position:relative;
+}
+.hero-visual-frame::before{
+  content:'';
+  position:absolute;top:8px;left:8px;right:8px;bottom:8px;
+  border:1px solid rgba(201,169,110,0.1);border-radius:2px;
+}
+.hero-img-placeholder{
+  text-align:center;
+}
+.hero-img-icon{font-size:48px;opacity:0.3;display:block;margin-bottom:12px;}
+.hero-img-txt{font-family:var(--font-display);font-style:italic;font-size:13px;color:rgba(255,255,255,0.2);}
+
+.hero-content{position:relative;z-index:2;max-width:560px;}
+.hero-eyebrow{
+  font-size:10px;letter-spacing:0.3em;text-transform:uppercase;
+  color:var(--gold);margin-bottom:20px;
+  display:flex;align-items:center;gap:12px;
+}
+.hero-eyebrow::before{content:'';width:32px;height:1px;background:var(--gold);}
+.hero-headline{
+  font-family:var(--font-display);
+  font-size:80px;font-weight:300;
+  line-height:0.95;letter-spacing:-0.02em;
+  color:var(--ivory);margin-bottom:24px;
+}
+.hero-headline em{
+  font-style:italic;
+  color:var(--gold-light);
+  display:block;
+}
+.hero-sub{
+  font-size:15px;color:rgba(255,255,255,0.42);
+  max-width:400px;line-height:1.8;margin-bottom:40px;
+}
+.hero-ctas{display:flex;gap:16px;flex-wrap:wrap;align-items:center;}
+.hero-scroll{
+  position:absolute;bottom:40px;left:50%;transform:translateX(-50%);
+  display:flex;flex-direction:column;align-items:center;gap:8px;
+}
+.scroll-line{
+  width:1px;height:48px;
+  background:linear-gradient(180deg,var(--gold) 0%,transparent 100%);
+  animation:scrollPulse 2s ease-in-out infinite;
+}
+@keyframes scrollPulse{0%,100%{opacity:0.3;}50%{opacity:1;}}
+.scroll-txt{font-size:9px;letter-spacing:0.2em;text-transform:uppercase;color:rgba(255,255,255,0.25);}
+
+/* Manifesto */
+.manifesto{
+  background:var(--cream);
+  padding:120px 60px;
+  text-align:center;
+  position:relative;
+  overflow:hidden;
+}
+.manifesto::before{
+  content:'"';
+  position:absolute;top:-40px;left:50%;transform:translateX(-50%);
+  font-family:var(--font-display);font-size:300px;font-weight:300;
+  color:rgba(201,169,110,0.06);line-height:1;pointer-events:none;
+}
+.manifesto-text{
+  font-family:var(--font-display);
+  font-size:52px;font-weight:300;
+  line-height:1.2;color:var(--charcoal);
+  max-width:800px;margin:0 auto;
+  position:relative;z-index:1;
+}
+.manifesto-text em{font-style:italic;color:var(--gold-dark);}
+
+/* Occasion cards */
+.occasions{padding:100px 60px;background:var(--warm-white);}
+.occasions-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:2px;
+  margin-top:48px;
+}
+.occ-card{
+  position:relative;height:480px;
+  overflow:hidden;cursor:pointer;
+}
+.occ-card-bg{
+  position:absolute;inset:0;
+  transition:transform 0.6s cubic-bezier(.25,.46,.45,.94);
+}
+.occ-card:hover .occ-card-bg{transform:scale(1.04);}
+.occ-1 .occ-card-bg{background:linear-gradient(160deg,#EDE4D8 0%,#D4C5B8 100%);}
+.occ-2 .occ-card-bg{background:linear-gradient(160deg,#2a2218 0%,#1a1510 100%);}
+.occ-3 .occ-card-bg{background:linear-gradient(160deg,#E8D5D0 0%,#D4B8B2 100%);}
+.occ-4-romantic .occ-card-bg{
+  background:linear-gradient(160deg,var(--crimson-deep) 0%,#3a0510 60%,#1a0208 100%);
+}
+.occ-overlay{
+  position:absolute;inset:0;
+  background:linear-gradient(0deg,rgba(0,0,0,0.55) 0%,transparent 55%);
+}
+.occ-4-romantic .occ-overlay{
+  background:linear-gradient(0deg,rgba(80,0,10,0.8) 0%,rgba(120,10,20,0.2) 60%,transparent 100%);
+}
+.occ-content{
+  position:absolute;bottom:0;left:0;right:0;
+  padding:32px 28px;
+}
+.occ-icon{font-size:28px;margin-bottom:10px;display:block;}
+.occ-label{
+  font-size:9px;letter-spacing:0.22em;text-transform:uppercase;
+  margin-bottom:6px;
+}
+.occ-1 .occ-label,.occ-3 .occ-label{color:rgba(0,0,0,0.45);}
+.occ-2 .occ-label{color:rgba(201,169,110,0.6);}
+.occ-4-romantic .occ-label{color:rgba(255,160,170,0.7);}
+.occ-name{
+  font-family:var(--font-display);font-size:28px;font-weight:300;
+  line-height:1.1;margin-bottom:8px;
+}
+.occ-1 .occ-name,.occ-3 .occ-name{color:var(--charcoal);}
+.occ-2 .occ-name{color:var(--gold-light);}
+.occ-4-romantic .occ-name{color:white;}
+.occ-desc{font-size:12px;line-height:1.5;}
+.occ-1 .occ-desc,.occ-3 .occ-desc{color:rgba(0,0,0,0.45);}
+.occ-2 .occ-desc{color:rgba(255,255,255,0.4);}
+.occ-4-romantic .occ-desc{color:rgba(255,200,200,0.55);}
+.occ-4-romantic .occ-card-bg::after{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse 80% 60% at 50% 30%,rgba(200,16,46,0.25) 0%,transparent 70%);
+}
+
+/* Process */
+.process{padding:100px 60px;background:var(--charcoal);}
+.process-grid{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:32px;
+  margin-top:56px;
+}
+.proc-step{text-align:center;position:relative;}
+.proc-step::after{
+  content:'';position:absolute;top:28px;left:calc(50% + 32px);right:-32px;
+  height:1px;background:linear-gradient(90deg,var(--gold),transparent);
+  opacity:0.3;
+}
+.proc-step:last-child::after{display:none;}
+.proc-num{
+  font-family:var(--font-display);font-size:48px;font-weight:300;
+  color:rgba(201,169,110,0.2);line-height:1;margin-bottom:16px;
+}
+.proc-icon{font-size:32px;margin-bottom:12px;display:block;}
+.proc-name{
+  font-family:var(--font-display);font-size:20px;font-weight:400;
+  color:var(--gold-light);margin-bottom:8px;
+}
+.proc-desc{font-size:13px;color:rgba(255,255,255,0.35);line-height:1.6;}
+
+/* Featured products */
+.featured{padding:100px 60px;background:var(--warm-white);}
+.products-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:24px;
+  margin-top:48px;
+}
+.prod-card{
+  background:var(--warm-white);
+  border:var(--border);border-radius:3px;
+  overflow:hidden;cursor:pointer;
+  transition:transform 0.35s cubic-bezier(.25,.46,.45,.94),
+             border-color 0.3s,box-shadow 0.3s;
+}
+.prod-card:hover{
+  transform:translateY(-8px);
+  border-color:rgba(201,169,110,0.4);
+  box-shadow:0 20px 48px rgba(0,0,0,0.08);
+}
+.prod-card.romantic{border-color:rgba(200,16,46,0.15);}
+.prod-card.romantic:hover{
+  border-color:rgba(200,16,46,0.4);
+  box-shadow:0 20px 48px rgba(200,16,46,0.1);
+}
+.prod-img{
+  height:280px;
+  position:relative;overflow:hidden;
+  display:flex;align-items:center;justify-content:center;
+}
+.prod-img-plain{background:var(--cream);}
+.prod-img-dark{background:linear-gradient(145deg,#2a2218,#1a1510);}
+.prod-img-blush{background:linear-gradient(145deg,#f0ddd8,#e5cac4);}
+.prod-img-romantic{
+  background:linear-gradient(145deg,#2a0810,#1a0208);
+  position:relative;overflow:hidden;
+}
+.prod-img-romantic::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse 80% 80% at 50% 50%,rgba(200,16,46,0.2) 0%,transparent 70%);
+}
+.prod-placeholder{
+  font-family:var(--font-display);font-style:italic;
+  font-size:13px;color:var(--light-gray);letter-spacing:0.08em;
+  text-align:center;
+  position:relative;z-index:1;
+}
+.prod-placeholder-dark{color:rgba(255,255,255,0.2);}
+.prod-badge{
+  position:absolute;top:16px;left:16px;
+  font-size:9px;letter-spacing:0.15em;text-transform:uppercase;
+  padding:5px 10px;border-radius:2px;z-index:2;
+}
+.badge-dark{background:var(--charcoal);color:var(--gold-light);}
+.badge-red{background:var(--crimson);color:white;}
+.prod-wish{
+  position:absolute;top:14px;right:14px;
+  width:36px;height:36px;
+  background:rgba(255,255,255,0.9);
+  border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-size:15px;z-index:2;
+  opacity:0;transition:opacity 0.25s;
+}
+.prod-card:hover .prod-wish{opacity:1;}
+.prod-romantic .prod-wish{background:rgba(200,16,46,0.85);color:white;}
+.prod-info{padding:22px 24px 28px;}
+.prod-cat{
+  font-size:10px;letter-spacing:0.18em;text-transform:uppercase;
+  margin-bottom:6px;
+}
+.prod-cat-gold{color:var(--gold-dark);opacity:0.8;}
+.prod-cat-red{color:var(--crimson);opacity:0.8;}
+.prod-name{
+  font-family:var(--font-display);font-size:21px;font-weight:400;
+  color:var(--charcoal);margin-bottom:6px;line-height:1.2;
+}
+.prod-desc{font-size:13px;color:var(--warm-gray);margin-bottom:18px;line-height:1.6;}
+.prod-row{display:flex;align-items:center;justify-content:space-between;}
+.prod-price{
+  font-family:var(--font-display);font-size:24px;font-weight:300;color:var(--charcoal);
+}
+.prod-cta{
+  font-size:11px;letter-spacing:0.12em;text-transform:uppercase;
+  padding-bottom:2px;cursor:pointer;transition:all 0.2s;
+}
+.prod-cta-gold{
+  color:var(--gold-dark);
+  border-bottom:1px solid transparent;
+}
+.prod-card:hover .prod-cta-gold{border-bottom-color:var(--gold-dark);}
+.prod-cta-red{color:var(--crimson);border-bottom:1px solid transparent;}
+.prod-card.romantic:hover .prod-cta-red{border-bottom-color:var(--crimson);}
+
+/* Social proof */
+.social-proof{padding:100px 60px;background:var(--charcoal);}
+.reviews-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:20px;
+  margin-top:48px;
+}
+.review-card{
+  background:rgba(255,255,255,0.03);
+  border:1px solid rgba(255,255,255,0.06);
+  border-radius:3px;padding:32px;
+}
+.review-stars{
+  display:flex;gap:3px;margin-bottom:16px;
+}
+.star{color:var(--gold);font-size:14px;}
+.review-text{
+  font-family:var(--font-display);font-style:italic;
+  font-size:17px;color:rgba(255,255,255,0.65);
+  line-height:1.6;margin-bottom:20px;
+}
+.review-name{font-size:12px;color:rgba(255,255,255,0.3);letter-spacing:0.08em;}
+.review-occasion{font-size:10px;color:var(--gold);opacity:0.6;margin-top:4px;}
+.review-card.love-review{
+  background:rgba(200,16,46,0.05);
+  border-color:rgba(200,16,46,0.15);
+}
+.love-review .review-text{color:rgba(255,200,200,0.65);}
+.love-review .review-occasion{color:#ff8899;}
+
+/* CTA Banner */
+.cta-banner{
+  padding:80px 60px;
+  background:var(--cream);
+  display:flex;align-items:center;justify-content:space-between;gap:32px;
+  border-top:var(--border);border-bottom:var(--border);
+}
+.cta-banner-text .headline{
+  font-family:var(--font-display);
+  font-size:44px;font-weight:300;
+  color:var(--charcoal);line-height:1.1;
+  margin-bottom:12px;
+}
+.cta-banner-text .headline em{font-style:italic;color:var(--gold-dark);}
+.cta-banner-text .sub{font-size:14px;color:var(--warm-gray);max-width:420px;line-height:1.7;}
+.cta-banner-actions{display:flex;gap:12px;flex-wrap:wrap;}
+
+/* ╔═══════════════════════════════════════╗
+   ║    02 · PRODUCT PAGE                  ║
+   ╚═══════════════════════════════════════╝ */
+.product-page{padding:0;background:var(--warm-white);}
+.product-hero{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  min-height:calc(100vh - 72px);
+}
+.product-gallery{
+  background:var(--cream);
+  position:relative;
+  display:flex;
+  flex-direction:column;
+}
+.gallery-main{
+  flex:1;display:flex;align-items:center;justify-content:center;
+  background:var(--parchment);
+  position:relative;overflow:hidden;
+  min-height:500px;
+}
+.gallery-zoom-hint{
+  position:absolute;bottom:20px;right:20px;
+  background:rgba(0,0,0,0.35);
+  color:rgba(255,255,255,0.6);
+  font-size:10px;letter-spacing:0.12em;text-transform:uppercase;
+  padding:6px 12px;border-radius:2px;
+  backdrop-filter:blur(8px);
+}
+.gallery-thumbs{
+  display:flex;gap:8px;padding:16px 20px;
+  background:var(--cream);
+}
+.gallery-thumb{
+  width:72px;height:72px;
+  background:var(--parchment);
+  border-radius:2px;
+  border:1px solid transparent;
+  cursor:pointer;transition:border-color 0.2s;
+  display:flex;align-items:center;justify-content:center;
+  font-size:20px;
+}
+.gallery-thumb.active{border-color:var(--gold);}
+
+.product-detail{
+  padding:56px 60px;
+  display:flex;flex-direction:column;
+  overflow-y:auto;
+  max-height:calc(100vh - 72px);
+}
+.prod-breadcrumb{
+  font-size:11px;color:var(--warm-gray);
+  display:flex;gap:8px;align-items:center;
+  margin-bottom:24px;
+}
+.bc-sep{opacity:0.4;}
+.bc-current{color:var(--charcoal);}
+.prod-page-cat{
+  font-size:10px;letter-spacing:0.2em;text-transform:uppercase;
+  color:var(--gold-dark);opacity:0.7;margin-bottom:8px;
+}
+.prod-page-name{
+  font-family:var(--font-display);font-size:40px;font-weight:300;
+  color:var(--charcoal);line-height:1.1;margin-bottom:6px;
+}
+.prod-page-tagline{
+  font-family:var(--font-display);font-style:italic;
+  font-size:17px;color:var(--warm-gray);margin-bottom:24px;
+}
+.prod-page-price{
+  font-family:var(--font-display);font-size:36px;font-weight:300;
+  color:var(--charcoal);margin-bottom:6px;
+}
+.prod-page-note{font-size:13px;color:var(--gold-dark);margin-bottom:28px;}
+
+.option-row{margin-bottom:24px;}
+.option-label{
+  font-size:11px;letter-spacing:0.15em;text-transform:uppercase;
+  color:var(--warm-gray);margin-bottom:10px;
+}
+.option-pills{display:flex;gap:8px;flex-wrap:wrap;}
+.option-pill{
+  padding:9px 18px;border:1px solid var(--light-gray);
+  border-radius:2px;font-size:12px;color:var(--warm-gray);
+  cursor:pointer;transition:all 0.2s;
+}
+.option-pill:hover{border-color:var(--gold);}
+.option-pill.active{
+  border-color:var(--charcoal);color:var(--charcoal);font-weight:500;
+}
+
+.personalise-box{
+  background:var(--cream);border:var(--border);border-radius:3px;
+  padding:24px;margin-bottom:28px;
+}
+.p-box-title{
+  font-size:11px;letter-spacing:0.15em;text-transform:uppercase;
+  color:var(--gold-dark);margin-bottom:14px;
+}
+.p-input{
+  width:100%;background:white;border:var(--border-soft);
+  border-radius:2px;padding:11px 14px;
+  font-family:var(--font-body);font-size:14px;color:var(--charcoal);
+  outline:none;transition:border-color 0.2s;margin-bottom:10px;
+}
+.p-input:focus{border-color:var(--gold);}
+.p-input::placeholder{color:var(--light-gray);}
+.p-row{display:flex;gap:10px;}
+.p-input-half{flex:1;}
+
+.prod-actions{display:flex;flex-direction:column;gap:10px;margin-bottom:28px;}
+.prod-add-btn{
+  width:100%;padding:16px;
+  background:var(--charcoal);color:var(--gold-light);
+  border:none;border-radius:2px;cursor:pointer;
+  font-family:var(--font-body);font-size:12px;letter-spacing:0.18em;text-transform:uppercase;
+  transition:background 0.25s;
+}
+.prod-add-btn:hover{background:#2c2926;}
+.prod-wish-btn{
+  width:100%;padding:15px;
+  background:transparent;color:var(--warm-gray);
+  border:1px solid var(--light-gray);border-radius:2px;cursor:pointer;
+  font-family:var(--font-body);font-size:12px;letter-spacing:0.15em;text-transform:uppercase;
+  transition:all 0.25s;display:flex;align-items:center;justify-content:center;gap:6px;
+}
+.prod-wish-btn:hover{border-color:var(--crimson);color:var(--crimson);}
+
+.trust-row{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:12px;
+  margin-bottom:28px;
+}
+.trust-item{
+  text-align:center;padding:14px 8px;
+  background:var(--cream);border:var(--border-soft);border-radius:2px;
+}
+.trust-icon{font-size:20px;display:block;margin-bottom:6px;}
+.trust-lbl{font-size:11px;color:var(--warm-gray);line-height:1.4;}
+.trust-val{font-size:12px;font-weight:500;color:var(--charcoal);}
+
+.prod-desc-section{
+  border-top:var(--border-soft);
+  padding-top:28px;margin-top:4px;
+}
+.prod-desc-head{
+  font-family:var(--font-display);font-size:20px;font-weight:400;
+  color:var(--charcoal);margin-bottom:12px;
+}
+.prod-desc-body{font-size:14px;color:var(--warm-gray);line-height:1.85;}
+
+/* ╔═══════════════════════════════════════╗
+   ║    03 · ROMANTIC / OCCASION PAGE      ║
+   ╚═══════════════════════════════════════╝ */
+.romantic-hero{
+  min-height:100vh;
+  background:linear-gradient(160deg,#0f0305 0%,#1a0208 30%,var(--crimson-deep) 100%);
+  display:flex;flex-direction:column;justify-content:flex-end;
+  padding:0 60px 80px;
+  position:relative;overflow:hidden;
+}
+.romantic-hero::before{
+  content:'';position:absolute;inset:0;
+  background:
+    radial-gradient(ellipse 60% 70% at 65% 35%,rgba(200,16,46,0.25) 0%,transparent 55%),
+    radial-gradient(ellipse 40% 60% at 20% 80%,rgba(150,10,30,0.15) 0%,transparent 50%);
+}
+.floating-hearts{position:absolute;inset:0;pointer-events:none;overflow:hidden;}
+.fheart{
+  position:absolute;
+  font-size:16px;opacity:0.08;
+  animation:floatUp 8s linear infinite;
+}
+.fheart:nth-child(1){left:10%;animation-delay:0s;}
+.fheart:nth-child(2){left:25%;animation-delay:1.5s;font-size:12px;}
+.fheart:nth-child(3){left:50%;animation-delay:3s;font-size:20px;}
+.fheart:nth-child(4){left:70%;animation-delay:4.5s;font-size:10px;}
+.fheart:nth-child(5){left:85%;animation-delay:6s;font-size:14px;}
+@keyframes floatUp{
+  0%{transform:translateY(110vh) rotate(0deg);opacity:0.08;}
+  100%{transform:translateY(-20px) rotate(360deg);opacity:0;}
+}
+.romantic-content{position:relative;z-index:2;}
+.romantic-eyebrow{
+  font-size:10px;letter-spacing:0.3em;text-transform:uppercase;
+  color:rgba(255,160,170,0.7);
+  display:flex;align-items:center;gap:12px;margin-bottom:16px;
+}
+.romantic-eyebrow::before{content:'';width:28px;height:1px;background:var(--crimson);}
+.romantic-headline{
+  font-family:var(--font-display);
+  font-size:88px;font-weight:300;
+  line-height:0.92;letter-spacing:-0.02em;
+  color:white;margin-bottom:24px;
+}
+.romantic-headline em{
+  font-style:italic;
+  color:rgba(255,140,150,0.9);
+  display:block;
+}
+.romantic-sub{
+  font-size:16px;color:rgba(255,200,200,0.45);
+  max-width:460px;line-height:1.8;margin-bottom:40px;
+}
+.romantic-ctas{display:flex;gap:14px;flex-wrap:wrap;}
+.romantic-badge{
+  position:absolute;top:80px;right:60px;
+  width:140px;height:140px;
+  border:1px solid rgba(200,16,46,0.3);
+  border-radius:50%;
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;gap:4px;
+  background:rgba(200,16,46,0.08);
+  backdrop-filter:blur(12px);
+}
+.rb-num{
+  font-family:var(--font-display);font-size:40px;font-weight:300;
+  color:white;line-height:1;
+}
+.rb-lbl{font-size:9px;letter-spacing:0.18em;text-transform:uppercase;color:rgba(255,200,200,0.5);text-align:center;line-height:1.4;}
+
+/* Romantic products */
+.romantic-products{
+  background:var(--warm-white);
+  padding:100px 60px;
+}
+.romantic-prods-grid{
+  display:grid;grid-template-columns:1fr 2fr 1fr;gap:24px;
+  margin-top:48px;align-items:start;
+}
+.romantic-prod-feature{
+  background:var(--charcoal);
+  border:1px solid rgba(200,16,46,0.15);
+  border-radius:3px;overflow:hidden;
+}
+.rpf-img{
+  height:360px;
+  background:linear-gradient(160deg,#1a0208,#0f0106);
+  display:flex;align-items:center;justify-content:center;
+  position:relative;overflow:hidden;
+}
+.rpf-img::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse 70% 70% at 50% 40%,rgba(200,16,46,0.2) 0%,transparent 65%);
+}
+.rpf-icon{font-size:56px;opacity:0.35;position:relative;z-index:1;}
+.rpf-info{padding:28px;}
+.rpf-cat{
+  font-size:10px;letter-spacing:0.18em;text-transform:uppercase;
+  color:var(--crimson);opacity:0.7;margin-bottom:8px;
+}
+.rpf-name{
+  font-family:var(--font-display);font-size:26px;font-weight:300;
+  color:var(--gold-light);margin-bottom:8px;line-height:1.2;
+}
+.rpf-desc{font-size:13px;color:rgba(255,255,255,0.35);line-height:1.6;margin-bottom:20px;}
+.rpf-price{
+  font-family:var(--font-display);font-size:28px;font-weight:300;
+  color:white;margin-bottom:20px;
+}
+.rpf-btn{
+  width:100%;padding:13px;background:var(--crimson);color:white;
+  border:none;border-radius:2px;cursor:pointer;
+  font-family:var(--font-body);font-size:11px;letter-spacing:0.18em;text-transform:uppercase;
+  transition:background 0.25s;
+}
+.rpf-btn:hover{background:var(--crimson-bright);}
+
+.romantic-prod-side{display:flex;flex-direction:column;gap:20px;}
+.rps-card{
+  background:var(--warm-white);border:var(--border-red);
+  border-radius:3px;overflow:hidden;
+  transition:transform 0.3s,box-shadow 0.3s;
+}
+.rps-card:hover{transform:translateY(-4px);box-shadow:0 12px 32px rgba(200,16,46,0.1);}
+.rps-img{
+  height:180px;
+  background:linear-gradient(145deg,#fdf0f0,#f0d8d8);
+  display:flex;align-items:center;justify-content:center;
+  font-size:36px;
+}
+.rps-info{padding:18px 20px;}
+.rps-name{
+  font-family:var(--font-display);font-size:18px;font-weight:400;
+  color:var(--charcoal);margin-bottom:6px;
+}
+.rps-price{
+  font-family:var(--font-display);font-size:20px;font-weight:300;color:var(--charcoal);
+}
+.rps-cta{font-size:11px;color:var(--crimson);letter-spacing:0.1em;text-transform:uppercase;}
+
+/* Love story section */
+.love-story{
+  background:var(--crimson-deep);
+  padding:100px 60px;
+  position:relative;overflow:hidden;
+}
+.love-story::before{
+  content:'';position:absolute;inset:0;
+  background:
+    radial-gradient(ellipse 60% 80% at 80% 50%,rgba(200,16,46,0.4) 0%,transparent 60%),
+    radial-gradient(ellipse 40% 60% at 10% 30%,rgba(120,5,15,0.4) 0%,transparent 50%);
+}
+.love-story-inner{
+  position:relative;z-index:1;
+  display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;
+}
+.ls-quote{
+  font-family:var(--font-display);
+  font-size:54px;font-weight:300;
+  line-height:1.1;color:white;
+}
+.ls-quote em{
+  font-style:italic;
+  color:rgba(255,160,170,0.85);display:block;
+}
+.ls-content{}
+.ls-eyebrow{
+  font-size:10px;letter-spacing:0.25em;text-transform:uppercase;
+  color:rgba(255,160,170,0.6);margin-bottom:16px;
+  display:flex;align-items:center;gap:10px;
+}
+.ls-eyebrow::before{content:'';width:24px;height:1px;background:rgba(200,16,46,0.6);}
+.ls-title{
+  font-family:var(--font-display);font-size:36px;font-weight:300;
+  color:white;margin-bottom:16px;line-height:1.2;
+}
+.ls-body{font-size:14px;color:rgba(255,200,200,0.5);line-height:1.85;margin-bottom:32px;max-width:420px;}
+.ls-stats{display:flex;gap:32px;margin-bottom:32px;}
+.ls-stat-num{
+  font-family:var(--font-display);font-size:36px;font-weight:300;
+  color:rgba(255,160,170,0.9);display:block;
+}
+.ls-stat-lbl{font-size:11px;color:rgba(255,200,200,0.4);letter-spacing:0.1em;}
+
+/* Valentine CTA */
+.valentine-cta{
+  background:var(--crimson);padding:60px;
+  display:flex;align-items:center;justify-content:space-between;gap:32px;
+  position:relative;overflow:hidden;
+}
+.valentine-cta::before{
+  content:'♥';
+  position:absolute;right:-20px;top:50%;transform:translateY(-50%);
+  font-size:280px;color:rgba(255,255,255,0.04);line-height:1;
+}
+.vc-text{
+  font-family:var(--font-display);font-size:36px;font-weight:300;
+  color:white;max-width:500px;line-height:1.2;
+  position:relative;z-index:1;
+}
+.vc-text em{font-style:italic;color:rgba(255,200,200,0.85);}
+
+/* ╔═══════════════════════════════════════╗
+   ║    04 · CATEGORY PAGE                 ║
+   ╚═══════════════════════════════════════╝ */
+.cat-hero{
+  height:380px;background:linear-gradient(160deg,#2a2218 0%,#1a1510 100%);
+  display:flex;align-items:flex-end;
+  padding:0 60px 56px;position:relative;overflow:hidden;
+}
+.cat-hero::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse 50% 80% at 60% 30%,rgba(201,169,110,0.1) 0%,transparent 60%);
+}
+.cat-hero-content{position:relative;z-index:1;}
+.cat-hero-count{
+  font-size:11px;letter-spacing:0.15em;text-transform:uppercase;
+  color:rgba(255,255,255,0.25);margin-bottom:8px;
+}
+.cat-hero-title{
+  font-family:var(--font-display);font-size:56px;font-weight:300;
+  color:var(--gold-light);line-height:1.05;margin-bottom:12px;
+}
+.cat-hero-sub{font-size:14px;color:rgba(255,255,255,0.35);max-width:480px;line-height:1.7;}
+
+.cat-body{padding:48px 60px;}
+.filter-bar{
+  display:flex;align-items:center;gap:10px;
+  padding-bottom:32px;border-bottom:var(--border-soft);
+  margin-bottom:40px;flex-wrap:wrap;
+}
+.filter-label{
+  font-size:11px;letter-spacing:0.14em;text-transform:uppercase;
+  color:var(--warm-gray);margin-right:6px;
+}
+.filter-pill{
+  padding:8px 18px;background:transparent;
+  border:1px solid var(--light-gray);border-radius:100px;
+  font-size:12px;color:var(--warm-gray);cursor:pointer;
+  transition:all 0.2s;
+}
+.filter-pill:hover{border-color:var(--gold);}
+.filter-pill.active{
+  background:var(--charcoal);border-color:var(--charcoal);color:var(--gold-light);
+}
+.filter-sort{
+  margin-left:auto;
+  display:flex;align-items:center;gap:8px;
+  font-size:12px;color:var(--warm-gray);
+}
+.sort-select{
+  background:transparent;border:1px solid var(--light-gray);
+  border-radius:2px;padding:7px 12px;font-size:12px;
+  color:var(--charcoal);cursor:pointer;outline:none;
+  font-family:var(--font-body);
+}
+
+.cat-feature-row{
+  display:grid;grid-template-columns:1.4fr 1fr;gap:24px;margin-bottom:24px;
+}
+.cat-feature-card{
+  height:400px;
+  border-radius:3px;overflow:hidden;
+  position:relative;cursor:pointer;
+  background:var(--parchment);
+  display:flex;align-items:flex-end;
+  padding:32px;
+  transition:box-shadow 0.3s;
+}
+.cat-feature-card:hover{box-shadow:0 16px 40px rgba(0,0,0,0.12);}
+.cfcard-dark{background:linear-gradient(145deg,#2a2218,#1c170f);}
+.cfcard-blush{background:linear-gradient(145deg,#f5e8e4,#e8d5cf);}
+.cat-feature-overlay{
+  position:absolute;inset:0;
+  background:linear-gradient(0deg,rgba(0,0,0,0.5) 0%,transparent 55%);
+}
+.cfcard-blush .cat-feature-overlay{
+  background:linear-gradient(0deg,rgba(0,0,0,0.3) 0%,transparent 55%);
+}
+.cat-feature-icon{
+  position:absolute;top:50%;left:50%;transform:translate(-50%,-55%);
+  font-size:64px;opacity:0.2;
+}
+.cat-feature-info{position:relative;z-index:1;}
+.cfi-name{
+  font-family:var(--font-display);font-size:28px;font-weight:300;
+  line-height:1.1;margin-bottom:8px;
+}
+.cfcard-dark .cfi-name{color:var(--gold-light);}
+.cfcard-blush .cfi-name{color:var(--charcoal);}
+.cfi-price{font-family:var(--font-display);font-size:22px;font-weight:300;}
+.cfcard-dark .cfi-price{color:rgba(255,255,255,0.6);}
+.cfcard-blush .cfi-price{color:var(--warm-gray);}
+
+.cat-grid-row{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:20px;
+}
+.cat-card{
+  background:var(--warm-white);border:var(--border);border-radius:3px;
+  overflow:hidden;cursor:pointer;
+  transition:transform 0.3s,border-color 0.3s;
+}
+.cat-card:hover{transform:translateY(-5px);border-color:rgba(201,169,110,0.4);}
+.cat-card-img{
+  height:200px;background:var(--cream);
+  display:flex;align-items:center;justify-content:center;
+  font-size:36px;
+}
+.cat-card-info{padding:16px 18px 20px;}
+.cat-card-name{
+  font-family:var(--font-display);font-size:17px;font-weight:400;
+  color:var(--charcoal);margin-bottom:6px;line-height:1.2;
+}
+.cat-card-price{font-family:var(--font-display);font-size:20px;font-weight:300;color:var(--charcoal);}
+.cat-card-cta{
+  font-size:11px;color:var(--gold-dark);letter-spacing:0.1em;
+  text-transform:uppercase;margin-top:8px;
+  border-bottom:1px solid transparent;display:inline-block;
+  transition:border-color 0.2s;
+}
+.cat-card:hover .cat-card-cta{border-bottom-color:var(--gold-dark);}
+
+/* ╔═══════════════════════════════════════╗
+   ║    05 · CHECKOUT PAGE                 ║
+   ╚═══════════════════════════════════════╝ */
+.checkout-page{background:var(--warm-white);min-height:100vh;}
+.checkout-header{
+  background:var(--charcoal);
+  height:64px;display:flex;align-items:center;justify-content:center;
+  border-bottom:1px solid rgba(201,169,110,0.15);
+}
+.checkout-body{
+  display:grid;grid-template-columns:1fr 420px;
+  max-width:1100px;margin:0 auto;gap:48px;
+  padding:48px 32px;
+}
+.checkout-form{}
+.checkout-steps{
+  display:flex;gap:0;margin-bottom:40px;
+}
+.co-step{
+  flex:1;display:flex;flex-direction:column;align-items:center;
+  position:relative;
+}
+.co-step::after{
+  content:'';
+  position:absolute;top:16px;left:calc(50% + 16px);right:calc(-50% + 16px);
+  height:1px;background:var(--light-gray);
+}
+.co-step:last-child::after{display:none;}
+.co-step-dot{
+  width:32px;height:32px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--font-display);font-size:14px;font-weight:400;
+  margin-bottom:6px;position:relative;z-index:1;
+}
+.co-step.done .co-step-dot{background:var(--gold);color:var(--charcoal);border:1px solid var(--gold);}
+.co-step.active .co-step-dot{background:var(--charcoal);color:var(--gold-light);border:1px solid var(--charcoal);}
+.co-step.pending .co-step-dot{background:transparent;color:var(--light-gray);border:1px solid var(--light-gray);}
+.co-step.done::after{background:var(--gold);}
+.co-step-name{font-size:11px;color:var(--warm-gray);letter-spacing:0.08em;}
+.co-step.active .co-step-name{color:var(--charcoal);font-weight:500;}
+
+.co-section-title{
+  font-family:var(--font-display);font-size:22px;font-weight:400;
+  color:var(--charcoal);margin-bottom:20px;
+}
+.co-field{margin-bottom:16px;}
+.co-label{font-size:12px;color:var(--warm-gray);margin-bottom:6px;letter-spacing:0.05em;}
+.co-input{
+  width:100%;background:white;border:var(--border);
+  border-radius:2px;padding:12px 14px;
+  font-family:var(--font-body);font-size:14px;color:var(--charcoal);
+  outline:none;transition:border-color 0.2s;
+}
+.co-input:focus{border-color:var(--gold);}
+.co-input::placeholder{color:var(--light-gray);}
+.co-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+.co-row-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;}
+.co-section{
+  background:white;border:var(--border);border-radius:3px;
+  padding:28px;margin-bottom:20px;
+}
+.payment-icons{display:flex;gap:8px;margin-top:14px;}
+.pay-icon{
+  height:32px;padding:0 10px;
+  background:var(--cream);border:var(--border-soft);border-radius:2px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:11px;color:var(--warm-gray);letter-spacing:0.08em;
+  font-weight:500;cursor:pointer;transition:all 0.2s;
+}
+.pay-icon.active{background:var(--charcoal);color:var(--gold-light);border-color:var(--charcoal);}
+.gift-toggle{
+  display:flex;align-items:center;gap:12px;
+  padding:14px 18px;background:var(--cream);border:var(--border);border-radius:2px;
+  cursor:pointer;transition:border-color 0.2s;margin-top:12px;
+}
+.gift-toggle:hover{border-color:var(--gold);}
+.toggle-check{
+  width:18px;height:18px;border:1px solid var(--light-gray);
+  border-radius:2px;display:flex;align-items:center;justify-content:center;
+  font-size:11px;color:var(--gold);background:white;
+}
+.gift-txt{font-size:13px;color:var(--warm-gray);}
+.gift-txt strong{color:var(--charcoal);}
+
+/* Order summary sidebar */
+.order-summary{
+  background:var(--cream);border:var(--border);border-radius:3px;
+  padding:28px;height:fit-content;position:sticky;top:24px;
+}
+.os-title{
+  font-family:var(--font-display);font-size:20px;font-weight:400;
+  color:var(--charcoal);margin-bottom:20px;padding-bottom:16px;
+  border-bottom:var(--border-soft);
+}
+.os-item{
+  display:flex;gap:14px;margin-bottom:16px;
+  padding-bottom:16px;border-bottom:var(--border-soft);align-items:flex-start;
+}
+.os-item:last-of-type{border-bottom:none;}
+.os-thumb{
+  width:60px;height:60px;background:var(--parchment);
+  border-radius:2px;border:var(--border-soft);
+  display:flex;align-items:center;justify-content:center;
+  font-size:24px;flex-shrink:0;
+}
+.os-item-info{flex:1;}
+.os-item-name{font-size:13px;font-weight:500;color:var(--charcoal);margin-bottom:3px;}
+.os-item-custom{font-size:11px;color:var(--warm-gray);}
+.os-item-price{
+  font-family:var(--font-display);font-size:17px;font-weight:300;
+  color:var(--charcoal);
+}
+.os-totals{margin-top:16px;padding-top:16px;border-top:var(--border-soft);}
+.os-row{display:flex;justify-content:space-between;margin-bottom:8px;font-size:13px;color:var(--warm-gray);}
+.os-total-row{
+  display:flex;justify-content:space-between;margin-top:16px;padding-top:16px;
+  border-top:var(--border-soft);
+}
+.os-total-label{font-family:var(--font-display);font-size:18px;font-weight:400;color:var(--charcoal);}
+.os-total-val{font-family:var(--font-display);font-size:22px;font-weight:300;color:var(--charcoal);}
+.co-submit{
+  width:100%;margin-top:20px;padding:16px;
+  background:var(--charcoal);color:var(--gold-light);
+  border:none;border-radius:2px;cursor:pointer;
+  font-family:var(--font-body);font-size:12px;letter-spacing:0.18em;text-transform:uppercase;
+  transition:background 0.25s;
+}
+.co-submit:hover{background:#2c2926;}
+.secure-note{
+  display:flex;align-items:center;justify-content:center;gap:6px;
+  margin-top:12px;font-size:11px;color:var(--warm-gray);
+}
+
+/* ╔═══════════════════════════════════════╗
+   ║    06 · ORDER CONFIRMATION            ║
+   ╚═══════════════════════════════════════╝ */
+.confirm-page{
+  background:var(--charcoal);min-height:100vh;
+  display:flex;align-items:center;justify-content:center;
+  padding:80px 60px;
+  position:relative;overflow:hidden;
+}
+.confirm-page::before{
+  content:'';position:absolute;inset:0;
+  background:
+    radial-gradient(ellipse 60% 70% at 50% 30%,rgba(201,169,110,0.06) 0%,transparent 60%);
+}
+.confirm-inner{max-width:680px;width:100%;position:relative;z-index:1;text-align:center;}
+.confirm-icon{font-size:56px;margin-bottom:24px;display:block;animation:popIn 0.5s ease 0.3s both;}
+@keyframes popIn{0%{transform:scale(0.5);opacity:0;}100%{transform:scale(1);opacity:1;}}
+.confirm-eyebrow{
+  font-size:10px;letter-spacing:0.28em;text-transform:uppercase;
+  color:var(--gold);margin-bottom:14px;
+}
+.confirm-headline{
+  font-family:var(--font-display);font-size:56px;font-weight:300;
+  color:var(--ivory);line-height:1.05;margin-bottom:16px;
+}
+.confirm-headline em{font-style:italic;color:var(--gold-light);}
+.confirm-sub{font-size:15px;color:rgba(255,255,255,0.4);line-height:1.8;margin-bottom:40px;}
+.confirm-order-id{
+  font-size:11px;letter-spacing:0.15em;text-transform:uppercase;
+  color:var(--gold);opacity:0.6;margin-bottom:40px;
+}
+.timeline{
+  background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);
+  border-radius:3px;padding:32px;margin-bottom:32px;
+  text-align:left;
+}
+.tl-head{
+  font-size:11px;letter-spacing:0.18em;text-transform:uppercase;
+  color:rgba(255,255,255,0.3);margin-bottom:24px;
+}
+.tl-steps{display:flex;flex-direction:column;gap:0;}
+.tl-step{display:flex;gap:16px;position:relative;padding-bottom:24px;}
+.tl-step:last-child{padding-bottom:0;}
+.tl-step-left{display:flex;flex-direction:column;align-items:center;}
+.tl-dot{
+  width:32px;height:32px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-size:14px;flex-shrink:0;
+}
+.tl-dot.done{background:var(--gold);color:var(--charcoal);}
+.tl-dot.active{
+  background:rgba(201,169,110,0.15);border:1px solid var(--gold);
+  color:var(--gold);animation:pulse 2s ease-in-out infinite;
+}
+.tl-dot.pending{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);color:rgba(255,255,255,0.2);}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(201,169,110,0.3);}50%{box-shadow:0 0 0 8px rgba(201,169,110,0);}}
+.tl-line{width:1px;flex:1;background:rgba(255,255,255,0.06);margin:4px 0;}
+.tl-step:last-child .tl-line{display:none;}
+.tl-info{padding-top:4px;}
+.tl-name{font-size:14px;font-weight:500;color:rgba(255,255,255,0.7);margin-bottom:3px;}
+.tl-name.active{color:var(--gold-light);}
+.tl-desc{font-size:12px;color:rgba(255,255,255,0.25);}
+.tl-date{font-size:11px;color:rgba(255,255,255,0.2);margin-top:2px;}
+
+/* ╔═══════════════════════════════════════╗
+   ║    07 · USER DASHBOARD (VAULT)        ║
+   ╚═══════════════════════════════════════╝ */
+.dashboard{
+  background:var(--ivory);min-height:100vh;
+  display:grid;grid-template-columns:260px 1fr;
+}
+.dash-sidebar{
+  background:var(--charcoal);padding:0;
+  display:flex;flex-direction:column;
+  border-right:1px solid rgba(255,255,255,0.04);
+}
+.dash-sidebar-top{
+  padding:32px 24px;
+  border-bottom:1px solid rgba(255,255,255,0.05);
+}
+.dash-brand{
+  font-family:var(--font-display);font-size:20px;
+  letter-spacing:0.18em;text-transform:uppercase;
+  color:var(--gold-light);margin-bottom:20px;
+}
+.dash-user-card{
+  display:flex;align-items:center;gap:12px;
+}
+.dash-avatar{
+  width:44px;height:44px;background:rgba(201,169,110,0.15);
+  border-radius:50%;display:flex;align-items:center;justify-content:center;
+  font-family:var(--font-display);font-size:20px;color:var(--gold);
+  border:1px solid rgba(201,169,110,0.2);
+}
+.dash-user-name{font-size:14px;color:rgba(255,255,255,0.65);font-weight:400;}
+.dash-user-level{
+  font-size:10px;color:var(--gold);opacity:0.6;letter-spacing:0.1em;
+  text-transform:uppercase;margin-top:2px;
+}
+.dash-sidebar-nav{padding:16px 0;flex:1;}
+.dash-nav-section{padding:0 16px;margin-bottom:4px;}
+.dash-nav-sec-label{
+  font-size:9px;letter-spacing:0.22em;text-transform:uppercase;
+  color:rgba(255,255,255,0.2);padding:12px 12px 6px;
+}
+.dash-nav-item{
+  display:flex;align-items:center;gap:10px;
+  padding:10px 12px;border-radius:6px;
+  font-size:13px;color:rgba(255,255,255,0.4);
+  cursor:pointer;transition:all 0.2s;margin:1px 0;
+}
+.dash-nav-item:hover{background:rgba(255,255,255,0.04);color:rgba(255,255,255,0.7);}
+.dash-nav-item.active{background:rgba(201,169,110,0.1);color:var(--gold-light);}
+.dash-nav-icon{font-size:15px;opacity:0.7;width:18px;text-align:center;}
+.dash-nav-badge{
+  margin-left:auto;background:var(--crimson);color:white;
+  font-size:9px;padding:2px 7px;border-radius:100px;
+}
+.dash-main{padding:40px 48px;overflow-y:auto;}
+.dash-page-title{
+  font-family:var(--font-display);font-size:36px;font-weight:300;
+  color:var(--charcoal);margin-bottom:6px;
+}
+.dash-page-sub{font-size:14px;color:var(--warm-gray);margin-bottom:36px;}
+.dash-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:36px;}
+.dash-stat-card{
+  background:white;border:var(--border);border-radius:3px;
+  padding:20px 22px;
+}
+.ds-num{
+  font-family:var(--font-display);font-size:32px;font-weight:300;
+  color:var(--charcoal);margin-bottom:4px;
+}
+.ds-lbl{font-size:11px;color:var(--warm-gray);letter-spacing:0.08em;}
+.ds-trend{font-size:11px;color:#5a9a6a;margin-top:4px;}
+.dash-stat-card.highlight{
+  background:var(--charcoal);border-color:rgba(201,169,110,0.2);
+}
+.highlight .ds-num{color:var(--gold);}
+.highlight .ds-lbl{color:rgba(255,255,255,0.3);}
+
+.dash-memories{margin-bottom:36px;}
+.dash-section-head{
+  display:flex;align-items:center;justify-content:space-between;
+  margin-bottom:20px;
+}
+.dash-section-title{
+  font-family:var(--font-display);font-size:22px;font-weight:400;color:var(--charcoal);
+}
+.dash-section-link{
+  font-size:11px;color:var(--gold-dark);letter-spacing:0.1em;text-transform:uppercase;
+  cursor:pointer;text-decoration:none;
+}
+.memory-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
+.memory-card{
+  background:white;border:var(--border);border-radius:3px;
+  padding:20px;transition:border-color 0.2s,transform 0.2s;
+  cursor:pointer;
+}
+.memory-card:hover{border-color:rgba(201,169,110,0.4);transform:translateY(-2px);}
+.memory-card.love{border-color:rgba(200,16,46,0.15);}
+.memory-card.love:hover{border-color:rgba(200,16,46,0.35);}
+.mc-thumb{
+  width:48px;height:48px;background:var(--cream);
+  border-radius:8px;display:flex;align-items:center;justify-content:center;
+  font-size:22px;margin-bottom:14px;border:var(--border-soft);
+}
+.mc-thumb.love{background:rgba(200,16,46,0.06);border-color:rgba(200,16,46,0.15);}
+.mc-title{font-size:14px;font-weight:500;color:var(--charcoal);margin-bottom:4px;}
+.mc-sub{font-size:12px;color:var(--warm-gray);line-height:1.5;margin-bottom:10px;}
+.mc-chip{
+  display:inline-block;padding:3px 10px;border-radius:100px;
+  font-size:10px;letter-spacing:0.06em;
+}
+.chip-done{background:rgba(90,154,106,0.1);color:#3a7a4a;}
+.chip-crafting{background:rgba(201,169,110,0.12);color:var(--bronze);}
+.chip-saved{background:rgba(107,100,96,0.1);color:var(--warm-gray);}
+.chip-soon{background:rgba(200,16,46,0.08);color:var(--crimson-deep);}
+
+.upcoming-reminder{
+  background:linear-gradient(135deg,rgba(200,16,46,0.05),rgba(200,16,46,0.02));
+  border:var(--border-red);border-radius:3px;padding:24px;
+  display:flex;align-items:center;gap:20px;
+}
+.ur-icon{font-size:40px;}
+.ur-info{flex:1;}
+.ur-title{
+  font-family:var(--font-display);font-size:22px;font-weight:400;
+  color:var(--charcoal);margin-bottom:4px;
+}
+.ur-sub{font-size:13px;color:var(--warm-gray);}
+.ur-date{font-size:12px;color:var(--crimson);margin-top:4px;font-weight:500;}
+.ur-action{}
+
+/* ╔═══════════════════════════════════════╗
+   ║    08 · ADMIN PANEL                   ║
+   ╚═══════════════════════════════════════╝ */
+.admin{background:#F5F3EF;min-height:100vh;display:flex;flex-direction:column;}
+.admin-top{
+  background:var(--charcoal);height:56px;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 24px;border-bottom:1px solid rgba(201,169,110,0.1);
+}
+.admin-brand{
+  font-family:var(--font-display);font-size:16px;
+  letter-spacing:0.14em;text-transform:uppercase;color:var(--gold-light);
+}
+.admin-top-right{display:flex;align-items:center;gap:16px;}
+.admin-alert{
+  background:rgba(200,16,46,0.15);border:1px solid rgba(200,16,46,0.2);
+  color:rgba(255,150,150,0.8);
+  font-size:11px;padding:5px 12px;border-radius:2px;letter-spacing:0.08em;
+}
+.admin-av{
+  width:32px;height:32px;background:rgba(201,169,110,0.15);
+  border-radius:50%;display:flex;align-items:center;justify-content:center;
+  font-family:var(--font-display);font-size:15px;color:var(--gold);
+}
+.admin-body{display:flex;flex:1;}
+.admin-sidebar{
+  width:200px;background:#EAE7E1;
+  border-right:1px solid rgba(0,0,0,0.05);padding:20px 0;flex-shrink:0;
+}
+.admin-nav{
+  padding:9px 16px;font-size:12px;color:var(--warm-gray);
+  cursor:pointer;border-radius:6px;margin:1px 8px;
+  transition:all 0.2s;display:flex;align-items:center;gap:8px;
+}
+.admin-nav:hover{background:rgba(0,0,0,0.05);color:var(--charcoal);}
+.admin-nav.active{background:white;color:var(--charcoal);font-weight:500;box-shadow:0 1px 3px rgba(0,0,0,0.06);}
+.admin-nav-icon{font-size:14px;}
+.admin-content{flex:1;padding:28px;overflow-y:auto;}
+.admin-page-title{
+  font-family:var(--font-display);font-size:28px;font-weight:400;
+  color:var(--charcoal);margin-bottom:24px;
+}
+.admin-kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:28px;}
+.akpi{
+  background:white;border:var(--border);border-radius:3px;padding:20px;
+}
+.akpi-val{
+  font-family:var(--font-display);font-size:30px;font-weight:300;
+  color:var(--charcoal);margin-bottom:4px;
+}
+.akpi-lbl{font-size:11px;color:var(--warm-gray);}
+.akpi-trend{font-size:11px;color:#5a9a6a;margin-top:4px;}
+.akpi-alert{font-size:11px;color:var(--crimson);margin-top:4px;}
+.admin-tables{display:grid;grid-template-columns:1.5fr 1fr;gap:20px;}
+.admin-table-card{background:white;border:var(--border);border-radius:3px;overflow:hidden;}
+.atc-head{
+  padding:16px 20px;border-bottom:var(--border-soft);
+  display:flex;align-items:center;justify-content:space-between;
+}
+.atc-title{font-size:14px;font-weight:500;color:var(--charcoal);}
+.atc-badge{
+  font-size:10px;padding:3px 10px;border-radius:100px;
+  background:rgba(200,16,46,0.08);color:var(--crimson-deep);
+  letter-spacing:0.08em;
+}
+.order-row{
+  display:flex;gap:12px;padding:14px 20px;
+  border-bottom:var(--border-soft);align-items:center;
+  transition:background 0.15s;cursor:pointer;
+}
+.order-row:hover{background:var(--ivory);}
+.order-row:last-child{border-bottom:none;}
+.or-icon{
+  width:36px;height:36px;background:var(--cream);border-radius:6px;
+  display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;
+}
+.or-info{flex:1;}
+.or-id{font-size:12px;font-weight:500;color:var(--charcoal);}
+.or-details{font-size:11px;color:var(--warm-gray);margin-top:2px;}
+.or-status{
+  font-size:10px;padding:3px 9px;border-radius:100px;
+  font-weight:500;
+}
+.status-crafting{background:rgba(201,169,110,0.12);color:var(--bronze);}
+.status-review{background:rgba(200,16,46,0.08);color:var(--crimson-deep);}
+.status-done{background:rgba(90,154,106,0.1);color:#3a7a4a;}
+.or-price{font-family:var(--font-display);font-size:15px;font-weight:300;color:var(--charcoal);}
+.recent-customers{display:flex;flex-direction:column;}
+.cust-row{
+  display:flex;gap:10px;padding:12px 20px;
+  border-bottom:var(--border-soft);align-items:center;
+  transition:background 0.15s;cursor:pointer;
+}
+.cust-row:hover{background:var(--ivory);}
+.cust-row:last-child{border-bottom:none;}
+.cust-av{
+  width:34px;height:34px;background:var(--cream);
+  border-radius:50%;display:flex;align-items:center;justify-content:center;
+  font-family:var(--font-display);font-size:14px;color:var(--warm-gray);flex-shrink:0;
+}
+.cust-name{font-size:13px;font-weight:500;color:var(--charcoal);}
+.cust-orders{font-size:11px;color:var(--warm-gray);}
+.cust-total{font-family:var(--font-display);font-size:14px;color:var(--charcoal);}
+
+/* ╔═══════════════════════════════════════╗
+   ║    09 · GIFT FINDER QUIZ              ║
+   ╚═══════════════════════════════════════╝ */
+.gift-finder{
+  background:var(--charcoal);min-height:100vh;
+  display:flex;align-items:center;justify-content:center;
+  padding:80px 40px;
+  position:relative;overflow:hidden;
+}
+.gift-finder::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse 60% 70% at 50% 40%,rgba(201,169,110,0.06) 0%,transparent 60%);
+}
+.gf-inner{max-width:700px;width:100%;position:relative;z-index:1;}
+.gf-progress{
+  display:flex;gap:6px;margin-bottom:40px;
+}
+.gf-prog-dot{
+  flex:1;height:2px;background:rgba(255,255,255,0.1);border-radius:1px;
+  transition:background 0.4s;
+}
+.gf-prog-dot.done{background:var(--gold);}
+.gf-prog-dot.active{background:rgba(201,169,110,0.5);}
+.gf-step-label{
+  font-size:10px;letter-spacing:0.22em;text-transform:uppercase;
+  color:rgba(255,255,255,0.25);margin-bottom:12px;
+}
+.gf-question{
+  font-family:var(--font-display);font-size:48px;font-weight:300;
+  color:var(--ivory);line-height:1.1;margin-bottom:12px;
+}
+.gf-question em{font-style:italic;color:var(--gold-light);}
+.gf-sub{font-size:14px;color:rgba(255,255,255,0.35);margin-bottom:40px;line-height:1.7;}
+.gf-options{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:40px;}
+.gf-option{
+  background:rgba(255,255,255,0.03);
+  border:1px solid rgba(255,255,255,0.07);
+  border-radius:3px;padding:20px 22px;
+  cursor:pointer;transition:all 0.25s;
+  display:flex;align-items:center;gap:14px;
+}
+.gf-option:hover{
+  background:rgba(255,255,255,0.06);
+  border-color:rgba(201,169,110,0.3);
+}
+.gf-option.selected{
+  background:rgba(201,169,110,0.08);
+  border-color:rgba(201,169,110,0.5);
+}
+.gf-option.love-option{border-color:rgba(200,16,46,0.15);}
+.gf-option.love-option:hover{
+  background:rgba(200,16,46,0.06);
+  border-color:rgba(200,16,46,0.35);
+}
+.gf-option.love-option.selected{
+  background:rgba(200,16,46,0.1);
+  border-color:rgba(200,16,46,0.5);
+}
+.gf-opt-icon{font-size:28px;flex-shrink:0;}
+.gf-opt-text{}
+.gf-opt-name{
+  font-family:var(--font-display);font-size:18px;font-weight:400;
+  color:rgba(255,255,255,0.7);margin-bottom:3px;
+}
+.gf-option.selected .gf-opt-name{color:var(--gold-light);}
+.gf-option.love-option.selected .gf-opt-name{color:rgba(255,160,170,0.9);}
+.gf-opt-sub{font-size:12px;color:rgba(255,255,255,0.25);}
+.gf-nav{display:flex;justify-content:space-between;align-items:center;}
+.gf-skip{
+  font-size:12px;color:rgba(255,255,255,0.25);
+  letter-spacing:0.1em;text-transform:uppercase;cursor:pointer;
+  transition:color 0.2s;
+}
+.gf-skip:hover{color:rgba(255,255,255,0.5);}
+.gf-next{display:flex;align-items:center;gap:8px;}
+
+/* ╔═══════════════════════════════════════╗
+   ║    10 · MOBILE VIEWS                  ║
+   ╚═══════════════════════════════════════╝ */
+.mobile-showcase{
+  background:var(--cream);padding:60px;
+  display:flex;gap:32px;justify-content:center;flex-wrap:wrap;
+  align-items:flex-start;
+}
+.mobile-device{
+  width:230px;flex-shrink:0;
+}
+.mobile-device-label{
+  text-align:center;font-size:11px;letter-spacing:0.12em;
+  text-transform:uppercase;color:var(--warm-gray);
+  margin-bottom:16px;
+}
+.phone-frame{
+  background:var(--charcoal);
+  border-radius:36px;
+  padding:10px;
+  box-shadow:0 24px 60px rgba(0,0,0,0.2),0 0 0 1px rgba(255,255,255,0.06);
+  position:relative;
+}
+.phone-notch{
+  background:var(--charcoal);height:24px;
+  margin:0 -10px;border-radius:0 0 16px 16px;
+  position:relative;z-index:2;
+  display:flex;align-items:flex-end;justify-content:center;padding-bottom:3px;
+}
+.phone-pill{width:52px;height:8px;background:rgba(0,0,0,0.7);border-radius:4px;}
+.phone-screen{
+  border-radius:28px;overflow:hidden;
+  background:var(--warm-white);
+}
+/* Mobile homepage screen */
+.m-home-hero{
+  height:220px;
+  background:linear-gradient(160deg,var(--charcoal) 0%,#2a2218 100%);
+  display:flex;flex-direction:column;justify-content:flex-end;
+  padding:20px 18px;position:relative;overflow:hidden;
+}
+.m-home-hero::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse at 70% 30%,rgba(201,169,110,0.1) 0%,transparent 60%);
+}
+.mhh-eyebrow{font-size:8px;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);opacity:0.8;margin-bottom:6px;position:relative;z-index:1;}
+.mhh-title{font-family:var(--font-display);font-size:28px;font-weight:300;color:white;line-height:1;position:relative;z-index:1;}
+.mhh-title em{font-style:italic;color:var(--gold-light);}
+.m-home-nav{
+  padding:12px 18px;display:flex;align-items:center;justify-content:space-between;
+  background:var(--charcoal);
+}
+.m-logo{font-family:var(--font-display);font-size:14px;letter-spacing:0.18em;color:var(--gold-light);text-transform:uppercase;}
+.m-icons{display:flex;gap:12px;}
+.m-icon-btn{font-size:15px;color:rgba(255,255,255,0.5);}
+.m-product-scroll{padding:18px 18px 0;}
+.m-sec-head{
+  display:flex;justify-content:space-between;align-items:baseline;
+  margin-bottom:12px;
+}
+.m-sec-title{font-family:var(--font-display);font-size:18px;font-weight:300;color:var(--charcoal);}
+.m-sec-link{font-size:10px;color:var(--gold-dark);letter-spacing:0.1em;text-transform:uppercase;}
+.m-prod-cards{display:flex;gap:10px;overflow-x:auto;padding-bottom:12px;}
+.m-prod-cards::-webkit-scrollbar{display:none;}
+.m-prod-card{
+  flex-shrink:0;width:140px;background:white;border:var(--border);border-radius:3px;overflow:hidden;
+}
+.m-prod-img{
+  height:110px;background:var(--cream);
+  display:flex;align-items:center;justify-content:center;font-size:28px;
+}
+.m-prod-info{padding:10px 12px;}
+.m-prod-cat{font-size:8px;letter-spacing:0.12em;text-transform:uppercase;color:var(--gold-dark);opacity:0.7;margin-bottom:3px;}
+.m-prod-name{font-family:var(--font-display);font-size:13px;font-weight:400;color:var(--charcoal);line-height:1.2;margin-bottom:4px;}
+.m-prod-price{font-family:var(--font-display);font-size:14px;font-weight:300;color:var(--charcoal);}
+.m-bottom-nav{
+  display:flex;background:white;border-top:var(--border-soft);padding:0;
+}
+.m-bot-item{
+  flex:1;padding:10px 0 8px;display:flex;flex-direction:column;align-items:center;gap:3px;
+  cursor:pointer;transition:color 0.2s;
+}
+.m-bot-icon{font-size:18px;opacity:0.4;}
+.m-bot-label{font-size:8px;letter-spacing:0.1em;text-transform:uppercase;color:var(--warm-gray);opacity:0.5;}
+.m-bot-item.active .m-bot-icon{opacity:1;}
+.m-bot-item.active .m-bot-label{color:var(--charcoal);opacity:1;}
+
+/* Mobile romantic */
+.m-romantic-hero{
+  height:240px;
+  background:linear-gradient(160deg,#0f0305 0%,var(--crimson-deep) 100%);
+  display:flex;flex-direction:column;justify-content:flex-end;
+  padding:20px 18px;position:relative;overflow:hidden;
+}
+.m-romantic-hero::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse at 60% 30%,rgba(200,16,46,0.3) 0%,transparent 60%);
+}
+.mrh-tag{
+  font-size:8px;letter-spacing:0.2em;text-transform:uppercase;
+  color:rgba(255,160,170,0.6);margin-bottom:8px;position:relative;z-index:1;
+}
+.mrh-title{
+  font-family:var(--font-display);font-size:30px;font-weight:300;
+  color:white;line-height:1;position:relative;z-index:1;margin-bottom:12px;
+}
+.mrh-title em{font-style:italic;color:rgba(255,150,160,0.85);}
+.mrh-btn{
+  display:inline-block;background:var(--crimson);color:white;
+  font-size:9px;letter-spacing:0.15em;text-transform:uppercase;
+  padding:9px 18px;border-radius:2px;position:relative;z-index:1;
+}
+.m-romantic-product{
+  padding:16px 18px;
+  background:white;border-bottom:var(--border-soft);
+  display:flex;gap:12px;align-items:center;
+}
+.mrp-img{
+  width:64px;height:64px;border-radius:2px;
+  background:linear-gradient(145deg,#fce8ea,#f5d0d3);
+  display:flex;align-items:center;justify-content:center;font-size:26px;flex-shrink:0;
+  border:1px solid rgba(200,16,46,0.1);
+}
+.mrp-info{flex:1;}
+.mrp-cat{font-size:8px;letter-spacing:0.12em;text-transform:uppercase;color:var(--crimson);opacity:0.7;margin-bottom:3px;}
+.mrp-name{font-family:var(--font-display);font-size:15px;font-weight:400;color:var(--charcoal);margin-bottom:4px;line-height:1.2;}
+.mrp-price{font-family:var(--font-display);font-size:16px;font-weight:300;color:var(--charcoal);}
+.mrp-add{
+  background:var(--crimson);color:white;
+  font-size:9px;padding:8px 12px;border-radius:2px;
+  letter-spacing:0.1em;text-transform:uppercase;border:none;cursor:pointer;
+}
+
+/* Mobile checkout */
+.m-checkout-head{
+  background:var(--charcoal);padding:12px 18px;
+  display:flex;align-items:center;justify-content:center;
+  border-bottom:1px solid rgba(201,169,110,0.1);
+}
+.m-checkout-title{font-family:var(--font-display);font-size:15px;letter-spacing:0.1em;color:var(--gold-light);text-transform:uppercase;}
+.m-co-steps{
+  display:flex;padding:16px 18px;background:white;
+  border-bottom:var(--border-soft);gap:0;
+}
+.m-co-step{
+  flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;
+  position:relative;
+}
+.m-co-step::after{
+  content:'';position:absolute;top:10px;left:50%;right:-50%;
+  height:1px;background:var(--light-gray);z-index:0;
+}
+.m-co-step:last-child::after{display:none;}
+.m-co-dot{
+  width:20px;height:20px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-size:9px;font-weight:500;position:relative;z-index:1;
+}
+.m-co-dot.done{background:var(--gold);color:var(--charcoal);}
+.m-co-dot.active{background:var(--charcoal);color:var(--gold-light);border:1px solid var(--charcoal);}
+.m-co-dot.pending{background:white;color:var(--light-gray);border:1px solid var(--light-gray);}
+.m-co-label{font-size:8px;color:var(--warm-gray);letter-spacing:0.06em;}
+.m-co-label.active{color:var(--charcoal);}
+.m-co-form{padding:16px 18px;}
+.m-co-field{margin-bottom:12px;}
+.m-co-lbl{font-size:10px;color:var(--warm-gray);margin-bottom:4px;letter-spacing:0.06em;}
+.m-co-input{
+  width:100%;border:var(--border-soft);border-radius:2px;
+  padding:10px 12px;font-size:13px;outline:none;
+  background:white;color:var(--charcoal);font-family:var(--font-body);
+}
+.m-co-btn{
+  width:100%;padding:14px;background:var(--charcoal);color:var(--gold-light);
+  border:none;border-radius:2px;cursor:pointer;
+  font-family:var(--font-body);font-size:10px;letter-spacing:0.18em;text-transform:uppercase;
+  margin-top:16px;
+}
+.m-co-summary{
+  margin:0 18px 16px;background:var(--cream);border:var(--border);border-radius:2px;padding:14px;
+}
+.m-co-sum-title{font-size:11px;font-weight:500;color:var(--charcoal);margin-bottom:10px;}
+.m-co-sum-item{
+  display:flex;justify-content:space-between;
+  font-size:11px;color:var(--warm-gray);margin-bottom:6px;
+}
+.m-co-sum-total{
+  display:flex;justify-content:space-between;
+  border-top:var(--border-soft);padding-top:10px;margin-top:10px;
+}
+.m-co-sum-tl{font-family:var(--font-display);font-size:15px;color:var(--charcoal);}
+.m-co-sum-tv{font-family:var(--font-display);font-size:16px;color:var(--charcoal);}
+
+/* ╔═══════════════════════════════════════╗
+   ║  SECTION LABELS                       ║
+   ╚═══════════════════════════════════════╝ */
+.screen-label{
+  background:var(--charcoal);padding:12px 60px;
+  border-bottom:1px solid rgba(201,169,110,0.1);
+  display:flex;align-items:center;gap:16px;
+}
+.sl-name{
+  font-family:var(--font-display);font-size:18px;font-weight:300;
+  color:var(--gold-light);letter-spacing:0.05em;
+}
+.sl-desc{font-size:12px;color:rgba(255,255,255,0.3);}
+.sl-tag{
+  margin-left:auto;font-size:10px;letter-spacing:0.12em;text-transform:uppercase;
+  color:var(--gold);opacity:0.6;
+  padding:4px 12px;border:1px solid rgba(201,169,110,0.2);border-radius:100px;
+}
+.sl-tag-red{color:var(--crimson);border-color:rgba(200,16,46,0.25);}
+</style>
+</head>
+<body>
+
+<!-- ════════════════════ NAVIGATION ════════════════════ -->
+<nav class="screen-nav">
+  <div class="screen-nav-brand">Luminary</div>
+  <a class="screen-btn active" onclick="showScreen('home')">Homepage</a>
+  <a class="screen-btn" onclick="showScreen('product')">Product Page</a>
+  <a class="screen-btn" onclick="showScreen('category')">Category Page</a>
+  <a class="screen-btn red-tab" onclick="showScreen('romantic')">❤ Romantic</a>
+  <a class="screen-btn" onclick="showScreen('checkout')">Checkout</a>
+  <a class="screen-btn" onclick="showScreen('confirm')">Confirmation</a>
+  <a class="screen-btn" onclick="showScreen('dashboard')">User Dashboard</a>
+  <a class="screen-btn" onclick="showScreen('admin')">Admin Panel</a>
+  <a class="screen-btn" onclick="showScreen('giftfinder')">Gift Finder</a>
+  <a class="screen-btn" onclick="showScreen('mobile')">📱 Mobile Views</a>
+</nav>
+
+<!-- ════════════════════════════════════════════════════
+     SCREEN 01 · HOMEPAGE
+════════════════════════════════════════════════════ -->
+<div class="screen active" id="screen-home">
+  <!-- Site Header -->
+  <header class="site-header">
+    <div class="logo">Luminary</div>
+    <nav class="header-nav">
+      <a class="header-link">Collections</a>
+      <a class="header-link">Occasions</a>
+      <a class="header-link love-link">❤ Romance</a>
+      <a class="header-link">Our Story</a>
+      <a class="header-link">Gift Guide</a>
+    </nav>
+    <div class="header-icons">
+      <svg class="h-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+      <svg class="h-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+      <div class="cart-pill">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+        Bag <div class="cart-count">2</div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-visual">
+      <div class="hero-visual-inner">
+        <div class="hero-visual-frame">
+          <div class="hero-img-placeholder">
+            <span class="hero-img-icon">🤲</span>
+            <span class="hero-img-txt">Newborn Hand Casting</span>
+          </div>
+        </div>
+        <div class="hero-visual-label">Luminary Studio</div>
+      </div>
+    </div>
+    <div class="hero-content">
+      <div class="hero-eyebrow">Handcrafted Memory Keepsakes</div>
+      <h1 class="hero-headline">
+        Their hands<br>were this
+        <em>small.</em>
+      </h1>
+      <p class="hero-sub">Cast your newborn's hand and footprint, or preserve the touch of your love story — in handcrafted plaster, made one piece at a time.</p>
+      <div class="hero-ctas">
+        <a class="btn btn-dark">Preserve This Moment</a>
+        <a class="btn btn-ghost-white">Explore Collections</a>
+      </div>
+    </div>
+    <div class="hero-scroll">
+      <div class="scroll-line"></div>
+      <span class="scroll-txt">Scroll</span>
+    </div>
+  </section>
+
+  <!-- Manifesto -->
+  <section class="manifesto">
+    <p class="manifesto-text">Some moments <em>deserve</em> to last<br>longer than memory.</p>
+  </section>
+
+  <!-- Occasion Cards -->
+  <section class="occasions">
+    <div class="sec-eyebrow">Shop by Occasion</div>
+    <h2 class="sec-title">Made for the moments<br>that <em>matter most</em></h2>
+    <div class="occasions-grid">
+      <div class="occ-card occ-1">
+        <div class="occ-card-bg"></div>
+        <div class="occ-overlay"></div>
+        <div class="occ-content">
+          <span class="occ-icon">🤱</span>
+          <div class="occ-label">For new parents</div>
+          <div class="occ-name">New Baby<br>Keepsakes</div>
+          <div class="occ-desc">Before they outgrow your arms</div>
+        </div>
+      </div>
+      <div class="occ-card occ-2">
+        <div class="occ-card-bg"></div>
+        <div class="occ-overlay"></div>
+        <div class="occ-content">
+          <span class="occ-icon">💍</span>
+          <div class="occ-label">For couples</div>
+          <div class="occ-name">Anniversary<br>Castings</div>
+          <div class="occ-desc">Still the same hands, still the same love</div>
+        </div>
+      </div>
+      <div class="occ-card occ-3">
+        <div class="occ-card-bg"></div>
+        <div class="occ-overlay"></div>
+        <div class="occ-content">
+          <span class="occ-icon">🎂</span>
+          <div class="occ-label">For birthdays</div>
+          <div class="occ-name">Birthday<br>Memory Frames</div>
+          <div class="occ-desc">Another year of a beautiful story</div>
+        </div>
+      </div>
+      <div class="occ-card occ-4-romantic">
+        <div class="occ-card-bg"></div>
+        <div class="occ-overlay"></div>
+        <div class="occ-content">
+          <span class="occ-icon">❤️</span>
+          <div class="occ-label">For lovers</div>
+          <div class="occ-name">Romantic<br>Gift Collection</div>
+          <div class="occ-desc">Because some love deserves to be seen</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Featured Products -->
+  <section class="featured">
+    <div class="sec-eyebrow">Featured Collection</div>
+    <h2 class="sec-title">Handcrafted with<br><em>intention</em></h2>
+    <div class="products-grid">
+      <div class="prod-card">
+        <div class="prod-img prod-img-plain">
+          <div class="prod-badge badge-dark">Bestseller</div>
+          <div class="prod-wish">♡</div>
+          <div class="prod-placeholder">🤲<br>Newborn Casting</div>
+        </div>
+        <div class="prod-info">
+          <div class="prod-cat prod-cat-gold">Baby Keepsakes</div>
+          <div class="prod-name">Hand & Footprint<br>Casting Frame</div>
+          <div class="prod-desc">A permanent impression of the tiniest fingers and toes, set in a hand-gilded frame.</div>
+          <div class="prod-row">
+            <div class="prod-price">৳ 2,800</div>
+            <div class="prod-cta prod-cta-gold">Explore →</div>
+          </div>
+        </div>
+      </div>
+      <div class="prod-card romantic">
+        <div class="prod-img prod-img-romantic">
+          <div class="prod-badge badge-red">New</div>
+          <div class="prod-wish prod-romantic">❤</div>
+          <div class="prod-placeholder prod-placeholder-dark">❤️<br>Couple Casting</div>
+        </div>
+        <div class="prod-info">
+          <div class="prod-cat prod-cat-red">Romantic Collection</div>
+          <div class="prod-name">Couple Hand<br>Casting Sculpture</div>
+          <div class="prod-desc">Two hands, one eternal moment — cast in plaster, finished in matte white or warm bronze.</div>
+          <div class="prod-row">
+            <div class="prod-price">৳ 4,500</div>
+            <div class="prod-cta prod-cta-red">Explore →</div>
+          </div>
+        </div>
+      </div>
+      <div class="prod-card">
+        <div class="prod-img prod-img-blush">
+          <div class="prod-badge badge-dark">Personalised</div>
+          <div class="prod-wish">♡</div>
+          <div class="prod-placeholder">🖼<br>Memory Frame</div>
+        </div>
+        <div class="prod-info">
+          <div class="prod-cat prod-cat-gold">Birthday</div>
+          <div class="prod-name">Birthday Memory<br>Frame</div>
+          <div class="prod-desc">Birth details, a photo, and a handwritten message — engraved for eternity.</div>
+          <div class="prod-row">
+            <div class="prod-price">৳ 1,900</div>
+            <div class="prod-cta prod-cta-gold">Explore →</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Process -->
+  <section class="process">
+    <div class="sec-eyebrow" style="color:var(--gold)">How It Works</div>
+    <h2 class="sec-title" style="color:var(--ivory)">Made for you,<br>by <em>our hands</em></h2>
+    <div class="process-grid">
+      <div class="proc-step">
+        <div class="proc-num">01</div>
+        <span class="proc-icon">✍️</span>
+        <div class="proc-name">You Customise</div>
+        <div class="proc-desc">Choose your product, add names, dates, and your personal message with our live preview tool.</div>
+      </div>
+      <div class="proc-step">
+        <div class="proc-num">02</div>
+        <span class="proc-icon">🏺</span>
+        <div class="proc-name">We Handcraft</div>
+        <div class="proc-desc">Our artisans begin your piece within 24 hours. Every item is made one at a time, by human hands.</div>
+      </div>
+      <div class="proc-step">
+        <div class="proc-num">03</div>
+        <span class="proc-icon">✨</span>
+        <div class="proc-name">We Perfect It</div>
+        <div class="proc-desc">Each piece goes through a quality review before finishing. We check every detail twice.</div>
+      </div>
+      <div class="proc-step">
+        <div class="proc-num">04</div>
+        <span class="proc-icon">📦</span>
+        <div class="proc-name">It Arrives</div>
+        <div class="proc-desc">Gift-wrapped and ready, delivered within 5–7 days to anywhere in Bangladesh.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Reviews -->
+  <section class="social-proof">
+    <div class="sec-eyebrow" style="color:var(--gold)">Real Memories, Real Families</div>
+    <h2 class="sec-title" style="color:var(--ivory)">Their <em>stories</em></h2>
+    <div class="reviews-grid">
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <div class="review-text">"When I first held the casting, I cried. It is exactly her tiny hand from the day she was born. My daughter is three now — and I still hold it sometimes."</div>
+        <div class="review-name">Fatima A. — Dhaka</div>
+        <div class="review-occasion">Newborn Hand & Footprint Frame</div>
+      </div>
+      <div class="review-card love-review">
+        <div class="review-stars" style="color:var(--crimson)">★★★★★</div>
+        <div class="review-text">"I gave my husband our couple casting for our 10th anniversary. He could not speak for a full minute. Best gift I have ever given — or received."</div>
+        <div class="review-name">Sadia R. — Chittagong</div>
+        <div class="review-occasion">Couple Hand Casting — Anniversary</div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <div class="review-text">"The frame arrived so beautifully wrapped, it felt like receiving a work of art. I did not want to open it. The quality is extraordinary for the price."</div>
+        <div class="review-name">Tahmina K. — Sylhet</div>
+        <div class="review-occasion">Birthday Memory Frame</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Banner -->
+  <section class="cta-banner">
+    <div class="cta-banner-text">
+      <div class="headline">Not sure what to give?<br><em>Find the perfect gift</em></div>
+      <div class="sub">Answer 4 quick questions and we will recommend the gift that will mean the most to the person you love.</div>
+    </div>
+    <div class="cta-banner-actions">
+      <a class="btn btn-dark" onclick="showScreen('giftfinder')">Start the Gift Finder</a>
+      <a class="btn btn-ghost-gold">Browse All</a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="footer-top">
+      <div>
+        <div class="footer-brand">Luminary</div>
+        <div class="footer-tagline">"Cast in love.<br>Kept forever."</div>
+        <div class="footer-social">
+          <div class="social-dot">f</div>
+          <div class="social-dot">in</div>
+          <div class="social-dot">▶</div>
+          <div class="social-dot">📸</div>
+        </div>
+      </div>
+      <div>
+        <div class="footer-col-head">Collections</div>
+        <a class="footer-link">Baby Keepsakes</a>
+        <a class="footer-link">Couple Castings</a>
+        <a class="footer-link" style="color:rgba(200,100,110,0.4)">❤ Romantic Gifts</a>
+        <a class="footer-link">Memory Frames</a>
+        <a class="footer-link">Anniversary</a>
+      </div>
+      <div>
+        <div class="footer-col-head">Occasions</div>
+        <a class="footer-link">New Baby</a>
+        <a class="footer-link">Wedding</a>
+        <a class="footer-link">Anniversary</a>
+        <a class="footer-link">Birthday</a>
+        <a class="footer-link" style="color:rgba(200,100,110,0.4)">Valentine's Day</a>
+      </div>
+      <div>
+        <div class="footer-col-head">Help</div>
+        <a class="footer-link">How It Works</a>
+        <a class="footer-link">Custom Orders</a>
+        <a class="footer-link">Shipping</a>
+        <a class="footer-link">Returns</a>
+        <a class="footer-link">Contact Us</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Luminary Memory & Gift. Handcrafted in Dhaka.</span>
+      <div style="display:flex;gap:20px;">
+        <a class="footer-link" style="margin:0">Privacy</a>
+        <a class="footer-link" style="margin:0">Terms</a>
+      </div>
+    </div>
+  </footer>
+</div>
+
+<!-- ════════════════════════════════════════════════════
+     SCREEN 02 · PRODUCT PAGE
+════════════════════════════════════════════════════ -->
+<div class="screen" id="screen-product">
+  <header class="site-header">
+    <div class="logo">Luminary</div>
+    <nav class="header-nav">
+      <a class="header-link">Collections</a><a class="header-link">Occasions</a>
+      <a class="header-link love-link">❤ Romance</a><a class="header-link">Our Story</a>
+    </nav>
+    <div class="header-icons">
+      <svg class="h-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+      <div class="cart-pill"><span>Bag</span><div class="cart-count">2</div></div>
+    </div>
+  </header>
+  <div class="product-page">
+    <div class="product-hero">
+      <!-- Gallery -->
+      <div class="product-gallery">
+        <div class="gallery-main">
+          <div style="text-align:center;position:relative;z-index:1;">
+            <div style="font-size:80px;opacity:0.3;margin-bottom:12px;">🤲</div>
+            <div style="font-family:var(--font-display);font-style:italic;font-size:16px;color:var(--light-gray)">Product Photography</div>
+          </div>
+          <div class="gallery-zoom-hint">+ Zoom</div>
+        </div>
+        <div class="gallery-thumbs">
+          <div class="gallery-thumb active">🤲</div>
+          <div class="gallery-thumb">👣</div>
+          <div class="gallery-thumb">🖼</div>
+          <div class="gallery-thumb">✨</div>
+        </div>
+      </div>
+      <!-- Detail Panel -->
+      <div class="product-detail">
+        <div class="prod-breadcrumb">
+          <span>Home</span><span class="bc-sep">/</span>
+          <span>Baby Keepsakes</span><span class="bc-sep">/</span>
+          <span class="bc-current">Hand & Footprint Frame</span>
+        </div>
+        <div class="prod-page-cat">Baby Keepsakes</div>
+        <h1 class="prod-page-name">Newborn Hand &<br>Footprint Casting Frame</h1>
+        <p class="prod-page-tagline">"They were this small, just once."</p>
+        <div class="prod-page-price">৳ 2,800</div>
+        <div class="prod-page-note">Free personalisation · Handcrafted in Dhaka</div>
+        <div class="gold-line"></div>
+
+        <div class="option-row">
+          <div class="option-label">Frame Finish</div>
+          <div class="option-pills">
+            <div class="option-pill active">Matte White</div>
+            <div class="option-pill">Warm Ivory</div>
+            <div class="option-pill">Gold Gilded</div>
+            <div class="option-pill">Dark Oak</div>
+          </div>
+        </div>
+
+        <div class="option-row">
+          <div class="option-label">Frame Size</div>
+          <div class="option-pills">
+            <div class="option-pill">A5 (Small)</div>
+            <div class="option-pill active">A4 (Standard)</div>
+            <div class="option-pill">A3 (Large)</div>
+          </div>
+        </div>
+
+        <div class="personalise-box">
+          <div class="p-box-title">Personalise Your Piece</div>
+          <input class="p-input" type="text" placeholder="Baby's name, exactly as you say it…">
+          <div class="p-row">
+            <input class="p-input p-input-half" type="text" placeholder="Date of birth">
+            <input class="p-input p-input-half" type="text" placeholder="Weight at birth">
+          </div>
+          <input class="p-input" type="text" placeholder="Your message (optional) — we'll engrave it by hand">
+        </div>
+
+        <div class="prod-actions">
+          <button class="prod-add-btn">Add to Keepsake Box</button>
+          <button class="prod-wish-btn">♡ &nbsp;Save to Wishlist</button>
+        </div>
+
+        <div class="trust-row">
+          <div class="trust-item">
+            <span class="trust-icon">🤲</span>
+            <div class="trust-val">Handmade</div>
+            <div class="trust-lbl">One at a time, by our artisans</div>
+          </div>
+          <div class="trust-item">
+            <span class="trust-icon">🌿</span>
+            <div class="trust-val">Non-toxic</div>
+            <div class="trust-lbl">Safe for newborns</div>
+          </div>
+          <div class="trust-item">
+            <span class="trust-icon">↩</span>
+            <div class="trust-val">30-Day</div>
+            <div class="trust-lbl">Memory guarantee</div>
+          </div>
+        </div>
+
+        <div class="prod-desc-section">
+          <div class="prod-desc-head">The Story of This Piece</div>
+          <p class="prod-desc-body">Each casting begins with a gentle, non-toxic plaster formula developed specifically for use with newborn skin. We pour by hand, allow it to cure naturally, then sand, seal, and finish the surface in your chosen colour. The result is a museum-quality impression that captures every line, every crease, every detail of a moment that passed too quickly.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════════════
+     SCREEN 03 · CATEGORY PAGE
+════════════════════════════════════════════════════ -->
+<div class="screen" id="screen-category">
+  <header class="site-header">
+    <div class="logo">Luminary</div>
+    <nav class="header-nav">
+      <a class="header-link">Collections</a><a class="header-link">Occasions</a>
+      <a class="header-link love-link">❤ Romance</a><a class="header-link">Our Story</a>
+    </nav>
+    <div class="header-icons">
+      <svg class="h-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+      <div class="cart-pill">Bag <div class="cart-count">2</div></div>
+    </div>
+  </header>
+  <div class="cat-hero">
+    <div class="cat-hero-content">
+      <div class="cat-hero-count">14 pieces in this collection</div>
+      <h1 class="cat-hero-title">Baby<br>Keepsakes</h1>
+      <p class="cat-hero-sub">Handcrafted casting and frame pieces that preserve the tiniest hands and the most fleeting moments of new parenthood.</p>
+    </div>
+  </div>
+  <div class="cat-body">
+    <div class="filter-bar">
+      <span class="filter-label">Filter</span>
+      <div class="filter-pill active">All (14)</div>
+      <div class="filter-pill">Hand Castings</div>
+      <div class="filter-pill">Foot Castings</div>
+      <div class="filter-pill">Memory Frames</div>
+      <div class="filter-pill">Gift Sets</div>
+      <div class="filter-sort">
+        Sort by:
+        <select class="sort-select">
+          <option>Most Popular</option>
+          <option>Price: Low–High</option>
+          <option>Price: High–Low</option>
+          <option>Newest</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="cat-feature-row">
+      <div class="cat-feature-card cfcard-dark">
+        <div class="cat-feature-overlay"></div>
+        <div class="cat-feature-icon">🤲</div>
+        <div class="cat-feature-info">
+          <div class="cfi-name">Newborn Hand &<br>Footprint Frame</div>
+          <div class="cfi-price">৳ 2,800</div>
+        </div>
+      </div>
+      <div class="cat-feature-card cfcard-blush">
+        <div class="cat-feature-overlay"></div>
+        <div class="cat-feature-icon">👶</div>
+        <div class="cat-feature-info">
+          <div class="cfi-name">Newborn Memory<br>Birth Detail Frame</div>
+          <div class="cfi-price">৳ 2,200</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="cat-grid-row">
+      <div class="cat-card"><div class="cat-card-img">👣</div><div class="cat-card-info"><div class="cat-card-name">Footprint Cast</div><div class="cat-card-price">৳ 1,800</div><div class="cat-card-cta">Explore →</div></div></div>
+      <div class="cat-card"><div class="cat-card-img">🖼</div><div class="cat-card-info"><div class="cat-card-name">3D Hand Cast</div><div class="cat-card-price">৳ 3,200</div><div class="cat-card-cta">Explore →</div></div></div>
+      <div class="cat-card"><div class="cat-card-img">✉️</div><div class="cat-card-info"><div class="cat-card-name">Birth Announcement Frame</div><div class="cat-card-price">৳ 1,500</div><div class="cat-card-cta">Explore →</div></div></div>
+      <div class="cat-card"><div class="cat-card-img">🎁</div><div class="cat-card-info"><div class="cat-card-name">New Baby Gift Set</div><div class="cat-card-price">৳ 4,800</div><div class="cat-card-cta">Explore →</div></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════════════
+     SCREEN 04 · ROMANTIC / LOVE PAGE  ❤ RED ACCENT
+════════════════════════════════════════════════════ -->
+<div class="screen" id="screen-romantic">
+  <header class="site-header" style="background:#0f0305;border-bottom:1px solid rgba(200,16,46,0.2);">
+    <div class="logo">Luminary</div>
+    <nav class="header-nav">
+      <a class="header-link" style="color:rgba(255,255,255,0.35)">Collections</a>
+      <a class="header-link" style="color:rgba(255,255,255,0.35)">Occasions</a>
+      <a class="header-link" style="color:rgba(255,140,150,0.8);font-weight:500">❤ Romance</a>
+      <a class="header-link" style="color:rgba(255,255,255,0.35)">Our Story</a>
+    </nav>
+    <div class="header-icons">
+      <svg class="h-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+      <svg class="h-icon" style="color:var(--crimson);opacity:0.8;" viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+      <div class="cart-pill" style="background:var(--crimson);">Bag <div class="cart-count">2</div></div>
+    </div>
+  </header>
+
+  <!-- Romantic Hero -->
+  <section class="romantic-hero">
+    <div class="floating-hearts">
+      <div class="fheart">❤</div>
+      <div class="fheart">♥</div>
+      <div class="fheart">❤</div>
+      <div class="fheart">♥</div>
+      <div class="fheart">❤</div>
+    </div>
+    <div class="romantic-badge">
+      <div class="rb-num">❤</div>
+      <div class="rb-lbl">Romantic<br>Collection</div>
+    </div>
+    <div class="romantic-content">
+      <div class="romantic-eyebrow">For the ones you love most</div>
+      <h1 class="romantic-headline">
+        Show don't
+        <em>say it.</em>
+      </h1>
+      <p class="romantic-sub">A romantic gift isn't bought — it is chosen with intention and made with care. Our couple castings, love frames, and anniversary keepsakes are a declaration, not a purchase.</p>
+      <div class="romantic-ctas">
+        <a class="btn btn-red">Shop Romance ❤</a>
+        <a class="btn btn-ghost-white">Our Love Story</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Love Story Split -->
+  <section class="love-story">
+    <div class="love-story-inner">
+      <div class="ls-quote">
+        "The best<br>love stories<br>deserve to be<br><em>permanent."</em>
+      </div>
+      <div class="ls-content">
+        <div class="ls-eyebrow">Why couples choose Luminary</div>
+        <h2 class="ls-title">More than a gift.<br>A declaration.</h2>
+        <p class="ls-body">Our couple hand castings capture the exact feeling of holding someone's hand — the warmth, the fit, the way your fingers interlock. It is the only gift that is literally made of the two of you.</p>
+        <div class="ls-stats">
+          <div>
+            <span class="ls-stat-num">1,200+</span>
+            <span class="ls-stat-lbl">Couple castings made</span>
+          </div>
+          <div>
+            <span class="ls-stat-num">98%</span>
+            <span class="ls-stat-lbl">5-star love reviews</span>
+          </div>
+        </div>
+        <a class="btn btn-ghost-red" style="border-color:rgba(255,160,170,0.4);color:rgba(255,160,170,0.8)">See All Romantic Gifts ❤</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Romantic Products -->
+  <section class="romantic-products">
+    <div class="sec-eyebrow sec-eyebrow-red">Romantic Collection</div>
+    <h2 class="sec-title">Gifts that say <em class="red">"forever"</em></h2>
+    <div class="romantic-prods-grid">
+      <!-- Side -->
+      <div class="romantic-prod-side">
+        <div class="rps-card">
+          <div class="rps-img">💌</div>
+          <div class="rps-info">
+            <div class="prod-cat prod-cat-red">Love Frames</div>
+            <div class="rps-name">Love Letter<br>Memory Frame</div>
+            <div class="rps-price">৳ 2,200</div>
+            <div class="rps-cta">Explore ❤</div>
+          </div>
+        </div>
+        <div class="rps-card">
+          <div class="rps-img">💐</div>
+          <div class="rps-info">
+            <div class="prod-cat prod-cat-red">Anniversary</div>
+            <div class="rps-name">Pressed Flower<br>Wedding Frame</div>
+            <div class="rps-price">৳ 3,100</div>
+            <div class="rps-cta">Explore ❤</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Feature -->
+      <div class="romantic-prod-feature">
+        <div class="rpf-img"><div class="rpf-icon">❤️</div></div>
+        <div class="rpf-info">
+          <div class="rpf-cat">Featured — Romantic Collection</div>
+          <div class="rpf-name">Couple Hand<br>Casting Sculpture</div>
+          <div class="rpf-desc">Two hands, cast together in one session. The most intimate gift you can give — because it is literally made of both of you.</div>
+          <div class="rpf-price">৳ 4,500</div>
+          <button class="rpf-btn">Add to Keepsake Box ❤</button>
+        </div>
+      </div>
+
+      <!-- Side 2 -->
+      <div class="romantic-prod-side">
+        <div class="rps-card">
+          <div class="rps-img" style="background:linear-gradient(145deg,#fce8ea,#f5d0d3)">💍</div>
+          <div class="rps-info">
+            <div class="prod-cat prod-cat-red">Anniversary</div>
+            <div class="rps-name">Anniversary<br>Date Sculpture</div>
+            <div class="rps-price">৳ 2,800</div>
+            <div class="rps-cta">Explore ❤</div>
+          </div>
+        </div>
+        <div class="rps-card">
+          <div class="rps-img" style="background:linear-gradient(145deg,#ffe8eb,#ffd0d5)">✉️</div>
+          <div class="rps-info">
+            <div class="prod-cat prod-cat-red">Valentine's</div>
+            <div class="rps-name">Valentine Memory<br>Box Set</div>
+            <div class="rps-price">৳ 5,200</div>
+            <div class="rps-cta">Explore ❤</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Valentine CTA -->
+  <section class="valentine-cta">
+    <div class="vc-text">Give something they will keep<br><em>their entire life.</em></div>
+    <div style="display:flex;gap:12px;flex-wrap:wrap;position:relative;z-index:1;">
+      <a class="btn btn-ghost-white">Browse All ❤ Gifts</a>
+      <a class="btn" style="background:white;color:var(--crimson);padding:14px 36px;border-radius:2px;font-size:11px;letter-spacing:0.18em;text-transform:uppercase;">Start Customising</a>
+    </div>
+  </section>
+
+  <!-- Reviews -->
+  <section class="social-proof" style="background:#0f0208;">
+    <div class="sec-eyebrow sec-eyebrow-red" style="color:rgba(255,140,150,0.6);">Real Love Stories</div>
+    <h2 class="sec-title" style="color:white;">What love <em class="red">feels</em> like</h2>
+    <div class="reviews-grid">
+      <div class="review-card love-review"><div class="review-stars" style="color:var(--crimson)">★★★★★</div><div class="review-text">"I gave my wife our couple casting on our 15th anniversary. She held it for ten minutes before she could speak."</div><div class="review-name">Rahim C. — Dhaka</div><div class="review-occasion" style="color:#ff8899;">Couple Hand Casting</div></div>
+      <div class="review-card love-review"><div class="review-stars" style="color:var(--crimson)">★★★★★</div><div class="review-text">"He proposed with the casting of our hands already inside. I said yes before he even opened the box."</div><div class="review-name">Nadia H. — Dhaka</div><div class="review-occasion" style="color:#ff8899;">Couple Casting — Proposal Gift</div></div>
+      <div class="review-card love-review"><div class="review-stars" style="color:var(--crimson)">★★★★★</div><div class="review-text">"This is not a gift. It is a moment that now exists forever. I have never given or received anything like it."</div><div class="review-name">Karim M. — Chittagong</div><div class="review-occasion" style="color:#ff8899;">Anniversary Love Frame</div></div>
+    </div>
+  </section>
+
+  <footer class="site-footer" style="background:#0a0205;">
+    <div class="footer-top">
+      <div>
+        <div class="footer-brand" style="color:rgba(255,160,170,0.7);">Luminary</div>
+        <div class="footer-tagline">"Cast in love.<br>Kept forever."</div>
+        <div class="footer-social">
+          <div class="social-dot">f</div><div class="social-dot">in</div><div class="social-dot">▶</div><div class="social-dot">📸</div>
+        </div>
+      </div>
+      <div><div class="footer-col-head">Romantic</div><a class="footer-link">Couple Castings</a><a class="footer-link">Love Frames</a><a class="footer-link">Valentine's Gifts</a><a class="footer-link">Anniversary</a></div>
+      <div><div class="footer-col-head">All Collections</div><a class="footer-link">Baby Keepsakes</a><a class="footer-link">Birthday Frames</a><a class="footer-link">Custom Orders</a></div>
+      <div><div class="footer-col-head">Help</div><a class="footer-link">How It Works</a><a class="footer-link">Shipping</a><a class="footer-link">Returns</a></div>
+    </div>
+    <div class="footer-bottom"><span>© 2026 Luminary. Made with ❤ in Dhaka.</span></div>
+  </footer>
+</div>
+
+<!-- ════════════════════════════════════════════════════
+     SCREEN 05 · CHECKOUT
+════════════════════════════════════════════════════ -->
+<div class="screen" id="screen-checkout">
+  <div class="checkout-page">
+    <div class="checkout-header">
+      <div class="logo">Luminary</div>
+    </div>
+    <div class="checkout-body">
+      <div class="checkout-form">
+        <div class="checkout-steps">
+          <div class="co-step done"><div class="co-step-dot">✓</div><div class="co-step-name">Bag</div></div>
+          <div class="co-step active"><div class="co-step-dot">2</div><div class="co-step-name">Details</div></div>
+          <div class="co-step pending"><div class="co-step-dot">3</div><div class="co-step-name">Delivery</div></div>
+          <div class="co-step pending"><div class="co-step-dot">4</div><div class="co-step-name">Payment</div></div>
+        </div>
+
+        <div class="co-section">
+          <div class="co-section-title">Your Details</div>
+          <div class="co-row">
+            <div class="co-field"><div class="co-label">First Name</div><input class="co-input" type="text" placeholder="Sadia"></div>
+            <div class="co-field"><div class="co-label">Last Name</div><input class="co-input" type="text" placeholder="Rahman"></div>
+          </div>
+          <div class="co-field"><div class="co-label">Email Address</div><input class="co-input" type="email" placeholder="sadia@email.com"></div>
+          <div class="co-field"><div class="co-label">Phone</div><input class="co-input" type="tel" placeholder="+880 1XXX XXX XXX"></div>
+        </div>
+
+        <div class="co-section">
+          <div class="co-section-title">Delivery Address</div>
+          <div class="co-field"><div class="co-label">Address Line 1</div><input class="co-input" type="text" placeholder="House, Road, Block…"></div>
+          <div class="co-row">
+            <div class="co-field"><div class="co-label">City</div><input class="co-input" type="text" placeholder="Dhaka"></div>
+            <div class="co-field"><div class="co-label">District</div><input class="co-input" type="text" placeholder="Dhaka"></div>
+          </div>
+          <div class="gift-toggle">
+            <div class="toggle-check">✓</div>
+            <div class="gift-txt"><strong>Add gift wrapping</strong> — ৳ 150 · Includes handwritten card</div>
+          </div>
+          <div class="gift-toggle">
+            <div class="toggle-check" style="color:transparent;border-color:var(--light-gray)"></div>
+            <div class="gift-txt"><strong>This is a gift</strong> — Add a personal message for the recipient</div>
+          </div>
+        </div>
+
+        <div class="co-section">
+          <div class="co-section-title">Payment Method</div>
+          <div class="payment-icons">
+            <div class="pay-icon active">bKash</div>
+            <div class="pay-icon">Nagad</div>
+            <div class="pay-icon">Card</div>
+            <div class="pay-icon">COD</div>
+          </div>
+          <div style="margin-top:20px;">
+            <div class="co-row">
+              <div class="co-field"><div class="co-label">Card Number</div><input class="co-input" placeholder="•••• •••• •••• ••••"></div>
+            </div>
+            <div class="co-row-3">
+              <div class="co-field"><div class="co-label">Month</div><input class="co-input" placeholder="MM"></div>
+              <div class="co-field"><div class="co-label">Year</div><input class="co-input" placeholder="YY"></div>
+              <div class="co-field"><div class="co-label">CVV</div><input class="co-input" placeholder="•••"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Order Summary -->
+      <div>
+        <div class="order-summary">
+          <div class="os-title">Your Keepsake Box</div>
+          <div class="os-item">
+            <div class="os-thumb">🤲</div>
+            <div class="os-item-info">
+              <div class="os-item-name">Newborn Hand & Footprint Frame</div>
+              <div class="os-item-custom">Name: Zara · Matte White · A4</div>
+              <div class="os-item-custom">Engraved: "Nov 2, 2025 · 3.1kg"</div>
+            </div>
+            <div class="os-item-price">৳2,800</div>
+          </div>
+          <div class="os-item">
+            <div class="os-thumb" style="background:rgba(200,16,46,0.06);border-color:rgba(200,16,46,0.1);">❤️</div>
+            <div class="os-item-info">
+              <div class="os-item-name" style="color:var(--crimson-deep);">Couple Hand Casting</div>
+              <div class="os-item-custom">Bronze finish · Personalised</div>
+              <div class="os-item-custom" style="color:var(--crimson);opacity:0.7;">Romantic Collection</div>
+            </div>
+            <div class="os-item-price">৳4,500</div>
+          </div>
+          <div class="os-totals">
+            <div class="os-row"><span>Subtotal</span><span>৳7,300</span></div>
+            <div class="os-row"><span>Gift wrapping</span><span>৳150</span></div>
+            <div class="os-row"><span>Delivery (5–7 days)</span><span>Free</span></div>
+          </div>
+          <div class="os-total-row">
+            <div class="os-total-label">Total</div>
+            <div class="os-total-val">৳7,450</div>
+          </div>
+          <button class="co-submit">Complete Order</button>
+          <div class="secure-note">🔒 Secured by SSL — your details are safe</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════════════
+     SCREEN 06 · ORDER CONFIRMATION
+════════════════════════════════════════════════════ -->
+<div class="screen" id="screen-confirm">
+  <header class="site-header"><div class="logo">Luminary</div></header>
+  <div class="confirm-page">
+    <div class="confirm-inner">
+      <span class="confirm-icon">✨</span>
+      <div class="confirm-eyebrow">Order Received</div>
+      <h1 class="confirm-headline">Your memory<br>is being <em>made.</em></h1>
+      <p class="confirm-sub">Our artisan has been notified. Your piece will begin being crafted within 24 hours. We will send you updates at each stage of its journey to you.</p>
+      <div class="confirm-order-id">Order #LM-2849 · Placed on 18 Jan 2026</div>
+
+      <div class="timeline">
+        <div class="tl-head">Your Order Timeline</div>
+        <div class="tl-steps">
+          <div class="tl-step">
+            <div class="tl-step-left">
+              <div class="tl-dot done">✓</div>
+              <div class="tl-line"></div>
+            </div>
+            <div class="tl-info">
+              <div class="tl-name">Order received</div>
+              <div class="tl-desc">Your details and personalisation confirmed</div>
+              <div class="tl-date">18 Jan 2026, 3:42 PM</div>
+            </div>
+          </div>
+          <div class="tl-step">
+            <div class="tl-step-left">
+              <div class="tl-dot active">🤲</div>
+              <div class="tl-line"></div>
+            </div>
+            <div class="tl-info">
+              <div class="tl-name active">Being handcrafted</div>
+              <div class="tl-desc">Your artisan is working on your piece now</div>
+              <div class="tl-date">Expected: 19–22 Jan 2026</div>
+            </div>
+          </div>
+          <div class="tl-step">
+            <div class="tl-step-left">
+              <div class="tl-dot pending">✓</div>
+              <div class="tl-line"></div>
+            </div>
+            <div class="tl-info">
+              <div class="tl-name">Quality review</div>
+              <div class="tl-desc">We check every detail before packaging</div>
+            </div>
+          </div>
+          <div class="tl-step">
+            <div class="tl-step-left">
+              <div class="tl-dot pending">📦</div>
+              <div class="tl-line"></div>
+            </div>
+            <div class="tl-info">
+              <div class="tl-name">Dispatched</div>
+              <div class="tl-desc">Gift-wrapped and ready for delivery</div>
+            </div>
+          </div>
+          <div class="tl-step">
+            <div class="tl-step-left">
+              <div class="tl-dot pending">🏠</div>
+            </div>
+            <div class="tl-info">
+              <div class="tl-name">Delivered</div>
+              <div class="tl-desc">Arriving to your address</div>
+              <div class="tl-date">Expected: 23–25 Jan 2026</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div style="display:flex;gap:12px;flex-wrap:wrap;justify-content:center;">
+        <a class="btn btn-ghost-gold" onclick="showScreen('dashboard')">View Memory Vault</a>
+        <a class="btn btn-dark" onclick="showScreen('home')">Continue Shopping</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════════════
+     SCREEN 07 · USER DASHBOARD — MEMORY VAULT
+════════════════════════════════════════════════════ -->
+<div class="screen" id="screen-dashboard">
+  <div class="dashboard">
+    <div class="dash-sidebar">
+      <div class="dash-sidebar-top">
+        <div class="dash-brand">Luminary</div>
+        <div class="dash-user-card">
+          <div class="dash-avatar">S</div>
+          <div>
+            <div class="dash-user-name">Sadia Rahman</div>
+            <div class="dash-user-level">Memory Keeper · Gold</div>
+          </div>
+        </div>
+      </div>
+      <div class="dash-sidebar-nav">
+        <div class="dash-nav-section">
+          <div class="dash-nav-sec-label">My Memories</div>
+          <div class="dash-nav-item active"><span class="dash-nav-icon">🏛</span>Memory Vault</div>
+          <div class="dash-nav-item"><span class="dash-nav-icon">📦</span>My Orders<span class="dash-nav-badge">1</span></div>
+          <div class="dash-nav-item"><span class="dash-nav-icon">♡</span>Wishlist</div>
+        </div>
+        <div class="dash-nav-section">
+          <div class="dash-nav-sec-label">Planning</div>
+          <div class="dash-nav-item"><span class="dash-nav-icon">🔔</span>Reminders<span class="dash-nav-badge" style="background:var(--crimson);">2</span></div>
+          <div class="dash-nav-item"><span class="dash-nav-icon">📅</span>Occasions</div>
+          <div class="dash-nav-item"><span class="dash-nav-icon">🎁</span>Gift Ideas</div>
+        </div>
+        <div class="dash-nav-section">
+          <div class="dash-nav-sec-label">Account</div>
+          <div class="dash-nav-item"><span class="dash-nav-icon">👤</span>Profile</div>
+          <div class="dash-nav-item"><span class="dash-nav-icon">⚙</span>Settings</div>
+        </div>
+      </div>
+    </div>
+    <div class="dash-main">
+      <div class="dash-page-title">Your Memory Vault</div>
+      <p class="dash-page-sub">Every moment you have chosen to keep, in one place.</p>
+
+      <div class="dash-stats">
+        <div class="dash-stat-card"><div class="ds-num">4</div><div class="ds-lbl">Memories created</div></div>
+        <div class="dash-stat-card"><div class="ds-num">1</div><div class="ds-lbl">In production now</div><div class="ds-trend">↑ Crafting</div></div>
+        <div class="dash-stat-card"><div class="ds-num">3</div><div class="ds-lbl">Saved to wishlist</div></div>
+        <div class="dash-stat-card highlight"><div class="ds-num">❤ 2</div><div class="ds-lbl">Romantic pieces</div></div>
+      </div>
+
+      <!-- Upcoming reminder -->
+      <div class="upcoming-reminder" style="margin-bottom:28px;">
+        <div class="ur-icon">❤️</div>
+        <div class="ur-info">
+          <div class="ur-title">7th Anniversary is coming</div>
+          <div class="ur-sub">January 14, 2026 · You and Arif</div>
+          <div class="ur-date">In 58 days — shall we create something?</div>
+        </div>
+        <div class="ur-action">
+          <a class="btn btn-red" style="font-size:10px;padding:10px 18px;" onclick="showScreen('romantic')">Shop Romance ❤</a>
+        </div>
+      </div>
+
+      <div class="dash-memories">
+        <div class="dash-section-head">
+          <div class="dash-section-title">My Pieces</div>
+          <a class="dash-section-link" onclick="showScreen('home')">Shop more →</a>
+        </div>
+        <div class="memory-cards">
+          <div class="memory-card">
+            <div class="mc-thumb">🤲</div>
+            <div class="mc-title">Couple Hand Casting</div>
+            <div class="mc-sub">Arif & Sadia · Oct 2025<br>Bronze finish</div>
+            <div class="mc-chip chip-done">Delivered</div>
+          </div>
+          <div class="memory-card love" onclick="showScreen('romantic')">
+            <div class="mc-thumb love">❤️</div>
+            <div class="mc-title" style="color:var(--crimson-deep);">Anniversary Love Frame</div>
+            <div class="mc-sub">Wedding date engraving<br>7 years</div>
+            <div class="mc-chip chip-crafting">Crafting Now ✦</div>
+          </div>
+          <div class="memory-card">
+            <div class="mc-thumb">👶</div>
+            <div class="mc-title">Baby Zara — Newborn Frame</div>
+            <div class="mc-sub">Footprint · Nov 2, 2025<br>Matte white finish</div>
+            <div class="mc-chip chip-done">Delivered</div>
+          </div>
+          <div class="memory-card">
+            <div class="mc-thumb">🎂</div>
+            <div class="mc-title">Birthday Memory Frame</div>
+            <div class="mc-sub">For Ammi's 60th birthday<br>Wishlist · Not ordered</div>
+            <div class="mc-chip chip-saved">In Wishlist</div>
+          </div>
+          <div class="memory-card love">
+            <div class="mc-thumb love">💌</div>
+            <div class="mc-title" style="color:var(--crimson-deep);">Valentine Box Set</div>
+            <div class="mc-sub">Saved for Jan 14<br>Anniversary gift idea</div>
+            <div class="mc-chip chip-soon">Reminder: 58 days</div>
+          </div>
+          <div class="memory-card" style="background:var(--cream);cursor:pointer;border-style:dashed;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;min-height:120px;">
+            <div style="font-size:28px;opacity:0.25;margin-bottom:8px;">+</div>
+            <div style="font-family:var(--font-display);font-size:16px;color:var(--warm-gray);font-style:italic;">Add a new memory</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════════════
+     SCREEN 08 · ADMIN PANEL
+════════════════════════════════════════════════════ -->
+<div class="screen" id="screen-admin">
+  <div class="admin">
+    <div class="admin-top">
+      <div class="admin-brand">Luminary Admin</div>
+      <div class="admin-top-right">
+        <div class="admin-alert">3 orders awaiting review</div>
+        <div class="admin-av">A</div>
+      </div>
+    </div>
+    <div class="admin-body">
+      <div class="admin-sidebar">
+        <div class="admin-nav active"><span class="admin-nav-icon">📊</span>Dashboard</div>
+        <div class="admin-nav"><span class="admin-nav-icon">📦</span>All Orders</div>
+        <div class="admin-nav"><span class="admin-nav-icon">✏️</span>Custom Orders</div>
+        <div class="admin-nav"><span class="admin-nav-icon">🛍</span>Products</div>
+        <div class="admin-nav"><span class="admin-nav-icon">❤️</span>Romance Section</div>
+        <div class="admin-nav"><span class="admin-nav-icon">👤</span>Customers</div>
+        <div class="admin-nav"><span class="admin-nav-icon">🖼</span>Content</div>
+        <div class="admin-nav"><span class="admin-nav-icon">📈</span>Analytics</div>
+        <div class="admin-nav"><span class="admin-nav-icon">🔔</span>Reminders</div>
+        <div class="admin-nav"><span class="admin-nav-icon">⚙</span>Settings</div>
+      </div>
+      <div class="admin-content">
+        <div class="admin-page-title">Dashboard Overview</div>
+        <div class="admin-kpis">
+          <div class="akpi"><div class="akpi-val">৳84,200</div><div class="akpi-lbl">Revenue This Month</div><div class="akpi-trend">↑ 18% vs last month</div></div>
+          <div class="akpi"><div class="akpi-val">47</div><div class="akpi-lbl">Orders This Month</div><div class="akpi-trend">↑ 12 new today</div></div>
+          <div class="akpi"><div class="akpi-val">92%</div><div class="akpi-lbl">5-Star Reviews</div><div class="akpi-trend">↑ Excellent rating</div></div>
+          <div class="akpi"><div class="akpi-val" style="color:var(--crimson);">3</div><div class="akpi-lbl">Awaiting Review</div><div class="akpi-alert">⚠ Action needed</div></div>
+        </div>
+
+        <div class="admin-tables">
+          <div class="admin-table-card">
+            <div class="atc-head">
+              <div class="atc-title">Recent Orders</div>
+              <div class="atc-badge">3 pending</div>
+            </div>
+            <div class="order-row"><div class="or-icon">🤲</div><div class="or-info"><div class="or-id">#LM-2849 — Newborn Frame</div><div class="or-details">Zara · Matte White · Engraved</div></div><div class="or-status status-crafting">Crafting</div><div class="or-price">৳2,800</div></div>
+            <div class="order-row"><div class="or-icon" style="background:rgba(200,16,46,0.06);">❤️</div><div class="or-info"><div class="or-id">#LM-2848 — Couple Casting</div><div class="or-details" style="color:var(--crimson-deep);">Bronze · Arif & Sadia</div></div><div class="or-status status-review">Review</div><div class="or-price">৳4,500</div></div>
+            <div class="order-row"><div class="or-icon">🎂</div><div class="or-info"><div class="or-id">#LM-2847 — Birthday Frame</div><div class="or-details">60th birthday · Gold frame</div></div><div class="or-status status-done">Done ✓</div><div class="or-price">৳1,900</div></div>
+            <div class="order-row"><div class="or-icon" style="background:rgba(200,16,46,0.06);">💌</div><div class="or-info"><div class="or-id" style="color:var(--crimson-deep);">#LM-2846 — Valentine Box</div><div class="or-details">Full romantic set · Rush</div></div><div class="or-status status-review">Review</div><div class="or-price">৳5,200</div></div>
+          </div>
+          <div class="admin-table-card">
+            <div class="atc-head"><div class="atc-title">Recent Customers</div></div>
+            <div class="cust-row"><div class="cust-av">S</div><div class="cust-info"><div class="cust-name">Sadia Rahman</div><div class="cust-orders">4 orders</div></div><div class="cust-total">৳13,400</div></div>
+            <div class="cust-row"><div class="cust-av">F</div><div class="cust-info"><div class="cust-name">Fatima Ahmed</div><div class="cust-orders">2 orders</div></div><div class="cust-total">৳7,100</div></div>
+            <div class="cust-row"><div class="cust-av">R</div><div class="cust-info"><div class="cust-name">Rahim Chowdhury</div><div class="cust-orders">1 order</div></div><div class="cust-total">৳4,500</div></div>
+            <div class="cust-row"><div class="cust-av">N</div><div class="cust-info"><div class="cust-name">Nadia Hossain</div><div class="cust-orders">3 orders</div></div><div class="cust-total">৳8,900</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════════════
+     SCREEN 09 · GIFT FINDER QUIZ
+════════════════════════════════════════════════════ -->
+<div class="screen" id="screen-giftfinder">
+  <header class="site-header"><div class="logo">Luminary</div><div style="font-size:12px;color:rgba(255,255,255,0.3);letter-spacing:0.1em;">Gift Finder — 60 seconds</div></header>
+  <div class="gift-finder">
+    <div class="gf-inner">
+      <div class="gf-progress">
+        <div class="gf-prog-dot done"></div>
+        <div class="gf-prog-dot active"></div>
+        <div class="gf-prog-dot"></div>
+        <div class="gf-prog-dot"></div>
+      </div>
+      <div class="gf-step-label">Question 2 of 4</div>
+      <h2 class="gf-question">Who is this<br>gift <em>for?</em></h2>
+      <p class="gf-sub">We will use this to find the piece that will mean the most to them.</p>
+
+      <div class="gf-options">
+        <div class="gf-option">
+          <div class="gf-opt-icon">🤱</div>
+          <div class="gf-opt-text">
+            <div class="gf-opt-name">A new parent</div>
+            <div class="gf-opt-sub">Baby castings, newborn frames</div>
+          </div>
+        </div>
+        <div class="gf-option love-option selected">
+          <div class="gf-opt-icon">❤️</div>
+          <div class="gf-opt-text">
+            <div class="gf-opt-name">My partner / spouse</div>
+            <div class="gf-opt-sub">Couple castings, love frames</div>
+          </div>
+        </div>
+        <div class="gf-option">
+          <div class="gf-opt-icon">🎂</div>
+          <div class="gf-opt-text">
+            <div class="gf-opt-name">A parent or grandparent</div>
+            <div class="gf-opt-sub">Birthday frames, family keepsakes</div>
+          </div>
+        </div>
+        <div class="gf-option">
+          <div class="gf-opt-icon">🎁</div>
+          <div class="gf-opt-text">
+            <div class="gf-opt-name">A close friend</div>
+            <div class="gf-opt-sub">Personalised memory gifts</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="gf-nav">
+        <div class="gf-skip">← Back</div>
+        <div class="gf-next">
+          <a class="btn btn-red">Next Question ❤</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════════════
+     SCREEN 10 · MOBILE VIEWS
+════════════════════════════════════════════════════ -->
+<div class="screen" id="screen-mobile">
+  <div class="screen-label">
+    <div class="sl-name">Mobile Screen Designs</div>
+    <div class="sl-desc">All key screens at 375px viewport — iPhone Standard</div>
+    <div class="sl-tag">375px · Mobile First</div>
+  </div>
+  <div class="mobile-showcase">
+
+    <!-- Mobile Homepage -->
+    <div class="mobile-device">
+      <div class="mobile-device-label">Homepage</div>
+      <div class="phone-frame">
+        <div class="phone-notch"><div class="phone-pill"></div></div>
+        <div class="phone-screen">
+          <div class="m-home-nav">
+            <div class="m-logo">Luminary</div>
+            <div class="m-icons">
+              <div class="m-icon-btn">🔍</div>
+              <div class="m-icon-btn">🛍</div>
+            </div>
+          </div>
+          <div class="m-home-hero">
+            <div class="mhh-eyebrow">Memory Keepsakes</div>
+            <div class="mhh-title">Their hands<br>were this <em>small.</em></div>
+          </div>
+          <div class="m-product-scroll">
+            <div class="m-sec-head">
+              <div class="m-sec-title">Collections</div>
+              <div class="m-sec-link">All →</div>
+            </div>
+            <div class="m-prod-cards">
+              <div class="m-prod-card"><div class="m-prod-img">🤲</div><div class="m-prod-info"><div class="m-prod-cat">Baby</div><div class="m-prod-name">Newborn Casting</div><div class="m-prod-price">৳2,800</div></div></div>
+              <div class="m-prod-card" style="border-color:rgba(200,16,46,0.2)"><div class="m-prod-img" style="background:linear-gradient(145deg,#fce8ea,#f5d0d3)">❤️</div><div class="m-prod-info"><div class="m-prod-cat" style="color:var(--crimson)">Romance</div><div class="m-prod-name">Couple Casting</div><div class="m-prod-price">৳4,500</div></div></div>
+              <div class="m-prod-card"><div class="m-prod-img">🖼</div><div class="m-prod-info"><div class="m-prod-cat">Birthday</div><div class="m-prod-name">Memory Frame</div><div class="m-prod-price">৳1,900</div></div></div>
+            </div>
+          </div>
+          <div class="m-bottom-nav">
+            <div class="m-bot-item active"><div class="m-bot-icon">🏠</div><div class="m-bot-label">Home</div></div>
+            <div class="m-bot-item"><div class="m-bot-icon">🛍</div><div class="m-bot-label">Shop</div></div>
+            <div class="m-bot-item"><div class="m-bot-icon" style="color:var(--crimson)">❤</div><div class="m-bot-label">Love</div></div>
+            <div class="m-bot-item"><div class="m-bot-icon">♡</div><div class="m-bot-label">Saved</div></div>
+            <div class="m-bot-item"><div class="m-bot-icon">👤</div><div class="m-bot-label">Vault</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mobile Romantic Page -->
+    <div class="mobile-device">
+      <div class="mobile-device-label">Romantic Page ❤</div>
+      <div class="phone-frame">
+        <div class="phone-notch"><div class="phone-pill"></div></div>
+        <div class="phone-screen">
+          <div class="m-home-nav" style="background:#0f0305;border-bottom:1px solid rgba(200,16,46,0.15)">
+            <div class="m-logo" style="color:rgba(255,160,170,0.7)">Luminary</div>
+            <div class="m-icons">
+              <div class="m-icon-btn" style="color:var(--crimson);opacity:0.8">❤</div>
+              <div class="m-icon-btn">🛍</div>
+            </div>
+          </div>
+          <div class="m-romantic-hero">
+            <div class="mrh-tag">Romantic Collection</div>
+            <div class="mrh-title">Show don't<br><em>say it.</em></div>
+            <div class="mrh-btn">Shop Romance ❤</div>
+          </div>
+          <div class="m-romantic-product">
+            <div class="mrp-img">❤️</div>
+            <div class="mrp-info">
+              <div class="mrp-cat">Featured</div>
+              <div class="mrp-name">Couple Hand Casting</div>
+              <div class="mrp-price">৳ 4,500</div>
+            </div>
+            <button class="mrp-add">Add ❤</button>
+          </div>
+          <div class="m-romantic-product">
+            <div class="mrp-img" style="background:linear-gradient(145deg,#fce8ea,#f5d0d3)">💌</div>
+            <div class="mrp-info">
+              <div class="mrp-cat">Love Frame</div>
+              <div class="mrp-name">Love Letter Frame</div>
+              <div class="mrp-price">৳ 2,200</div>
+            </div>
+            <button class="mrp-add">Add ❤</button>
+          </div>
+          <div class="m-bottom-nav">
+            <div class="m-bot-item"><div class="m-bot-icon">🏠</div><div class="m-bot-label">Home</div></div>
+            <div class="m-bot-item"><div class="m-bot-icon">🛍</div><div class="m-bot-label">Shop</div></div>
+            <div class="m-bot-item active"><div class="m-bot-icon" style="color:var(--crimson)">❤</div><div class="m-bot-label" style="color:var(--crimson)">Love</div></div>
+            <div class="m-bot-item"><div class="m-bot-icon">♡</div><div class="m-bot-label">Saved</div></div>
+            <div class="m-bot-item"><div class="m-bot-icon">👤</div><div class="m-bot-label">Vault</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mobile Checkout -->
+    <div class="mobile-device">
+      <div class="mobile-device-label">Checkout</div>
+      <div class="phone-frame">
+        <div class="phone-notch"><div class="phone-pill"></div></div>
+        <div class="phone-screen">
+          <div class="m-checkout-head">
+            <div class="m-checkout-title">Checkout</div>
+          </div>
+          <div class="m-co-steps">
+            <div class="m-co-step"><div class="m-co-dot done">✓</div><div class="m-co-label">Bag</div></div>
+            <div class="m-co-step"><div class="m-co-dot active">2</div><div class="m-co-label active">Details</div></div>
+            <div class="m-co-step"><div class="m-co-dot pending">3</div><div class="m-co-label">Delivery</div></div>
+            <div class="m-co-step"><div class="m-co-dot pending">4</div><div class="m-co-label">Pay</div></div>
+          </div>
+          <div class="m-co-summary">
+            <div class="m-co-sum-title">Your Order</div>
+            <div class="m-co-sum-item"><span>Newborn Frame</span><span>৳2,800</span></div>
+            <div class="m-co-sum-item" style="color:var(--crimson-deep)"><span>❤ Couple Casting</span><span>৳4,500</span></div>
+            <div class="m-co-sum-item"><span>Gift wrap</span><span>৳150</span></div>
+            <div class="m-co-sum-total"><span class="m-co-sum-tl">Total</span><span class="m-co-sum-tv">৳7,450</span></div>
+          </div>
+          <div class="m-co-form">
+            <div class="m-co-field"><div class="m-co-lbl">Full Name</div><input class="m-co-input" placeholder="Your name"></div>
+            <div class="m-co-field"><div class="m-co-lbl">Phone</div><input class="m-co-input" placeholder="+880 1XXX"></div>
+            <div class="m-co-field"><div class="m-co-lbl">Address</div><input class="m-co-input" placeholder="House, Road…"></div>
+            <button class="m-co-btn">Continue to Delivery</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mobile Dashboard -->
+    <div class="mobile-device">
+      <div class="mobile-device-label">Memory Vault</div>
+      <div class="phone-frame">
+        <div class="phone-notch"><div class="phone-pill"></div></div>
+        <div class="phone-screen">
+          <div class="m-home-nav" style="background:var(--charcoal)">
+            <div class="m-logo">Memory Vault</div>
+            <div class="m-icons"><div class="m-icon-btn">🔔</div></div>
+          </div>
+          <div style="padding:14px 16px;background:var(--warm-white);">
+            <div style="font-family:var(--font-display);font-size:14px;color:var(--warm-gray);margin-bottom:14px;">Hello, Sadia 👋</div>
+            <!-- Reminder card -->
+            <div style="background:rgba(200,16,46,0.05);border:1px solid rgba(200,16,46,0.15);border-radius:3px;padding:12px;margin-bottom:12px;">
+              <div style="font-size:8px;letter-spacing:0.15em;text-transform:uppercase;color:var(--crimson);margin-bottom:4px;">Upcoming</div>
+              <div style="font-family:var(--font-display);font-size:15px;color:var(--charcoal);margin-bottom:2px;">7th Anniversary</div>
+              <div style="font-size:11px;color:var(--warm-gray);">Jan 14 · in 58 days</div>
+              <div style="margin-top:8px;font-size:9px;color:var(--crimson);letter-spacing:0.1em;text-transform:uppercase;">Find a gift ❤ →</div>
+            </div>
+            <!-- Memory cards -->
+            <div style="display:flex;gap:8px;overflow-x:auto;padding-bottom:4px;">
+              <div style="flex-shrink:0;width:110px;background:white;border:var(--border);border-radius:3px;overflow:hidden;">
+                <div style="height:70px;background:var(--cream);display:flex;align-items:center;justify-content:center;font-size:24px;">🤲</div>
+                <div style="padding:8px;">
+                  <div style="font-size:10px;font-weight:500;color:var(--charcoal);margin-bottom:2px;">Couple Cast</div>
+                  <div style="font-size:9px;color:#5a9a6a;">Delivered ✓</div>
+                </div>
+              </div>
+              <div style="flex-shrink:0;width:110px;background:white;border:1px solid rgba(200,16,46,0.15);border-radius:3px;overflow:hidden;">
+                <div style="height:70px;background:linear-gradient(145deg,#fce8ea,#f5d0d3);display:flex;align-items:center;justify-content:center;font-size:24px;">❤️</div>
+                <div style="padding:8px;">
+                  <div style="font-size:10px;font-weight:500;color:var(--crimson-deep);margin-bottom:2px;">Love Frame</div>
+                  <div style="font-size:9px;color:var(--gold-dark);">Crafting ✦</div>
+                </div>
+              </div>
+              <div style="flex-shrink:0;width:110px;background:white;border:var(--border);border-radius:3px;overflow:hidden;">
+                <div style="height:70px;background:var(--cream);display:flex;align-items:center;justify-content:center;font-size:24px;">👶</div>
+                <div style="padding:8px;">
+                  <div style="font-size:10px;font-weight:500;color:var(--charcoal);margin-bottom:2px;">Baby Zara</div>
+                  <div style="font-size:9px;color:#5a9a6a;">Delivered ✓</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="m-bottom-nav">
+            <div class="m-bot-item"><div class="m-bot-icon">🏠</div><div class="m-bot-label">Home</div></div>
+            <div class="m-bot-item"><div class="m-bot-icon">🛍</div><div class="m-bot-label">Shop</div></div>
+            <div class="m-bot-item"><div class="m-bot-icon" style="color:var(--crimson)">❤</div><div class="m-bot-label">Love</div></div>
+            <div class="m-bot-item"><div class="m-bot-icon">♡</div><div class="m-bot-label">Saved</div></div>
+            <div class="m-bot-item active"><div class="m-bot-icon">👤</div><div class="m-bot-label" style="color:var(--charcoal)">Vault</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ════════════════════ SCRIPT ════════════════════ -->
+<script>
+function showScreen(name) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.screen-btn').forEach(b => b.classList.remove('active'));
+  const target = document.getElementById('screen-' + name);
+  if (target) { target.classList.add('active'); window.scrollTo({top:0,behavior:'smooth'}); }
+  const btns = document.querySelectorAll('.screen-btn');
+  btns.forEach(b => {
+    if (b.getAttribute('onclick') && b.getAttribute('onclick').includes("'" + name + "'")) b.classList.add('active');
+  });
+}
+// Option pill toggle
+document.querySelectorAll('.option-pill').forEach(pill => {
+  pill.addEventListener('click', function(){
+    const siblings = this.closest('.option-pills').querySelectorAll('.option-pill');
+    siblings.forEach(s => s.classList.remove('active'));
+    this.classList.add('active');
+  });
+});
+// Gift finder option select
+document.querySelectorAll('.gf-option').forEach(opt => {
+  opt.addEventListener('click', function(){
+    const siblings = this.closest('.gf-options').querySelectorAll('.gf-option');
+    siblings.forEach(s => s.classList.remove('selected'));
+    this.classList.add('selected');
+  });
+});
+// Payment icons
+document.querySelectorAll('.pay-icon').forEach(icon => {
+  icon.addEventListener('click', function(){
+    this.closest('.payment-icons').querySelectorAll('.pay-icon').forEach(i => i.classList.remove('active'));
+    this.classList.add('active');
+  });
+});
+// Filter pills
+document.querySelectorAll('.filter-pill').forEach(pill => {
+  pill.addEventListener('click', function(){
+    this.closest('.filter-bar').querySelectorAll('.filter-pill').forEach(p => p.classList.remove('active'));
+    this.classList.add('active');
+  });
+});
+</script>
+</body>
+</html>
